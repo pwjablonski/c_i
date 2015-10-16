@@ -1,0 +1,42 @@
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><%= link_to 'My Page', current_user %></li>
+          </ul> 
+           <ul class="nav nav-sidebar">
+            <li><%= link_to 'All Students', students_path %></li>
+            <li class="active"><%= link_to 'All Classrooms', classrooms_path%></li> 
+            <li>  <%= link_to 'View Users', users_path %> </li>
+          </ul>
+        </div>
+        
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1>Classrooms</h1>
+
+          <p id="notice"><%= notice %></p>
+              
+              <% @classrooms.each do |classroom| %>
+                <div class="card classroom-card">
+                  <h3><%=classroom.name%></h3>
+                  <a href="/classrooms/<%= classroom.id %>">
+                    <!--<img src="http://<%= classroom.name %>-pond.jpg.to/" alt="Class Picture" height="200" width="300">  -->
+                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="200" width="250">
+                    
+                  </a>
+                  <% if classroom.user == current_user %>
+                    <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+
+
+
+

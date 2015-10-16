@@ -1,0 +1,22 @@
+ <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><%= link_to 'My Page', current_user %></li>
+          </ul>  
+           <ul class="nav nav-sidebar"> 
+            <li><%= link_to 'All Students', students_path %></li>
+            <li><%= link_to 'All Classrooms', classrooms_path %></li>
+            <li>  <%= link_to 'View Users', users_path %> </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Editing Classroom</h1>
+    
+            <%= render 'form' %>
+            
+            <%= link_to 'Delete Class', @classroom, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Back', @classroom %>
+        </div>
+    </div>
+</div>
