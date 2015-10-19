@@ -1,20 +1,22 @@
 Rails.application.routes.draw do
   
+  get 'profiles/show'
+
+  devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   
+  devise_scope :user do
+    get "sign_in", to: "devise/sessions#new"
+  end
+  
+  root to: 'static_pages#home'
+
+  resources :users
+  resources :classrooms
+  resources :sessions
   resources :students do
     collection { post :import }
   end
   
-  
-  root to: 'static_pages#home'
-
-  get 'signup' => 'users#new', :as => 'signup'
-  get 'login' => 'sessions#new', :as => 'login'
-  delete 'logout' => 'sessions#destroy', :as => 'logout'
-  
-  resources :classrooms
-  resources :sessions
-  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
