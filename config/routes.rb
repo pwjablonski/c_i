@@ -14,10 +14,9 @@ Rails.application.routes.draw do
 
   resources :sessions
   resources :users
-  resources :classrooms do
-    resources :students do
+  resources :classrooms
+  resources :students do
       collection { post :import }
-    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
