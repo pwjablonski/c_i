@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    enum role: [:user, :student, :teacher, :admin]
+    enum role: [:student, :user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
@@ -15,6 +15,5 @@ class User < ActiveRecord::Base
     
 
   has_many :classrooms
-  has_many :teachers, through: :classrooms
   
 end

@@ -1,16 +1,7 @@
   <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><%= link_to 'My Page', current_user %></li>
-            <li class="active"><%= link_to 'Edit Class Info', edit_classroom_path(@classroom) %></li>
-          </ul>  
-           <ul class="nav nav-sidebar"> 
-            <li><%= link_to 'All Students', students_path %></li>
-            <li><%= link_to 'All Classrooms', classrooms_path %></li>
-            <li>  <%= link_to 'View Users', users_path %> </li>
-          </ul>
-        </div>
+        
+         <%= render 'layouts/sidebar' %>
         
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -60,7 +51,9 @@
                 </tr>
               </thead>
               <tbody>
-                <%= render "students/form" %>
+                <h4><%= link_to 'Add New Student', new_student_path %></h4>
+                
+                
                 <% @classroom.students.each do |student| %>
                 <tr>
                   <td><%= student.id %></td>
@@ -72,8 +65,9 @@
                 <%end%>
               </tbody>
             </table>
-            
-          <% @classroom.students.each do |student| %>
+          </div>
+          
+           <% @classroom.students.each do |student| %>
             <div class="card">   
             <a href="/students/<%= student.id %>">
               <img src="http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg" alt="Student Picture" height="115" width="175"> 
@@ -81,9 +75,10 @@
             <p><a href="/students/<%= student.id %>"><%= student.name %></a> | <%= link_to 'DELETE', student, method: :delete %></p>
             </div>
           <% end %>
-            
-            
-          </div>
+          
+          
+          <p>Classroom Id: <%= @classroom.id %></p>
+          
         </div>
       </div>
     </div>

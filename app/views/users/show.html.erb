@@ -8,11 +8,7 @@
             <% end %>
           </ul>  
           <ul class="nav nav-sidebar">
-            <li><%= link_to 'All Students', students_path %></li>
-            <li><%= link_to 'All Classrooms', classrooms_path %></li>
-            <li>  <%= link_to 'View Users', users_path %> </li>
-            
-            
+            <%= render 'layouts/sidebar' %>
           </ul>
         </div>
         
