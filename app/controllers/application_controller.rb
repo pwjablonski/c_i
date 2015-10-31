@@ -3,22 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  def user_signed_in?
-    session[:user_id] ? true : false
-  end
-  helper_method :user_signed_in?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  private
-    def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    rescue ActiveRecord::RecordNotFound
-      session[:user_id] = nil # or reset_session
-    end
-    
-    
-    helper_method :current_user
+  protected
 
-    def authorize
-      render :new if !user_signed_in?
-    end
+  def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit({ roles: [] }, :first_name, :last_name, :profile_name, :email, :password, :password_confirmation) }
+  
+  end 
+  
 end

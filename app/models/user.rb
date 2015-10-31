@@ -1,18 +1,19 @@
 class User < ActiveRecord::Base
-    has_many :students, through: :classrooms
-    has_many :classrooms
-    
-    
-    
-    
-    validates_uniqueness_of :name
-    validates_presence_of :name
-    
-    validates_uniqueness_of :email
-    validates_presence_of :email
-    
-    validates :password, length: { minimum: 5 }
-    
-    has_secure_password
+    enum role: [:student, :user, :admin]
+  after_initialize :set_default_role, :if => :new_record?
 
+  def set_default_role
+    self.role ||= :admin
+  end
+   
+   
+    # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+    
+
+  has_many :classrooms
+  
 end

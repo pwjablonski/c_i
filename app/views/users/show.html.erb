@@ -1,18 +1,14 @@
-  <div class="container-fluid">
+<div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active">  <%= link_to 'My Page', @user %> </li>
             <% if current_user == @user%>
-              <li>  <%= link_to 'Edit My User', edit_user_path(@user) %> </li>
+              <li>  <%= link_to 'Edit My User', edit_user_registration_path %> </li>
             <% end %>
           </ul>  
           <ul class="nav nav-sidebar">
-            <li><%= link_to 'All Students', students_path %></li>
-            <li><%= link_to 'All Classrooms', classrooms_path %></li>
-            <li>  <%= link_to 'View Users', users_path %> </li>
-            
-            
+            <%= render 'layouts/sidebar' %>
           </ul>
         </div>
         
@@ -24,7 +20,7 @@
 
             <p>
               <strong>Name:</strong>
-              <%= @user.name %>
+              <%= @user.profile_name %>
             </p>
             
             <p>
@@ -35,10 +31,10 @@
           
           <h1>Classrooms</h1>
               <div class="card classroom-card">
-                <h3><%= link_to 'New Classroom', new_classroom_path %></h3>
-                
-                <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="100" width="100"> 
-                
+               <div>
+                 <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="100" width="100"> 
+                 <h4><%= link_to 'New Classroom', new_classroom_path %></h4>
+               </div>
               </div>
               
               <% @user.classrooms.each do |classroom| %>
@@ -46,7 +42,7 @@
                   <h3><%=classroom.name%></h3>
                   <a href="/classrooms/<%= classroom.id %>">
                     <!--<img src="http://<%= classroom.name %>-pond.jpg.to/" alt="Class Picture" height="200" width="300">  -->
-                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="200" width="250">
+                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="100" width="100">
                     
                   </a>
                   <!--<p><%= link_to 'Show', classroom %></p>-->
@@ -61,6 +57,3 @@
         </div>
       </div>
     </div>
-
-
-
