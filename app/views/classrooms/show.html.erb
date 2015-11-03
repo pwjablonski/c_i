@@ -9,22 +9,22 @@
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <!-- <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>Number of Students</h4>
               <span class="text-muted"><%=@classroom.num_students%></span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <!-- <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>Attendence</h4>
               <span class="text-muted">Attendence</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <!-- <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>Grades</h4>
               <span class="text-muted">Grades</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <!-- <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>Pics</h4>
               <span class="text-muted">Pics</span>
             </div>
@@ -32,13 +32,8 @@
 
           <h2 class="sub-header">Students</h2>
           
-            <%= form_tag import_students_path, multipart: true do %>
-            <%= file_field_tag :file %>
-            <%= hidden_field_tag(:classroom_id, @classroom.id) %>
-            <%= submit_tag "Import" %>
-          <% end %>
           
-          
+
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -47,7 +42,7 @@
                   <th>Name</th>
                   <th>Grade</th>
                   <th>Class</th>
-                  <th>Delete</th>
+                  <!-- <th>Delete</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -60,13 +55,15 @@
                   <td><a href="/students/<%= student.id %>"><%= student.name %></a></td>
                   <td><%= student.grade %></td>
                   <td><%=student.classroom.name%></td>
-                  <td><%= link_to 'DELETE', student, method: :delete %></td>
+                 <!--  <td><%= link_to 'DELETE', student, method: :delete %></td> -->
                 </tr>
                 <%end%>
               </tbody>
             </table>
           </div>
           
+          <!-- <div class="student-cards">
+
            <% @classroom.students.each do |student| %>
             <div class="card">   
             <a href="/students/<%= student.id %>">
@@ -76,6 +73,14 @@
             </div>
           <% end %>
           
+          </div> -->
+
+
+          <%= form_tag import_students_path, multipart: true do %>
+            <%= file_field_tag :file %>
+            <%= hidden_field_tag(:classroom_id, @classroom.id) %>
+            <%= submit_tag "Import" %>
+          <% end %>
           
           <p>Classroom Id: <%= @classroom.id %></p>
           

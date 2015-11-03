@@ -1,16 +1,17 @@
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><%= link_to 'My Page', current_user %></li>
-            <li><%= link_to 'My Classrooms', current_user %></li>
-            <li><%= link_to 'My Students', current_user %></li>
-          </ul> 
+<div class="col-sm-3 col-md-2 sidebar">
           
-          
-          <% if current_user.try(:admin?) %>
-          <ul class="nav nav-sidebar"> 
-            <li><%= link_to 'All Students', classrooms_path %></li>
-            <li><%= link_to 'All Classrooms', classrooms_path %></li>
-            <li>  <%= link_to 'View Users', classrooms_path %> </li>
-          </ul>
-          <% end %>
-        </div>
+  <% if current_user.try(:admin?) %>         
+      <ul class="nav nav-sidebar"> 
+      <li>  <%= link_to 'View Users', users_path %> </li>
+      <li><%= link_to 'All Classrooms', classrooms_path %></li>
+      <li><%= link_to 'All Students', students_path %></li>
+    </ul>
+  <%else%>  
+     <ul class="nav nav-sidebar">
+      <li><%= link_to 'My Page', current_user %></li>
+      <li><%= link_to 'My Classrooms', classrooms_path %></li>
+      <li><%= link_to 'My Students', students_path %></li>
+    </ul> 
+  <% end %>
+
+</div>

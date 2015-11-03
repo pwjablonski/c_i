@@ -8,7 +8,28 @@
         <p id="notice"><%= notice %></p>
         
         <h1>Listing Students</h1>
+
+                <div class="card">   
+                  
+                  <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="150" width="150"> 
+
+                  <p><%= link_to 'New Student', new_student_path%></p>
+                </div>
+
+
+
         
+        <% @students.each do |student| %>
+             <% if student.classroom.user == current_user || current_user.try(:admin?)%>
+                <div class="card">   
+                  <a href="/students/<%= student.id %>">
+                    <img src="http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg" alt="Frog Picture" height="150" width="150"> 
+                  </a>
+                  <p><a href="/students/<%= student.id %>"><%= student.name %></a> | <%= link_to 'DELETE', student, method: :delete %></p>
+                </div>
+            <%end%>
+          <% end %>
+        <br>
         <%= link_to 'New Student', new_student_path %>
         
         
@@ -17,17 +38,6 @@
             <%= file_field_tag :file %>
             <%= submit_tag "Import CSV" %>
         <% end %>
-        
-        <% @students.each do |student| %>
-                <div class="card">   
-                  <a href="/students/<%= student.id %>">
-                    <img src="http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg" alt="Frog Picture" height="150" width="150"> 
-                  </a>
-                  <p><a href="/students/<%= student.id %>"><%= student.name %></a> | <%= link_to 'DELETE', student, method: :delete %></p>
-                </div>
-              <% end %>
-        <br>
-
     </div>
 </div>
 

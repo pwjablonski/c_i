@@ -10,18 +10,25 @@
 
           <p id="notice"><%= notice %></p>
               
+              <div class="card classroom-card">
+               <div>
+                 <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="100" width="100"> 
+                 <h4><%= link_to 'New Classroom', new_classroom_path %></h4>
+               </div>
+              </div>
+
               <% @classrooms.each do |classroom| %>
+              <% if classroom.user == current_user || current_user.try(:admin?)%>
                 <div class="card classroom-card">
                   <h3><%=classroom.name%></h3>
                   <a href="/classrooms/<%= classroom.id %>">
                     <!--<img src="http://<%= classroom.name %>-pond.jpg.to/" alt="Class Picture" height="200" width="300">  -->
-                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="100" width="100">
-                    
+                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="100" width="100"> 
                   </a>
-                  <% if classroom.user == current_user %>
                     <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-                  <% end %>
+                  
                 </div>
+                <% end %>
               <% end %>
             </div>
             
