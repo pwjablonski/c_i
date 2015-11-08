@@ -1,18 +1,13 @@
 Rails.application.routes.draw do
   
-  
-  get 'profiles/show'
+  devise_for :users,
+#    path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' },
+    controllers: { registrations: "users/registrations", sessions: "users/sessions" }
 
-  devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
-  
-  devise_scope :user do
-    match '/sessions/user', to: 'devise/sessions#create', via: :post
-    get "sign_in", to: "devise/sessions#new"
-  end
-  
   root to: 'static_pages#home'
 
-  resources :sessions
+
+  resources :profiles
   resources :users
   resources :classrooms
   resources :students do

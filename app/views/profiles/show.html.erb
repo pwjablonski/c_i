@@ -1,2 +1,73 @@
-<h1>Profiles#show</h1>
-<p>Find me in app/views/profiles/show.html.erb</p>
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active">  <%= link_to 'My Page', @user %> </li>
+            <% if current_user == @profile.user%>
+              <li>  <%= link_to 'Edit My User', edit_profile_path %> </li>
+            <% end %>
+          </ul>  
+          <ul class="nav nav-sidebar">
+            <%= render 'layouts/sidebar' %>
+          </ul>
+        </div>
+        
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          
+          <h1>My Page</h1>
+          <p id="notice"><%= notice %></p>
+
+            <p>
+              <strong>Name:</strong>
+              <%= @profile.first_name + " " + @profile.last_name %>
+            </p>
+            
+            <p>
+              <strong>Email:</strong>
+              <%= @profile.user.email %>
+            </p>
+            <p>
+              <strong>Github:</strong>
+              <%= @profile.github_username%>
+            </p>
+            <p>
+              <strong>Codecademy:</strong>
+              <%= @profile.codecademy_username %>
+            </p>
+
+          <% if current_user.try(:admin?) || current_user == @profile.user%> 
+          <%= link_to "Edit Profile", edit_profile_path(@profile)%>
+          <%end%>
+
+
+          <h1>Classrooms</h1>
+              
+              
+              <% @profile.user.classrooms.each do |classroom| %>
+                <div class="card classroom-card">
+                  <h3><%=classroom.name%></h3>
+                  <a href="/classrooms/<%= classroom.id %>">
+                    <!--<img src="http://<%= classroom.name %>-pond.jpg.to/" alt="Class Picture" height="200" width="300">  -->
+                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="100" width="100">
+                    
+                  </a>
+                  <!--<p><%= link_to 'Show', classroom %></p>-->
+                  <!--<p><%= link_to 'Edit', edit_classroom_path(classroom) %></p>-->
+                  
+                  <% if current_user.try(:admin?) || current_user == @profile.user%> 
+                  <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <%end%>
+                  
+                </div>
+              <% end %>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

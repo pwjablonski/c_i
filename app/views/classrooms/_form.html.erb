@@ -16,8 +16,9 @@
     <%= f.text_field :name %>
   </div>
   
-  <div class="field"><%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :profile_name %></div>
+
+  
+  <%= f.hidden_field :user_id, value: current_user.id%>
   
   <div class="actions">
     <%= f.submit %>

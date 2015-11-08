@@ -15,7 +15,14 @@
     <td>0</td>
     <td><%= f.text_field :name %></td>
     <td><%= f.text_field :grade %></td>
-    <td><%= f.collection_select :classroom_id, Classroom.all, :id, :name %></td>
+
+    <% if current_user.try(:admin?)%>
+      <td><%= f.collection_select :classroom_id, Classroom.all, :id, :name %></td>
+    <%else%>
+      <td><%= f.collection_select :classroom_id, current_user.classrooms, :id, :name %></td>
+    <%end%>
+
+
     <td> <%= f.submit %></td>
   </tr>
 
