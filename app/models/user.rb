@@ -12,10 +12,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
-    
-
-  has_many :classrooms
   
-  has_one :profile
+  has_one :teacher
+  has_one :student
+  has_many :classrooms, through: :teachers
+  has_many :students, through: :classrooms
+
   
 end

@@ -19,7 +19,7 @@
     <% if current_user.try(:admin?)%>
       <td><%= f.collection_select :classroom_id, Classroom.all, :id, :name %></td>
     <%else%>
-      <td><%= f.collection_select :classroom_id, current_user.classrooms, :id, :name %></td>
+      <td><%= f.collection_select :classroom_id, current_user.teacher.classrooms, :id, :name %></td>
     <%end%>
 
 
