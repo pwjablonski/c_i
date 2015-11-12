@@ -29,7 +29,7 @@ class ClassroomsController < ApplicationController
 
     respond_to do |format|
       if @classroom.save
-        format.html { redirect_to @classroom.user, notice: 'Classroom was successfully created.' }
+        format.html { redirect_to @classroom, notice: 'Classroom was successfully created.' }
         format.json { render :show, status: :created, location: @classroom }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class ClassroomsController < ApplicationController
     @classroom.students.destroy_all
     @classroom.destroy
     respond_to do |format|
-      format.html { redirect_to current_user, notice: 'Classroom was successfully destroyed.' }
+      format.html { redirect_to current_user.profile, notice: 'Classroom was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +71,6 @@ class ClassroomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classroom_params
-      params.require(:classroom).permit(:name, :user_id)
+      params.require(:classroom).permit(:name, :teacher_id)
     end
 end

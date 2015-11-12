@@ -16,9 +16,14 @@
     <%= f.text_field :name %>
   </div>
   
-  <div class="field"><%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :profile_name %></div>
-  
+
+  <% if current_user.try(:admin?)%>
+      <td><%= f.collection_select :teacher_id, Teacher.all, :id, :email %></td>
+  <%else%>
+    <%= f.hidden_field :teacher_id, value: current_user.teacher.id%>
+  <%end%>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -8,7 +8,7 @@
     </ul>
   <%else%>  
      <ul class="nav nav-sidebar">
-      <li><%= link_to 'My Page', current_user %></li>
+      <li><%= link_to 'My Page', current_user.teacher %></li>
       <li><%= link_to 'My Classrooms', classrooms_path %></li>
       <li><%= link_to 'My Students', students_path %></li>
     </ul> 

@@ -3,8 +3,8 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active">  <%= link_to 'My Page', @user %> </li>
-            <% if current_user == @user%>
-              <li>  <%= link_to 'Edit My User', edit_user_registration_path %> </li>
+            <% if current_user == @teacher.user%>
+              <li>  <%= link_to 'Edit My User', edit_teacher_path %> </li>
             <% end %>
           </ul>  
           <ul class="nav nav-sidebar">
@@ -20,19 +20,31 @@
 
             <p>
               <strong>Name:</strong>
-              <%= @user.profile_name %>
+              <%= @teacher.first_name + " " + @teacher.last_name %>
             </p>
             
             <p>
               <strong>Email:</strong>
-              <%= @user.email %>
+              <%= @teacher.user.email %>
+            </p>
+            <p>
+              <strong>Github:</strong>
+              <%= @teacher.github_username%>
+            </p>
+            <p>
+              <strong>Codecademy:</strong>
+              <%= @teacher.codecademy_username %>
             </p>
 
-          
+          <% if current_user.try(:admin?) || current_user == @teacher.user%> 
+          <%= link_to "Edit teacher", edit_teacher_path(@teacher)%>
+          <%end%>
+
+
           <h1>Classrooms</h1>
               
               
-              <% @user.classrooms.each do |classroom| %>
+              <% @teacher.classrooms.each do |classroom| %>
                 <div class="card classroom-card">
                   <h3><%=classroom.name%></h3>
                   <a href="/classrooms/<%= classroom.id %>">
@@ -42,7 +54,11 @@
                   </a>
                   <!--<p><%= link_to 'Show', classroom %></p>-->
                   <!--<p><%= link_to 'Edit', edit_classroom_path(classroom) %></p>-->
+                  
+                  <% if current_user.try(:admin?) || current_user == @teacher.user%> 
                   <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <%end%>
+                  
                 </div>
               <% end %>
             </div>
@@ -52,3 +68,6 @@
         </div>
       </div>
     </div>
+
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<%= link_to 'Back', teachers_path %>
