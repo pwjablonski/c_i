@@ -1,6 +1,8 @@
 require 'csv'
 
 class Student < ActiveRecord::Base
+    
+    belongs_to :user
     belongs_to :classroom
     
     # require 'iconv'

@@ -42,11 +42,11 @@
                   <th>Name</th>
                   <th>Grade</th>
                   <th>Class</th>
-                  <!-- <th>Delete</th> -->
+                  <th>Delete Student?</th> 
                 </tr>
               </thead>
               <tbody>
-                <h4><%= link_to 'Add New Student', new_student_path %></h4>
+                <%= link_to 'Add New Student', new_student_path,  :class => "btn btn-default btn-lg"  %>
                 
                 
                 <% @classroom.students.each do |student| %>
@@ -55,7 +55,7 @@
                   <td><a href="/students/<%= student.id %>"><%= student.name %></a></td>
                   <td><%= student.grade %></td>
                   <td><%=student.classroom.name%></td>
-                 <!--  <td><%= link_to 'DELETE', student, method: :delete %></td> -->
+                 <td><%= link_to 'DELETE', student, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
                 </tr>
                 <%end%>
               </tbody>

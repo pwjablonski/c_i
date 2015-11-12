@@ -20,7 +20,7 @@
 
         
         <% @students.each do |student| %>
-             <% if student.classroom.user == current_user || current_user.try(:admin?)%>
+             <% if student.classroom.teacher.user == current_user || current_user.try(:admin?)%>
                 <div class="card">   
                   <a href="/students/<%= student.id %>">
                     <img src="http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg" alt="Frog Picture" height="150" width="150"> 
