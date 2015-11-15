@@ -42,7 +42,15 @@
 
 
           <h1>Classrooms</h1>
-              
+              <div class="card classroom-card">
+               <div>
+                 
+                 <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="100" width="100" id="plus-button">    
+               
+               </div>
+
+               <h4><%= link_to 'New Classroom', new_classroom_path %></h4>
+              </div>
               
               <% @teacher.classrooms.each do |classroom| %>
                 <div class="card classroom-card">

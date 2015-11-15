@@ -49,4 +49,4 @@ gem 'mail', '~> 2.6.3'
 
 gem 'devise'
 
-gem 'omniauth-github’
+gem 'omniauth-github', '~> 1.1', '>= 1.1.2'
