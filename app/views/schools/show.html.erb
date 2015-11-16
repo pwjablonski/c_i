@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'layouts/sidebar' %>  
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <p id="notice"><%= notice %></p>
+
+      <h2>
+        <%= @school.school_name %>
+      </h2>
+
+      <p>
+        <strong>School address:</strong>
+        <%= @school.school_address %>
+      </p>
+      <% if current_user.try(:admin?) || current_user.try(:teacher?)%>
+        <%= link_to 'Edit School', edit_school_path(@school) %>
+      <%end%>
+    </div>
+  </div>
+</div>

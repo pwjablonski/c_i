@@ -46,19 +46,13 @@
     <%= f.text_field :github_username %>
   </div>
 
-    <% if current_user.try(:student?)%>
-     <%= f.hidden_field :user_id, value: current_user.id%>
-    <%end%>
-
-
     <div class="field">
-    <% if current_user.try(:admin?) || current_user.try(:student?)%>
-      <%= f.label :classroom %><br>
-      <%= f.collection_select :classroom_id, Classroom.all, :id, :name %>
-    <%elsif current_user.try(:teacher?)%>
-      <%= f.label :classroom %><br>
-      <%= f.collection_select :classroom_id, current_user.teacher.classrooms, :id, :name %>
-    <%end%>
+      <%= f.label :school %><br>
+      <%= f.collection_select :school_id, School.all, :id, :school_name %>
+    </div>
+
+     <div class="field">
+     <%= f.hidden_field :user_id, value: current_user.id%>
     </div>
 
     <%= f.submit %>

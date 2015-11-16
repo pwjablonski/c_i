@@ -26,6 +26,13 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
+#    if user.student?
+#        student = Student.find(user.student.id)
+#        student.destroy
+#    elsif user.teacher?
+#        user.teacher.destroy
+#    end
+
     user.destroy
     redirect_to users_path, :notice => "User deleted."
   end

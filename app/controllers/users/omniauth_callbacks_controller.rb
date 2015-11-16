@@ -12,10 +12,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.persisted?
           sign_in @user, :event => :authentication #this will throw if @user is not activated
           
-          if(@user.teacher == nil)
-              redirect_to new_teacher_path
-          else
+          if(@user.teacher == nil && @user.student == nil)
+              redirect_to new_student_path
+          elsif(@user.teacher?)
             redirect_to @user.teacher
+          elsif(@user.student?)
+            redirect_to @user.student
           end
           
           set_flash_message(:notice, :success, :kind => "Github") if is_navigational_format?

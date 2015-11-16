@@ -22,10 +22,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
 #     super
 #   end
 #
-#  # DELETE /resource
-#   def destroy
-#     super
-#   end
+  # DELETE /resource
+   def destroy
+     
+     if current_user.student? || current_user.admin?
+        current_user.student.destroy
+     elsif current_user.student? || current_user.admin?
+        current_user.teacher.destroy
+     end
+        
+#    if user.student?
+#        student = Student.find(user.student.id)
+#        student.destroy
+#    elsif user.teacher?
+#        user.teacher.destroy
+#    end
+
+#        user.destroy
+        super
+   end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -54,9 +69,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
          new_teacher_path
     elsif resource.try(:student?)
         new_student_path
+    elsif resource.try(:admin?)
+        users_path
     end
-     
-     
    end
 
   # The path used after sign up for inactive accounts.
