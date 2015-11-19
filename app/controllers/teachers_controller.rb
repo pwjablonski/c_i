@@ -25,6 +25,7 @@ class TeachersController < ApplicationController
   # POST /profiles.json
   def create
     @teacher = Teacher.new(teacher_params)
+    @teacher.user.update_attribute(:role, :teacher)
 
     respond_to do |format|
       if @teacher.save
@@ -69,6 +70,6 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-        params.require(:teacher).permit(:first_name, :last_name, :profile_name, :profile_pic_url, :about_me, :github_username, :codecademy_username, :user_id)
+        params.require(:teacher).permit(:first_name, :last_name, :profile_name, :profile_pic_url, :about_me, :github_username, :codecademy_username, :user_id, :school_id)
     end
 end

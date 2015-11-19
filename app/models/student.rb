@@ -4,6 +4,7 @@ class Student < ActiveRecord::Base
     
     belongs_to :user
     belongs_to :classroom
+    belongs_to :school
     
     # require 'iconv'
     

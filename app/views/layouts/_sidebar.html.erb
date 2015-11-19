@@ -3,14 +3,22 @@
   <% if current_user.try(:admin?) %>         
       <ul class="nav nav-sidebar"> 
       <li>  <%= link_to 'View Users', users_path %> </li>
-      <li><%= link_to 'All Classrooms', classrooms_path %></li>
-      <li><%= link_to 'All Students', students_path %></li>
+      <li><%= link_to 'Schools', schools_path %></li>
+      <li><%= link_to 'Classrooms', classrooms_path %></li>
+      <li><%= link_to 'Students', students_path %></li>
     </ul>
-  <%else%>  
+  <%elsif current_user.try(:teacher?)%>  
      <ul class="nav nav-sidebar">
       <li><%= link_to 'My Page', current_user.teacher %></li>
-      <li><%= link_to 'My Classrooms', classrooms_path %></li>
-      <li><%= link_to 'My Students', students_path %></li>
+      <li><%= link_to 'Schools', schools_path %></li>
+      <li><%= link_to 'Classrooms', classrooms_path %></li>
+      <li><%= link_to 'Students', students_path %></li>
+    </ul> 
+  <%elsif current_user.try(:student?) %>  
+     <ul class="nav nav-sidebar">
+      <li><%= link_to 'My Page', current_user.student %></li>
+      <li><%= link_to 'Schools', schools_path %></li>
+      <li><%= link_to 'Students', students_path %></li>
     </ul> 
   <% end %>
 

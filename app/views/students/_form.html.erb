@@ -11,19 +11,51 @@
     </div>
   <% end %>
 
-  <tr>
-    <td>0</td>
-    <td><%= f.text_field :name %></td>
-    <td><%= f.text_field :grade %></td>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :profile_name %><br />
+    <%= f.text_field :profile_name, autofocus: true %>
+  </div>
 
-    <% if current_user.try(:admin?)%>
-      <td><%= f.collection_select :classroom_id, Classroom.all, :id, :name %></td>
-    <%else%>
-      <td><%= f.collection_select :classroom_id, current_user.teacher.classrooms, :id, :name %></td>
-    <%end%>
+  <div class="field">
+    <%= f.label :profile_pic_url%><br>
+    <%= f.text_field :profile_pic_url %>
+  </div>
 
+  <div class="field">
+    <%= f.label :about_me %><br>
+    <%= f.text_field :about_me %>
+  </div>
 
-    <td> <%= f.submit %></td>
-  </tr>
+  <div class="field">
+    <%= f.label :codecademy_username %><br>
+    <%= f.text_field :codecademy_username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :github_username %><br>
+    <%= f.text_field :github_username %>
+  </div>
+
+    <div class="field">
+      <%= f.label :school %><br>
+      <%= f.collection_select :school_id, School.all, :id, :school_name %>
+    </div>
+
+     <div class="field">
+     <%= f.hidden_field :user_id, value: current_user.id%>
+    </div>
+
+    <%= f.submit %>
+  
 
 <% end %>

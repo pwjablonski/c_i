@@ -40,20 +40,20 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Grade</th>
+                  <th>Profile Name</th>
                   <th>Class</th>
                   <th>Delete Student?</th> 
                 </tr>
               </thead>
               <tbody>
-                <%= link_to 'Add New Student', new_student_path,  :class => "btn btn-default btn-lg"  %>
+                <!-- <%= link_to 'Add New Student', new_student_path,  :class => "btn btn-default btn-lg"  %> -->
                 
                 
                 <% @classroom.students.each do |student| %>
                 <tr>
                   <td><%= student.id %></td>
-                  <td><a href="/students/<%= student.id %>"><%= student.name %></a></td>
-                  <td><%= student.grade %></td>
+                  <td><a href="/students/<%= student.id %>"><%= student.first_name %></a></td>
+                  <td><%= student.profile_name %></td>
                   <td><%=student.classroom.name%></td>
                  <td><%= link_to 'DELETE', student, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
                 </tr>
@@ -62,16 +62,7 @@
             </table>
           </div>
           
-          <!-- <div class="student-cards">
-
-           <% @classroom.students.each do |student| %>
-            <div class="card">   
-            <a href="/students/<%= student.id %>">
-              <img src="http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg" alt="Student Picture" height="115" width="175"> 
-            </a>
-            <p><a href="/students/<%= student.id %>"><%= student.name %></a> | <%= link_to 'DELETE', student, method: :delete %></p>
-            </div>
-          <% end %>
+      
           
           </div> -->
 

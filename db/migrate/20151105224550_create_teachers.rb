@@ -4,6 +4,8 @@ class CreateTeachers < ActiveRecord::Migration
         
         t.integer :user_id
         
+        t.integer :school_id
+        
         t.string :first_name
         t.string :last_name
         t.string :profile_name

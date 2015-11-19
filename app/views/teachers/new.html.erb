@@ -1,5 +1,15 @@
-<h1>New Teacher</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <%= render 'layouts/sidebar' %>
+        
+   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <p id="notice"><%= notice %></p>     
+        <h1>Create Your Teacher Profile</h1>
 
-<%= render 'form' %>
+        <%= render 'form' %>
 
-<%= link_to 'Back', teachers_path %>
+        <p> Not a teacher? Create a <%= link_to 'Student Acount', new_student_path %> </p>
+        
+    </div>    
+  </div>
+<div>

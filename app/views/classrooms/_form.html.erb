@@ -16,12 +16,17 @@
     <%= f.text_field :name %>
   </div>
   
+  <div class="field">
+    <% if current_user.try(:admin?)%>
+        <td><%= f.collection_select :teacher_id, Teacher.all, :id, :email %></td>
+    <%else%>
+      <%= f.hidden_field :teacher_id, value: current_user.teacher.id%>
+    <%end%>
+  </div>
 
-  <% if current_user.try(:admin?)%>
-      <td><%= f.collection_select :teacher_id, Teacher.all, :id, :email %></td>
-  <%else%>
-    <%= f.hidden_field :teacher_id, value: current_user.teacher.id%>
-  <%end%>
+  <div class="field">
+    <%= f.hidden_field :school_id, value: current_user.teacher.school.id%>
+  </div>
 
 
   <div class="actions">
