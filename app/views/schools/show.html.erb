@@ -15,6 +15,29 @@
       <% if current_user.try(:admin?) || current_user.try(:teacher?)%>
         <%= link_to 'Edit School', edit_school_path(@school) %>
       <%end%>
+
+      <h1>Classrooms</h1>
+              
+              <% @school.classrooms.each do |classroom| %>
+                <div class="card classroom-card">
+                  <h3><%=classroom.name%></h3>
+                  <a href="/classrooms/<%= classroom.id %>">
+                    <!--<img src="http://<%= classroom.name %>-pond.jpg.to/" alt="Class Picture" height="200" width="300">  -->
+                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="100" width="100">
+                    
+                  </a>
+                  <!--<p><%= link_to 'Show', classroom %></p>-->
+                  <!--<p><%= link_to 'Edit', edit_classroom_path(classroom) %></p>-->
+                  
+                  <% if current_user.try(:admin?)%> 
+                  <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <%end%>
+                  
+                </div>
+              <% end %>
+            </div>
+
+
     </div>
   </div>
 </div>
