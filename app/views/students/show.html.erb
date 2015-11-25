@@ -21,11 +21,11 @@
 
             <p>
               <strong>Github:</strong>
-              <%= @student.github_username%>
+              <a href='https://github.com/<%=@student.github_username%>'> <%= @student.github_username%></a>
             </p>
             <p>
               <strong>Codecademy:</strong>
-              <%= @student.codecademy_username %>
+              <a href='https://www.codecademy.com/<%=@student.codecademy_username %>'> <%= @student.codecademy_username %></a>
             </p>
 
           <% if current_user.try(:admin?) || current_user == @student.user%> 

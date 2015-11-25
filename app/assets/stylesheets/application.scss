@@ -20,7 +20,12 @@
 body {
   padding-top: 50px;
   padding-bottom: 30px;
-  font-family: 'Source Code Pro', ;
+  font-family: 'Raleway', ;
+}
+
+p, ol, ul, td {
+  font-family: 'Proxima Nova';
+  font-size:  1em;
 }
 
 .theme-dropdown .dropdown-menu {
