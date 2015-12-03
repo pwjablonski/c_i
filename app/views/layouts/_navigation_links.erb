@@ -1,8 +1,12 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
-  <li><%= link_to 'My Profile', current_user.teacher %></li>
+  
+  <% if current_user.try(:teacher?)%>
+    <li><%= link_to 'My Profile', current_user.teacher %></li>
+  <% elsif current_user.try(:student?)%>
+    <li><%= link_to 'My Profile', current_user.student %></li>
+  <%end%>
   <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
-  <li><%= link_to 'Sign in', new_user_session_path %></li>
-  <li><%= link_to "Sign in with Github", user_omniauth_authorize_path(:github) %></li>
+  <li><%= link_to 'Sign in', new_user_session_path, :class => "btn btn-default btn-sm" %></li>
 <% end %>

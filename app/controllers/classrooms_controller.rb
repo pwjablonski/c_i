@@ -58,7 +58,7 @@ class ClassroomsController < ApplicationController
     @classroom.students.destroy_all
     @classroom.destroy
     respond_to do |format|
-      format.html { redirect_to current_user.profile, notice: 'Classroom was successfully destroyed.' }
+      format.html { redirect_to current_user.teacher, notice: 'Classroom was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

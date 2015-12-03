@@ -11,12 +11,21 @@
   box-shadow: 0 1px 0 #e7e7e7;
 }
 
-
-.classroom-card #plus-button:hover {
-    background: #fff url('http://www.iconsdb.com/icons/preview/orange/plus-4-xxl.png');
-    width: 100px;
-    height: 100px;
+#plus-button {  
+  margin-top: 45px;
     
 }
+
+#plus-button:hover {
+    background: url('http://www.iconsdb.com/icons/preview/orange/plus-4-xxl.png') no-repeat;
+    background-size: 100px 100px;
+    
+}
+
+
+
+
+
+
 
 

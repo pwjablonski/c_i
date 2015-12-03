@@ -23,9 +23,11 @@
              
                 <div class="card">   
                   <a href="/students/<%= student.id %>">
-                    <img src="http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg" alt="Frog Picture" height="150" width="150"> 
+                    <img src='<%= student.profile_pic_url%>' alt="No Pic" height="150" width="150"> 
                   </a>
-                  <p><a href="/students/<%= student.id %>"><%= student.first_name + " " +  student.last_name%></a> 
+                  <p><a href="/students/<%= student.id %>"><%= student.first_name + " " +  student.last_name%></a> </p>
+                  <p> <%= student.school.school_name %></p>
+
                 </div>
            
           <% end %>

@@ -34,6 +34,7 @@
           
           
 
+
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -41,37 +42,38 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Profile Name</th>
-                  <th>Class</th>
-                  <th>Delete Student?</th> 
+                  <th>Remove Student?</th> 
                 </tr>
               </thead>
               <tbody>
                 <!-- <%= link_to 'Add New Student', new_student_path,  :class => "btn btn-default btn-lg"  %> -->
                 
                 
-                <% @classroom.students.each do |student| %>
+                <% @classroom.enrollments.each do |enrollment| %>
                 <tr>
-                  <td><%= student.id %></td>
-                  <td><a href="/students/<%= student.id %>"><%= student.first_name %></a></td>
-                  <td><%= student.profile_name %></td>
-                  <td><%=student.classroom.name%></td>
-                 <td><%= link_to 'DELETE', student, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+                  <td><%= enrollment.student.id %></td>
+                  <td><a href="/students/<%= enrollment.student.id %>"><%= enrollment.student.first_name %></a></td>
+                  <td><%= enrollment.student.profile_name %></td>
+                 
+                  <% if current_user == @classroom.teacher.user || current_user == enrollment.student.user%> 
+                    <td><%= link_to 'Remove', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+                  <%end%>
+
                 </tr>
                 <%end%>
               </tbody>
             </table>
           </div>
           
-      
-          
-          </div> -->
 
 
+
+          <!--
           <%= form_tag import_students_path, multipart: true do %>
             <%= file_field_tag :file %>
             <%= hidden_field_tag(:classroom_id, @classroom.id) %>
             <%= submit_tag "Import" %>
-          <% end %>
+          <% end %> -->
           
           <p>Classroom Id: <%= @classroom.id %></p>
           

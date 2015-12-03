@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115171733) do
+ActiveRecord::Schema.define(version: 20151125192007) do
 
   create_table "classrooms", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20151115171733) do
     t.integer  "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "classroom_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "schools", force: :cascade do |t|
@@ -35,12 +42,12 @@ ActiveRecord::Schema.define(version: 20151115171733) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "profile_name"
-    t.string   "profile_pic_url"
+    t.string   "profile_pic_url",     default: "http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg", null: false
     t.text     "about_me"
     t.string   "github_username"
     t.string   "codecademy_username"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                                                                                     null: false
+    t.datetime "updated_at",                                                                                                     null: false
   end
 
   create_table "teachers", force: :cascade do |t|

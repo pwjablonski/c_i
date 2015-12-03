@@ -49,23 +49,17 @@
 
           <h1>Classrooms</h1>
               <div class="card classroom-card">
-               <div>
                  
-                 <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="100" width="100" id="plus-button">    
-               
-               </div>
-
-               <h4><%= link_to 'New Classroom', new_classroom_path %></h4>
+                 <%= link_to image_tag('plus-5-128.png', :id => "plus-button"), new_classroom_path%>
+                      
               </div>
               
               <% @teacher.classrooms.each do |classroom| %>
                 <div class="card classroom-card">
                   <h3><%=classroom.name%></h3>
-                  <a href="/classrooms/<%= classroom.id %>">
-                    <!--<img src="http://<%= classroom.name %>-pond.jpg.to/" alt="Class Picture" height="200" width="300">  -->
-                    <img src="http://mapssedu.net/images/iconInstruction-01.png" alt="Class Picture" height="100" width="100">
-                    
-                  </a>
+                  
+                    <%= link_to image_tag('speech-bubble-3-128.png'), classroom%>
+                  
                   <!--<p><%= link_to 'Show', classroom %></p>-->
                   <!--<p><%= link_to 'Edit', edit_classroom_path(classroom) %></p>-->
                   

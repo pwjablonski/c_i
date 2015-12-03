@@ -1,5 +1,15 @@
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to omniauth_authorize_path(resource_name, provider), :class => "btn btn-block btn-social btn-lg btn-github" do %>
+      <span class="fa fa-github"></span>
+      Sign in with <%=provider.to_s.titleize%>
+    <%end%>
+    <br />
+  <% end -%>
+<% end -%>
+
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_user_session_path %><br />
+  <%= link_to "Sign in", new_user_session_path %><br />
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
@@ -16,10 +26,4 @@
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
-<% end -%>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
 <% end -%>

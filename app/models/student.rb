@@ -3,10 +3,14 @@ require 'csv'
 class Student < ActiveRecord::Base
     
     belongs_to :user
-    belongs_to :classroom
+    has_many :enrollments
+    has_many :classrooms, through: :enrollments
     belongs_to :school
     
     # require 'iconv'
+    
+    
+    
     
      def self.import(file, classroom_id = nil)
       CSV.foreach(file.path, headers: true) do |row|
