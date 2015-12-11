@@ -1,15 +1,10 @@
-  <div class="container-fluid">
-    <div class="row">
-      <%= render 'layouts/sidebar' %>
-        
-   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+ <div id="page-wrapper">
+     <div class="row">
       <p id="notice"><%= notice %></p>     
         <h1>Create Your Teacher Profile</h1>
 
         <%= render 'form' %>
 
-        <p> Not a teacher? Create a <%= link_to 'Student Acount', new_student_path %> </p>
-        
-    </div>    
+        <p> Not a teacher? Create a <%= link_to 'Student Acount', new_student_path %> </p>  
   </div>
 <div>

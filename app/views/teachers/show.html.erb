@@ -1,22 +1,13 @@
-<div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active">  <%= link_to 'My Page', @user %> </li>
-            <% if current_user == @teacher.user%>
-              <li>  <%= link_to 'Edit My User', edit_teacher_path %> </li>
-            <% end %>
-          </ul>  
-          <ul class="nav nav-sidebar">
-            <%= render 'layouts/sidebar' %>
-          </ul>
-        </div>
-        
-        
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          
-          <h1>My Page</h1>
-          <p id="notice"><%= notice %></p>
+ <div id="page-wrapper">
+     <div class="row">
+          <h1 class="page-header">My Page</h1>
+
+         <% flash.each do |name, msg| -%>
+              <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <%= msg %> 
+              </div>
+          <%end%>
 
             <p>
               <strong>Name:</strong>
@@ -60,22 +51,12 @@
                   
                     <%= link_to image_tag('speech-bubble-3-128.png'), classroom%>
                   
-                  <!--<p><%= link_to 'Show', classroom %></p>-->
-                  <!--<p><%= link_to 'Edit', edit_classroom_path(classroom) %></p>-->
-                  
                   <% if current_user.try(:admin?) || current_user == @teacher.user%> 
                   <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
                   <%end%>
                   
                 </div>
               <% end %>
-            </div>
-            
-            
-          </div>
-        </div>
-      </div>
-    </div>
-
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+             
+     </div>
+</div>

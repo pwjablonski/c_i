@@ -4,8 +4,11 @@ class Classroom < ActiveRecord::Base
     
     has_many :enrollments, dependent: :destroy
     has_many :students, through: :enrollments
+    has_many :notifications
     
-    def add_student(student_id)
+    
+    def add_student(student)
+        student_id = student.id
         current_student = self.enrollments.find_by(student_id: student_id)
         if current_student
             current_student;

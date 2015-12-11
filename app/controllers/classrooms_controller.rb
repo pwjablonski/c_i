@@ -4,7 +4,14 @@ class ClassroomsController < ApplicationController
   # GET /classrooms
   # GET /classrooms.json
   def index
-    @classrooms = Classroom.all
+    
+    if current_user.try(:admin?)
+        @classrooms = Classroom.all
+    elsif current_user.try(:teacher?)
+        @classrooms = current_user.teacher.classrooms
+    elsif current_user.try(:student?)
+        @classrooms = current_user.student.classrooms
+    end
   end
 
   # GET /classrooms/1

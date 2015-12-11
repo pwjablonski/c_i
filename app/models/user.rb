@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   enum role: [:student, :teacher, :admin]
+  validates :role, presence: true
 #  after_initialize :set_default_role, :if => :new_record?
 
 #  def set_default_role

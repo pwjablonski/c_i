@@ -5,6 +5,7 @@ class Student < ActiveRecord::Base
     belongs_to :user
     has_many :enrollments
     has_many :classrooms, through: :enrollments
+    
     belongs_to :school
     
     # require 'iconv'

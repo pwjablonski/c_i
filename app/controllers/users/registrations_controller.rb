@@ -27,7 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      
      if current_user.student? || current_user.admin?
         current_user.student.destroy
-     elsif current_user.student? || current_user.admin?
+     elsif current_user.teacher? || current_user.admin?
         current_user.teacher.destroy
      end
         

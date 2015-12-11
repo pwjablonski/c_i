@@ -13,6 +13,15 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @students = Student.all
+    
+    
+    if current_user.try(:admin?)
+        @students = Student.all
+        elsif current_user.try(:teacher?)
+        @students = current_user.teacher.students
+        elsif current_user.try(:student?)
+        @students = current_user.student.school.students
+    end
   end
 
   # GET /students/1

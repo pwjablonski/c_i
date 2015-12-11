@@ -1,4 +1,4 @@
-<div class="col-sm-3 col-md-2 sidebar">
+ <!-- <div class="col-sm-3 col-md-2 sidebar">
           
   <% if current_user.try(:admin?) %>         
       <ul class="nav nav-sidebar"> 
@@ -9,17 +9,82 @@
     </ul>
   <%elsif current_user.try(:teacher?)%>  
      <ul class="nav nav-sidebar">
-      <!-- <li><%= link_to 'My Page', current_user.teacher %></li> -->
+      <li><%= link_to 'My Page', current_user.teacher %></li> 
       <li><%= link_to 'Schools', schools_path %></li>
       <li><%= link_to 'Classrooms', classrooms_path %></li>
       <li><%= link_to 'Students', students_path %></li>
     </ul> 
   <%elsif current_user.try(:student?) %>  
      <ul class="nav nav-sidebar">
-      <!-- <li><%= link_to 'My Page', current_user.student %></li> -->
+      <li><%= link_to 'My Page', current_user.student %></li> 
       <li><%= link_to 'Schools', schools_path %></li>
       <li><%= link_to 'Students', students_path %></li>
     </ul> 
   <% end %>
 
-</div>
+</div>  -->
+
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <% if current_user.try(:admin?) %> 
+                            
+                            <%elsif current_user.try(:student?) %>  
+                              <%= link_to current_user.student do%>
+                              <i class="fa fa-dashboard fa-fw"></i>
+                              Dashboard
+                              <%end%>
+                            <%elsif current_user.try(:teacher?)%> 
+                              <%= link_to current_user.teacher do%>
+                              <i class="fa fa-dashboard fa-fw"></i>
+                              Dashboard
+                              <%end%>
+                            <%end%>
+                        </li>
+                        <li>
+                            <%= link_to classrooms_path do%>
+                              <i class="fa fa-book fa-fw"></i>
+                              Classrooms
+                            <%end%>
+                        </li>
+                        <li>
+                            <% if current_user.try(:admin?) %> 
+                            
+                            <%elsif current_user.try(:student?) %> 
+                            <%= link_to current_user.student do%>
+                              <i class="fa fa-university fa-fw"></i> 
+                              School
+                            <%end%>
+                            <%elsif current_user.try(:teacher?)%> 
+                            <%= link_to current_user.teacher do%>
+                              <i class="fa fa-university fa-fw"></i> 
+                              School
+                            <%end%>
+                            <%end%>
+                        </li>
+                        <li>
+                             <%= link_to students_path do%>
+                              <i class="fa fa-users fa-fw"></i>
+                              Students
+                            <%end%>
+                        <li>
+                             <a href="#"><i class="fa fa-calendar fa-fw"></i> Events</a>
+                        </li>
+   
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
