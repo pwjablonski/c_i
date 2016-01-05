@@ -23,6 +23,7 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+          <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -30,20 +31,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
+                
                   <!-- <img alt="C/I" src="images/ci_logo_header.png"> -->
-                  <%= image_tag "ci_logo_header.png" %>
-                </a>
+                <%= link_to image_tag("ci_logo_header.png", :class => "navbar-brand"), root_path %>
+
             </div>
             <!-- /.navbar-header -->
+            <div class = "navbar-collapse collapse in">
+              <ul class="nav navbar-nav navbar-right">
+                  <%= render 'layouts/navigation_links' %>
+                  <!-- /.dropdown -->
+              </ul>
+            </div>
+          </div>
 
-            <ul class="nav navbar-top-links navbar-right">
-                <%= render 'layouts/navigation_links' %>
-                <!-- /.dropdown -->
-            </ul>
             <!-- /.navbar-top-links -->
-            <% if user_signed_in? && current_user.teacher? || user_signed_in? && current_user.student?%>
-              <%= render 'layouts/sidebar' %>
-            <% end %>
+            
             <!-- /.navbar-static-side -->
         </nav>  

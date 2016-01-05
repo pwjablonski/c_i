@@ -10,11 +10,10 @@ class CreateTeachers < ActiveRecord::Migration
         t.string :last_name
         t.string :profile_name
 
-
-        t.string :profile_pic_url
         t.text :about_me
         t.string :github_username
         t.string :codecademy_username
+        t.string :devpost_username
 
 
       t.timestamps null: false

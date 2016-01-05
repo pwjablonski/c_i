@@ -1,62 +1,112 @@
- <div id="page-wrapper">
-     <div class="row">
-          <h1 class="page-header">My Page</h1>
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1><%= @teacher.first_name %> <%= @teacher.last_name %> (<%=@teacher.profile_name%>)</h1>
+     </div> 
+    </div>
+  </div>
+</div>
 
-         <% flash.each do |name, msg| -%>
-              <div class="alert alert-success alert-dismissable">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <%= msg %> 
-              </div>
-          <%end%>
-
-            <p>
-              <strong>Name:</strong>
-              <%= @teacher.first_name + " " + @teacher.last_name %>
-            </p>
-            
-            <p>
-              <strong>Email:</strong>
-              <%= @teacher.user.email %>
-            </p>
-
-            <p>
-              <strong>School:</strong>
-              <%= link_to @teacher.school.school_name, @teacher.school %>
-            </p>
-
-            <p>
-              <strong>Github:</strong>
-              <a href='https://github.com/<%=@teacher.github_username%>'> <%= @teacher.github_username%></a>
-            </p>
-            <p>
-              <strong>Codecademy:</strong>
-              <a href='https://www.codecademy.com/<%=@teacher.codecademy_username %>'> <%= @teacher.codecademy_username %></a>
-            </p>
-
-          <% if current_user.try(:admin?) || current_user == @teacher.user%> 
-          <%= link_to "Edit Teacher Profile", edit_teacher_path(@teacher)%>
-          <%end%>
-
-
-          <h1>Classrooms</h1>
-              <div class="card classroom-card">
-                 
-                 <%= link_to image_tag('plus-5-128.png', :id => "plus-button"), new_classroom_path%>
-                      
-              </div>
-              
-              <% @teacher.classrooms.each do |classroom| %>
-                <div class="card classroom-card">
-                  <h3><%=classroom.name%></h3>
-                  
-                    <%= link_to image_tag('speech-bubble-3-128.png'), classroom%>
-                  
-                  <% if current_user.try(:admin?) || current_user == @teacher.user%> 
-                  <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-                  <%end%>
-                  
-                </div>
-              <% end %>
-             
+<div class="page-header">
+  <div class="container">
+    <% flash.each do |name, msg| -%>
+     <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= msg %> 
      </div>
+    <%end%>
+
+    <div class="row">
+       <div class="col-lg-3">
+            <%= image_tag @teacher.user.image, :class => "user-image img-rounded img-responsive"%>
+    
+            <% if current_user.try(:admin?) || current_user == @teacher.user%> 
+            <p> 
+              <span class="fa fa-edit"></span> <%= link_to "Edit Profile", edit_teacher_path(@teacher)%> 
+            </p>
+            <%end%>
+      </div>
+
+      <div class="col-lg-6">
+
+             <a href='https://github.com/<%=@teacher.github_username%>' class="btn btn-social-icon btn-github">
+                <span class="fa fa-github"></span>
+            </a>
+
+            <a href='https://www.codecademy.com/<%=@teacher.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                <span class="fa fa-code"></span>
+            </a>
+
+            <a href='https://devpost.com/<%=@teacher.github_username%>' class="btn btn-social-icon btn-reddit">
+              <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">         
+            </a>
+      </div>
+    </div>
+  
+  </div> 
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-sitemap"></i> Classrooms</a></li>
+        <li><a data-toggle="pill" href="#menu1"><i class="fa fa-users"></i>  Students</a></li>
+        <li><a data-toggle="pill" href="#menu2"><i class="fa fa-calendar"></i>  Events</a></li>
+        <li><a data-toggle="pill" href="#menu3"><i class="fa fa-user-plus"></i>  Followers</a></li>
+      </ul>
+      
+      
+    </div>
+      
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="col-lg-12"> 
+              <h3><%= link_to "New Classroom", new_classroom_path, :class => "btn btn-primary"%> </h3>
+            </div> 
+
+              <% @teacher.classrooms.each do |classroom| %>
+              <div class="col-lg-6"> 
+                 <div class="panel panel-default">
+
+                    <div class="panel-body"><%= link_to classroom.name, classroom%></div>
+                    
+                    <div class="panel-footer">
+                      <% if current_user.try(:admin?) || current_user == @teacher.user%> 
+                      <%= link_to 'Remove', classroom, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%end%>
+                    </div>
+                </div>
+               </div> 
+              <% end %>
+        </div>
+
+        <div id="menu1" class="tab-pane fade">
+            <h3>Students</h3>
+            <% @teacher.students.each do |student| %>
+            <div class="col-md-3">
+              <a href="/students/<%= student.id %>">
+                  <div class="well well-sm">
+                      <%= image_tag student.user.image, :height => "50px" %>
+                      <%= student.first_name %>
+                  </div>
+              </a> 
+            </div>
+            <%end%>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+          <h3>Menu 2</h3>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+          <h3>Menu 3</h3>
+          <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        </div>
+      </div>
+    
+
+  </div>
 </div>

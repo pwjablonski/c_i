@@ -2,33 +2,36 @@ class EnrollmentsController < ApplicationController
 #    before_action :initialize_classroom, only: [:create]
 
     def create
-        
+        @notice = ""
         @classroom = Classroom.find(params[:classroom_id])
-        if User.find_by(email: params[:student_email]).try(:student?)
-            @student = User.find_by(email: params[:student_email]).student
-#           @student = User.find_by(email: params[:enrollment][:student_id]).student
-            @enrollment = nil
-            if @student != nil
-             @enrollment = @classroom.add_student(@student)
-            end
- 
-        respond_to do |format|
-            if @enrollment.save
-                format.html { redirect_to classroom_path(@classroom),
-                    notice: 'Student Enrolled!' }
-            else
-                format.html { redirect_to classroom_path(@classroom),
-                    notice: 'Student Was Not Enrolled!' }
-
-            end
-        end
+        
+        user_email_string = params[:student_email]
+        user_email_list = user_email_string.split(",")
+        
+        user_email_list.each do |user_email|
             
-        else
-        respond_to do |format|
-                format.html { redirect_to classroom_path(@classroom),
-                    notice: 'Student was not found!' }
-            end
+          if User.find_by(email: user_email).try(:student?)
+            @student = User.find_by(email: user_email).student
+    
+              @enrollment = @classroom.add_student(@student)
+              
+              if @enrollment == nil
+                  @notice = @notice + "#{user_email} already enrolled  "
+              else
+                @enrollment.save
+                @notice = @notice + "#{user_email} successfully enrolled  "
+              end
+          else
+            @notice = @notice + "#{user_email} not found  "
+          
+          end
         end
+        
+        respond_to do |format|
+                format.html {redirect_to classroom_path(@classroom),
+                    notice: @notice }
+        end
+        
     end
     
     

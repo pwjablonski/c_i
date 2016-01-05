@@ -1,26 +1,40 @@
- <div id="page-wrapper">
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1><%= @school.school_name %></h1>        
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+ 
      <div class="row">
       <p id="notice"><%= notice %></p>
-
-      <h2>
-        <%= @school.school_name %>
-      </h2>
 
       <p>
         <strong>School address:</strong>
         <%= @school.school_address %>
       </p>
+      <p>
+      <strong>School Teachers:</strong>
+      <% @school.teachers.each do |teacher| %>
+        <%= link_to teacher.last_name, teacher%>
+      <% end %>
+      </p>
+      
       <% if current_user.try(:admin?) || current_user.try(:teacher?)%>
         <%= link_to 'Edit School', edit_school_path(@school) %>
       <%end%>
 
       <h1>Classrooms</h1>
-              
+
               <% @school.classrooms.each do |classroom| %>
                 <div class="card classroom-card">
                   <h3><%=classroom.name%></h3>
                    <%= link_to image_tag('speech-bubble-3-128.png'), classroom%>
-                  <h6> Teacher: <%=classroom.teacher.last_name%></h6>
+          
                   <% if current_user.try(:student?)%>
                     <%= button_to 'Enroll', enrollments_path(classroom_id: classroom) %>
                   <%end%>

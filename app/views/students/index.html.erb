@@ -1,4 +1,15 @@
- <div id="page-wrapper">
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1>All Students</h1>        
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
       <div class="row">
 
         <p id="notice"><%= notice %></p>
@@ -11,17 +22,15 @@
 
                   <p><%= link_to 'New Student', new_student_path%></p>
                 </div> -->
-
+        <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+        <%= pie_chart Teacher.group(:school_id).count %>
 
 
         
         <% @students.each do |student| %>
              
                 <div class="card">   
-                  <a href="/students/<%= student.id %>">
-                    <img src='<%= student.profile_pic_url%>' alt="No Pic" height="150" width="150"> 
-                  </a>
-                  <p><a href="/students/<%= student.id %>"><%= student.first_name + " " +  student.last_name%></a> </p>
+                  <p><a href="/students/<%= student.id %>"><%= student.first_name%> <%=student.last_name%></a> </p>
                   <p> <%= student.school.school_name %></p>
 
                 </div>

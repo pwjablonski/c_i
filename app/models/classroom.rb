@@ -11,7 +11,7 @@ class Classroom < ActiveRecord::Base
         student_id = student.id
         current_student = self.enrollments.find_by(student_id: student_id)
         if current_student
-            current_student;
+            return nil;
         else
             current_student = self.enrollments.build(student_id: student_id)
         end

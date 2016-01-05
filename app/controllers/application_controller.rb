@@ -7,21 +7,25 @@ class ApplicationController < ActionController::Base
   
   
   def after_sign_in_path_for(resource)
-      if resource.try(:teacher?)
+      if resource.try(:teacher?) && resource.teacher == nil
+          new_teacher_path
+      elsif resource.try(:teacher?)
           resource.teacher
+      elsif resource.try(:student?) && resource.student == nil
+          new_student_path
       elsif resource.try(:student?)
           resource.student
       elsif resource.try(:admin?)
           users_path
       end
   end
-  
  
 
   protected
 
   def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit( :role, :email, :password, :password_confirmation) }
-  end 
+  end
+  
   
 end

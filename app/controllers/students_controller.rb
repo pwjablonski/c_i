@@ -1,3 +1,9 @@
+require 'open-uri'
+require 'nokogiri'
+require 'mechanize'
+require 'httparty'
+
+
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
@@ -14,24 +20,29 @@ class StudentsController < ApplicationController
   def index
     @students = Student.all
     
-    
-    if current_user.try(:admin?)
-        @students = Student.all
-        elsif current_user.try(:teacher?)
-        @students = current_user.teacher.students
-        elsif current_user.try(:student?)
-        @students = current_user.student.school.students
-    end
   end
 
   # GET /students/1
   # GET /students/1.json
   def show
+      
+        ca_data_array = @student.update_ca_data
+
+        @ca_badges = ca_data_array[2]
+        @ca_total_points = ca_data_array[3]
+        @ca_last_coded = ca_data_array.last
+        
+        @ca_datum = CaDatum.create(:student_id => @student.id, :total_points => @ca_total_points)
+        
+        
+        @badges_array = @student.badges_array
+        
   end
 
   # GET /students/new
   def new
     @student = Student.new
+    
   end
 
   # GET /students/1/edit
@@ -87,6 +98,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-        params.require(:student).permit(:first_name, :last_name, :profile_name, :profile_pic_url, :about_me, :github_username, :codecademy_username, :user_id, :classroom_id, :school_id)
+        params.require(:student).permit(:first_name, :last_name, :profile_name, :profile_pic_url, :about_me, :github_username, :codecademy_username, :user_id, :classroom_id, :school_id, :devpost_username, :credly_member_id )
     end
 end

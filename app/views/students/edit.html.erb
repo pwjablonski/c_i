@@ -1,10 +1,20 @@
-   <div id="page-wrapper">
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+         <h1>Update Student Profile</h1>       
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  
      <div class="row">
-        <h1>Editing Student</h1>
         
         <%= render 'form' %>
         
         <%= link_to 'Back', @student %> | <%= link_to "Update Email/Password", edit_user_registration_path %>
        
      </div>
-  </div>
+</div>

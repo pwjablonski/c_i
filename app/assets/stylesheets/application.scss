@@ -18,7 +18,7 @@
 @import "bootstrap";
 /* Some Style from the Bootstrap Default Theme */
 body {
-    background-color: #f8f8f8;
+    background-color: #fff;
 }
 
 #wrapper {
@@ -31,6 +31,16 @@ body {
     background-color: #fff;
 }
 
+.ribbon-top {
+    padding-bottom: 3em;
+    padding-top: 3em;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    border-bottom: 1px solid #eeeeee;
+    background-color: #0f4278;
+    color: #fff;
+}
+
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
@@ -38,6 +48,19 @@ body {
         padding: 0 30px;
         border-left: 1px solid #e7e7e7;
     }
+}
+
+.navbar {
+    min-height: 70px
+}
+
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
+}
+
+.navbar-nav {
+  margin-top: 10px;
 }
 
 .navbar-top-links {
@@ -98,54 +121,20 @@ body {
     left: auto;
 }
 
-.sidebar .sidebar-nav.navbar-collapse {
-    padding-right: 0;
-    padding-left: 0;
-}
-
-.sidebar .sidebar-search {
-    padding: 15px;
-}
-
-.sidebar ul li {
-    border-bottom: 1px solid #e7e7e7;
-}
-
-.sidebar ul li a.active {
-    background-color: #eee;
-}
-
-.sidebar .arrow {
-    float: right;
-}
-
-.sidebar .fa.arrow:before {
-    content: "\f104";
-}
-
-.sidebar .active>a>.fa.arrow:before {
-    content: "\f107";
-}
-
-.sidebar .nav-second-level li,
-.sidebar .nav-third-level li {
-    border-bottom: 0!important;
-}
-
-.sidebar .nav-second-level li a {
-    padding-left: 37px;
-}
-
-.sidebar .nav-third-level li a {
-    padding-left: 52px;
+img.navbar-brand {
+    float: left;
+    height: 65px;
+    padding: 5px 15px;
+    line-height: 20px;
 }
 
 @media(min-width:768px) {
     .sidebar {
         z-index: 1;
         position: absolute;
+        height: 100vh;
         width: 250px;
-        margin-top: 51px;
+        margin-top: 1px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -153,6 +142,29 @@ body {
     .navbar-top-links .dropdown-alerts {
         margin-left: auto;
     }
+}
+
+
+.footer {
+    background-color: #f5f5f5;
+    color: #aaa;
+    padding: 50px 0 35px 0;
+    margin-top: 20px;
+    z-index: 1;
+}
+.footer h3 {
+    text-transform: uppercase;
+    font-size: 15px;
+}
+.footer ul {
+    padding: 0;
+    list-style: none;
+}
+.footer a {
+    color: #aaa;
+    font-size: 13px;
+    display: inline-block;
+    padding: 5px 0;
 }
 
 .btn-outline {
@@ -366,24 +378,86 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 
+.panel-project {
+   height: 200px;
 
+}
+
+.panel-img-footer {
+  height: 20px;
+  width: 20px;
+}
 
 
 .navbar-brand{
     padding: 0px 15px;
 }
 
+.jumbotron {
+  background: image_url("http://www.weare.ci/wp-content/uploads/2015/12/19932631036-17261604.jpg") no-repeat center center; 
+  background-size:cover;
+  color: #0f4278; 
+  height: 500px; 
+  padding-top: 25px; 
+  margin-bottom: 0; 
+} 
 
-.jumbotron{
-  background: url(http://www.weare.ci/wp-content/uploads/2014/06/office-e1404412060977-1280x640.jpg);
-  color: white;
+.jumbotron h2:first-child {
+  margin:120px 0 0; 
+} 
+
+.jumbotron h2 {
+  color:#fff; 
+  font-size: 60px; 
+  text-align: right; 
+  margin:0; 
+  width:100%; 
+} 
+
+.section {
+  text-align: center; 
+  padding-top: 40px; 
+} 
+
+.section h3 {
+  margin: 0; 
+  padding: 0 0 20px; 
+  font-size: 30px; 
+} 
+
+.banner h3 {
+  margin: 0; 
+  padding: 0; 
+  color:#fff; 
+} 
+
+.section h4 {
+  color:#d8192f; 
+  margin: 30px 0 20px; 
+  padding: 0; 
+  font-size: 20px; 
+} 
+
+.section .btn {
+  background-color:rgba(216,25,47,.5); 
+  border:0px; 
+  margin-top: 24px; 
+  color: #fff; 
+} 
+
+.section ul {
+  list-style-type: none; 
+  margin-top: 10px; 
+  padding: 0; 
+} 
+
+.user-image{
+    height: 230px;
+    width: 230px;
+    margin-bottom: 10px;
+    
+    
 }
-
-.marketing .col-lg-4 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
 
 
 .theme-dropdown .dropdown-menu {

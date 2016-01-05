@@ -1,33 +1,136 @@
- <div id="page-wrapper">
-     <div class="row">
-      <h1>My Page</h1>
-      <p id="notice"><%= notice %></p>
-            <p>
-              <strong>Name:</strong>
-              <%= @student.first_name + " " + @student.last_name %>
-            </p>
-            
-            <p>
-              <strong>Email:</strong>
-              <%= @student.user.email %>
-            </p>
-            <p>
-              <strong>School:</strong>
-              <%= link_to @student.school.school_name, @student.school%>
-            </p>
-
-            <p>
-              <strong>Github:</strong>
-              <a href='https://github.com/<%=@student.github_username%>'> <%= @student.github_username%></a>
-            </p>
-            <p>
-              <strong>Codecademy:</strong>
-              <a href='https://www.codecademy.com/<%=@student.codecademy_username %>'> <%= @student.codecademy_username %></a>
-            </p>
-
-          <% if current_user.try(:admin?) || current_user == @student.user%> 
-          <%= link_to "Edit Student Profile", edit_student_path(@student)%> 
-          <%end%>
-      
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1><%= @student.first_name %> <%= @student.last_name %> (<%=@student.profile_name%>)</h1>
+     </div> 
     </div>
   </div>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <% flash.each do |name, msg| -%>
+     <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= msg %> 
+     </div>
+    <%end%>
+
+    <div class="row">
+       <div class="col-lg-3">
+            <%= image_tag @student.user.image, :class => "user-image img-rounded img-responsive"%>
+      </div>
+
+      <div class="col-lg-6">
+            <h3> "<%= @student.about_me %>"</h3> 
+            <p> <span class="fa fa-university"></span> <%= @student.school.school_name %></p>
+            <p> <span class="fa fa-user"></span>  Front End Developer</p> 
+            <p> <span class="fa fa-map-marker"></span>   New York, New York</p> 
+
+            <% if current_user.try(:admin?) || current_user == @student.user%> 
+            <p> 
+              <span class="fa fa-edit"></span> <%= link_to "Edit Profile", edit_student_path(@student)%> 
+            </p>
+            <%end%>
+            
+             <a href='https://github.com/<%=@student.github_username%>' class="btn btn-social-icon btn-github">
+                <span class="fa fa-github"></span>
+            </a>
+
+            <a href='https://www.codecademy.com/<%=@student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                <span class="fa fa-code"></span>
+            </a>
+
+            <a href='https://devpost.com/<%=@student.github_username%>' class="btn btn-social-icon btn-reddit">
+              <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">         
+            </a>
+      </div>
+
+
+      <div class="col-lg-3">
+            <h1><%= @ca_total_points %> </h1>
+            <p><%= @ca_last_coded %> </p>
+      </div>
+
+    </div>
+  
+  </div> 
+</div>
+
+
+<div class="container">
+  <div class="row">
+    
+    <div class="col-lg-12"> 
+      <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-tasks"></i> Progress</a></li>
+        <li><a data-toggle="pill" href="#menu1"><i class="fa fa-folder"></i>  Projects</a></li>
+        <li><a data-toggle="pill" href="#menu2"><i class="fa fa-calendar"></i>   Events</a></li>
+        <li><a data-toggle="pill" href="#menu3"><i class="fa fa-trophy"></i>  Awards</a></li>
+      </ul>
+    </div>
+      
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+          <div class="col-lg-12"> 
+          <%= line_chart @student.ca_data.group_by_day(:created_at, time_zone: "Eastern Time (US & Canada)", range: @student.ca_data.first.created_at..Time.now).maximum(:total_points) %>
+          </div>
+        </div>
+
+        <div id="menu1" class="tab-pane fade">
+          <div class="col-lg-12"> 
+          
+          <% if current_user.try(:admin?) || current_user == @student.user%>
+          <h3>  <%= link_to "Create a New Project", new_project_path, :class => "btn btn-primary"%> </h3>
+          <% end%> 
+          </div>
+          <% @student.projects.each do |project| %>
+          
+              <div class="col-lg-3"> 
+                 <div class="panel panel-default">
+
+                  <div class="panel-body panel-project">
+                    <h3><%= link_to project.name, project%></h3>
+                    <p><%= project.tag_line %> </p>
+                  </div>
+                    
+                    <div class="panel-footer">
+                      <% if current_user.try(:admin?) || current_user == @student.user%> 
+                      <%= link_to 'Remove', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%end%>
+                    </div>
+                </div>
+              </div> 
+          <% end %>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+          <h3>Menu 2</h3>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+        
+        <div id="menu3" class="tab-pane fade">
+          <div class="col-lg-12"> 
+          
+          <h3>  C/I Badges  </h3>
+         
+          </div>
+          <% @badges_array.each do |badge| %>
+          
+              <div class="col-lg-2"> 
+                 <div class="panel panel-default">
+                 
+                  <div class="panel-body panel-project">
+                    <%= image_tag badge["image"], :class => "img-responsive" %>
+                  </div>
+
+                </div>
+              </div> 
+
+          <% end %>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+</div>
