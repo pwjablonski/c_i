@@ -1,0 +1,41 @@
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1> C/I Events </h1>
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <%= link_to 'New Event', new_event_path %>
+
+  <div class="col-lg-12"> 
+    <% if current_user.try(:admin?) || current_user.try(:student?)%>
+    <h3>  <%= link_to "Create a New Project", new_event_path, :class => "btn btn-primary"%> </h3>
+    <% end%> 
+  </div>
+  
+  <% @events.each do |event| %>
+    
+      <div class="col-lg-3"> 
+         
+         <div class="panel panel-default">
+          <%= link_to event do %>
+          <div class="panel-body panel-project">
+            <h3><%= event.name%></h3>
+            <p><%= event.date %> </p>
+          </div>
+          <%end%>
+          <div class="panel-footer">
+            Event
+          </div>
+        </div>
+        
+      </div> 
+  <% end %>
+  
+</div>

@@ -34,13 +34,25 @@ class EnrollmentsController < ApplicationController
         
     end
     
+    def verify
+       @enrollment = Enrollment.find(params[:enrollment_id])
+       @enrollment.verify
+       @student = @enrollment.student
+       
+       respond_to do |format|
+           format.html { redirect_to @student, notice: 'You succesfully enrolled!' }
+           format.json { head :no_content }
+       end
+       
+    end
+    
     
     def destroy
         @enrollment = Enrollment.find(params[:id])
         @classroom = @enrollment.classroom
         @enrollment.destroy
         respond_to do |format|
-            format.html { redirect_to @classroom, notice: 'School was successfully destroyed.' }
+            format.html { redirect_to @classroom, notice: 'Disenrolled' }
             format.json { head :no_content }
         end
     end

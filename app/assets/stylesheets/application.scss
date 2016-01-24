@@ -19,6 +19,7 @@
 /* Some Style from the Bootstrap Default Theme */
 body {
     background-color: #fff;
+    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;
 }
 
 #wrapper {
@@ -59,8 +60,14 @@ body {
     border-color: #e7e7e7;
 }
 
-.navbar-nav {
+
+
+.nav > li {
   margin-top: 10px;
+}
+
+.nav > li > a{
+  font-size: 1.25em;
 }
 
 .navbar-top-links {
@@ -324,6 +331,14 @@ table.dataTable thead .sorting:after {
     font-size: 40px;
 }
 
+.panel {
+  border: 1px solid #d3d3d3;
+}
+
+.panel:hover{
+  border: 1px solid #939393;
+}
+
 .panel-green {
     border-color: #5cb85c;
 }
@@ -394,12 +409,16 @@ table.dataTable thead .sorting:after {
 }
 
 .jumbotron {
-  background: image_url("http://www.weare.ci/wp-content/uploads/2015/12/19932631036-17261604.jpg") no-repeat center center; 
+  background: image_url("jumbtron4.jpeg") no-repeat center center; 
   background-size:cover;
-  color: #0f4278; 
+  color: #fff; 
   height: 500px; 
   padding-top: 25px; 
   margin-bottom: 0; 
+} 
+
+.jumbotron h1{
+  margin-top: 175px; 
 } 
 
 .jumbotron h2:first-child {

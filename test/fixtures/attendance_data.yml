@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  enrollment_id: 1
+  date: 2016-01-07
+  present: false
+
+two:
+  enrollment_id: 1
+  date: 2016-01-07
+  present: false

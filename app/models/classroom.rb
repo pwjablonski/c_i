@@ -5,6 +5,8 @@ class Classroom < ActiveRecord::Base
     has_many :enrollments, dependent: :destroy
     has_many :students, through: :enrollments
     has_many :notifications
+    has_many :attendance_lists
+    has_many :attendance_data, through: :attendance_lists
     
     
     def add_student(student)
@@ -17,6 +19,17 @@ class Classroom < ActiveRecord::Base
         end
         current_student
     end
+    
+    def verified_enrollments
+        verified_enrollments = []
+        self.enrollments.each do |enrollment|
+            if enrollment.is_verified
+                verified_enrollments << enrollment
+            end
+        end
+        return verified_enrollments
+    end
+
     
     
     

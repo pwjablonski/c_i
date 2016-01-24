@@ -6,6 +6,8 @@ require 'httparty'
 
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :current_student_only, only: [:edit]
+
 
   
   
@@ -26,16 +28,16 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
       
-        ca_data_array = @student.update_ca_data
-
-        @ca_badges = ca_data_array[2]
-        @ca_total_points = ca_data_array[3]
-        @ca_last_coded = ca_data_array.last
+#        ca_data_array = @student.update_ca_data
+#
+#        @ca_badges = ca_data_array[2]
+#        @ca_total_points = ca_data_array[3]
+#        @ca_last_coded = ca_data_array.last
+#        
+#        @ca_datum = CaDatum.create(:student_id => @student.id, :total_points => @ca_total_points)
+        @ca_datum = @student.ca_data.last
         
-        @ca_datum = CaDatum.create(:student_id => @student.id, :total_points => @ca_total_points)
-        
-        
-        @badges_array = @student.badges_array
+        @badges = @student.badges_array
         
   end
 
@@ -94,6 +96,14 @@ class StudentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+    end
+    
+    def current_student_only
+        if @student == current_user.student || current_user.admin?
+        
+        else
+            redirect_to root_path, :alert => "Access denied."
+        end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

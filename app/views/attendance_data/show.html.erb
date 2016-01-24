@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Enrollment:</strong>
+  <%= @attendance_datum.enrollment_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @attendance_datum.date %>
+</p>
+
+<p>
+  <strong>Present:</strong>
+  <%= @attendance_datum.present %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_datum_path(@attendance_datum) %> |
+<%= link_to 'Back', attendance_data_path %>

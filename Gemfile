@@ -65,3 +65,7 @@ gem 'chartkick', '~> 1.4', '>= 1.4.1'
 gem 'groupdate', '~> 2.5'
 
 gem 'httparty', '~> 0.13.7'
+
+gem 'whenever', require: false
+
+gem "figaro"

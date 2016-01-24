@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :current_teacher_only, only: [:edit]
 
   # GET /profiles
   # GET /profiles.json
@@ -66,6 +67,14 @@ class TeachersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
+    end
+    
+    def current_teacher_only
+        if @teacher == current_user.teacher || current_user.admin?
+            
+            else
+            redirect_to root_path, :alert => "Access denied."
+        end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @attendance_list.classroom_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @attendance_list.date %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_list_path(@attendance_list) %> |
+<%= link_to 'Back', attendance_lists_path %>

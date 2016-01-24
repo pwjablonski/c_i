@@ -56,7 +56,7 @@
         <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-sitemap"></i> Classrooms</a></li>
         <li><a data-toggle="pill" href="#menu1"><i class="fa fa-users"></i>  Students</a></li>
         <li><a data-toggle="pill" href="#menu2"><i class="fa fa-calendar"></i>  Events</a></li>
-        <li><a data-toggle="pill" href="#menu3"><i class="fa fa-user-plus"></i>  Followers</a></li>
+        <li><a data-toggle="pill" href="#menu3"><i class="fa fa-book"></i>  Resources and Links</a></li>
       </ul>
       
       
@@ -79,6 +79,8 @@
                       <%= link_to 'Remove', classroom, method: :delete, data: { confirm: 'Are you sure?' } %>
                       <%end%>
                     </div>
+
+                    
                 </div>
                </div> 
               <% end %>
@@ -86,16 +88,7 @@
 
         <div id="menu1" class="tab-pane fade">
             <h3>Students</h3>
-            <% @teacher.students.each do |student| %>
-            <div class="col-md-3">
-              <a href="/students/<%= student.id %>">
-                  <div class="well well-sm">
-                      <%= image_tag student.user.image, :height => "50px" %>
-                      <%= student.first_name %>
-                  </div>
-              </a> 
-            </div>
-            <%end%>
+            
         </div>
         <div id="menu2" class="tab-pane fade">
           <h3>Menu 2</h3>

@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105140929) do
+ActiveRecord::Schema.define(version: 20160116163354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendance_data", force: :cascade do |t|
+    t.integer  "enrollment_id"
+    t.integer  "attendance_list_id"
+    t.boolean  "present"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "attendance_lists", force: :cascade do |t|
+    t.integer  "classroom_id"
+    t.date     "date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "ca_data", force: :cascade do |t|
     t.integer  "total_points"
@@ -34,8 +49,20 @@ ActiveRecord::Schema.define(version: 20160105140929) do
   create_table "enrollments", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "classroom_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_verified",  default: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "date"
+    t.string   "location"
+    t.string   "image_url"
+    t.integer  "eventbrite_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "notifications", force: :cascade do |t|

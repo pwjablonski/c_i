@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Attendance Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Classroom</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendance_lists.each do |attendance_list| %>
+      <tr>
+        <td><%= attendance_list.classroom_id %></td>
+        <td><%= attendance_list.date %></td>
+        <td><%= link_to 'Show', attendance_list %></td>
+        <td><%= link_to 'Edit', edit_attendance_list_path(attendance_list) %></td>
+        <td><%= link_to 'Destroy', attendance_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attendance list', new_attendance_list_path %>

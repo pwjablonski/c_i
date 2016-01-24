@@ -33,11 +33,16 @@
                 </button>
                 
                   <!-- <img alt="C/I" src="images/ci_logo_header.png"> -->
-                <%= link_to image_tag("ci_logo_header.png", :class => "navbar-brand"), root_path %>
+                <%= link_to image_tag("ci-vector.png", :class => "navbar-brand"), root_path %>
 
             </div>
             <!-- /.navbar-header -->
             <div class = "navbar-collapse collapse in">
+              <ul class="nav navbar-nav navbar-left">
+                  <li> <%= link_to "Events", events_path %> </li>
+                  <li> <%= link_to "Projects", projects_path %> </li>
+              </ul>
+
               <ul class="nav navbar-nav navbar-right">
                   <%= render 'layouts/navigation_links' %>
                   <!-- /.dropdown -->

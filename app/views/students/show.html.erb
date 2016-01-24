@@ -17,6 +17,21 @@
      </div>
     <%end%>
 
+    <% @student.enrollments.each do |enrollment|%>
+      <% if enrollment.is_verified == false %>
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= form_tag verify_classroom_enrollments_path(enrollment.classroom) do %>
+              <%= hidden_field_tag :enrollment_id, enrollment.id %>
+              <%= submit_tag "Accept Enrollment Request" %>
+            <% end %> 
+             <%= link_to 'Decline Enrollment Request', [enrollment.classroom, enrollment], method: :delete, data: { confirm: 'Are you sure?' } %>
+       </div>
+      <% end%>
+    <%end%>
+
+
+
     <div class="row">
        <div class="col-lg-3">
             <%= image_tag @student.user.image, :class => "user-image img-rounded img-responsive"%>
@@ -49,8 +64,9 @@
 
 
       <div class="col-lg-3">
-            <h1><%= @ca_total_points %> </h1>
-            <p><%= @ca_last_coded %> </p>
+            <h1><%= @ca_datum.total_points %> </h1>
+            <h1><%= @student.enrollments.last.percent_present %> % </h1>
+            
       </div>
 
     </div>
@@ -115,19 +131,21 @@
           <h3>  C/I Badges  </h3>
          
           </div>
-          <% @badges_array.each do |badge| %>
           
-              <div class="col-lg-2"> 
-                 <div class="panel panel-default">
-                 
-                  <div class="panel-body panel-project">
-                    <%= image_tag badge["image"], :class => "img-responsive" %>
+
+            <% @badges.each do |badge| %>
+            
+                <div class="col-lg-2"> 
+                   <div class="panel panel-default">
+                   
+                    <div class="panel-body panel-project">
+                      <%= image_tag badge["image"], :class => "img-responsive" %>
+                    </div>
+
                   </div>
-
-                </div>
-              </div> 
-
-          <% end %>
+                </div> 
+                <% end %>
+            
           </div>
         </div>
       </div>
