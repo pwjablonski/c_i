@@ -34,10 +34,10 @@
 
     <div class="row">
        <div class="col-lg-3">
-            <%= image_tag @student.user.image, :class => "user-image img-rounded img-responsive"%>
+            <%= image_tag @student.user.image, :height => "100px", :class => "user-image img-rounded img-responsive"%>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-3">
             <h3> "<%= @student.about_me %>"</h3> 
             <p> <span class="fa fa-university"></span> <%= @student.school.school_name %></p>
             <p> <span class="fa fa-user"></span>  Front End Developer</p> 
@@ -48,25 +48,34 @@
               <span class="fa fa-edit"></span> <%= link_to "Edit Profile", edit_student_path(@student)%> 
             </p>
             <%end%>
-            
-             <a href='https://github.com/<%=@student.github_username%>' class="btn btn-social-icon btn-github">
-                <span class="fa fa-github"></span>
-            </a>
-
-            <a href='https://www.codecademy.com/<%=@student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
-                <span class="fa fa-code"></span>
-            </a>
-
-            <a href='https://devpost.com/<%=@student.github_username%>' class="btn btn-social-icon btn-reddit">
-              <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">         
-            </a>
       </div>
 
 
       <div class="col-lg-3">
-            <h1><%= @ca_datum.total_points %> </h1>
-            <h1><%= @student.enrollments.last.percent_present %> % </h1>
-            
+            <h3> Overview </h3>
+            <p><%= @ca_datum.total_points %> CA Points </p>
+            <p><%= @student.projects.count %> C/I Projects </p>
+            <p><%= @student.user.public_repos.count %> Repositiories on Github </p>
+      </div>
+
+      <div class="col-md-3">
+            <h3> Tools </h3>
+            <a href='https://github.com/<%=@student.github_username%>' class="btn btn-social-icon btn-github">
+                <span class="fa fa-github"></span>
+            </a>
+            <p> Github </p>
+            <a href='https://www.codecademy.com/<%=@student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                <span class="fa fa-code"></span>
+                <p> CodeAcademy </p>
+            </a>
+
+            <a href='https://devpost.com/<%=@student.devpost_username%>' class="btn btn-social-icon btn-reddit">
+              <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">         
+            </a>
+
+            <a href='https://c9.io/<%=@student.cloud9_username%>' class="btn btn-social-icon btn-reddit">
+              <%=image_tag "c9-logo.png" %>       
+            </a>
       </div>
 
     </div>
@@ -101,6 +110,7 @@
           <h3>  <%= link_to "Create a New Project", new_project_path, :class => "btn btn-primary"%> </h3>
           <% end%> 
           </div>
+
           <% @student.projects.each do |project| %>
           
               <div class="col-lg-3"> 
@@ -121,8 +131,20 @@
           <% end %>
         </div>
         <div id="menu2" class="tab-pane fade">
-          <h3>Menu 2</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    
+          <pre id="editor">function foo(items) {
+              var i;
+              for (i = 0; i &lt; items.length; i++) {
+                  alert("Ace Rocks " + items[i]);
+              }
+          }</pre>
+
+          <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+          <script>
+              var editor = ace.edit("editor");
+              editor.setTheme("ace/theme/twilight");
+              editor.session.setMode("ace/mode/javascript");
+          </script>
         </div>
         
         <div id="menu3" class="tab-pane fade">

@@ -11,37 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-goup">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name, autofocus: true, :class => "form-control" %>
   </div>
   
-  <div class="field">
+  <div class="field form-goup">
     <%= f.label :location %><br />
-    <%= f.text_field :location, autofocus: true %>
+    <%= f.text_field :location, autofocus: true, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.text_field :date, autofocus: true %>
+  <div class="field form-goup">
+    <%= f.label :start_time %><br />
+    <%= f.datetime_select :start_time, autofocus: true, :class => "form-control" %>
+  </div>
+  <div class="field form-goup">
+    <%= f.label :end_time %><br />
+    <%= f.datetime_select :end_time, autofocus: true, :class => "form-control" %>
   </div>
 
-  <div class="field">
+ <div class="field form-goup">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-goup">
     <%= f.label :image_url %><br>
-    <%= f.text_field :image_url %>
+    <%= f.text_field :image_url, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :eventbrite_id %><br>
-    <%= f.text_field :eventbrite_id %>
-  </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Event", :class => "btn btn-primary" %>
   </div>
 <% end %>

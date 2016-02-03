@@ -1,4 +1,42 @@
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1><%= @event.name %> </h1>
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
 <p id="notice"><%= notice %></p>
 
+<a href="<%= @eventbrite_event["url"]%>" class=""> See Event/SignUp </a> 
+
+<p>
+  <strong>About:</strong>
+  <%= @event.location %>
+</p>
+<p>
+  <strong>Start Time:</strong>
+  <%= @event.start_time %>
+</p>
+
+<p>
+  <strong>Start Time:</strong>
+  <%= @event.end_time %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+
+<% if current_user.try(:admin?) %>
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<% end %>
+<%= link_to 'Explore More Projects', events_path %>
+
+</div>

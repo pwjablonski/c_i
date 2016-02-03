@@ -111,17 +111,23 @@
 
           <div id="menu1" class="tab-pane fade">
             <% @classroom.verified_enrollments.each do |enrollment| %>
-
-            <div class="col-md-3">
-              <a href="/students/<%= enrollment.student.id %>">
-                <div class="well well-sm">
-                  <%= image_tag enrollment.student.user.image, :height => "50px" %>
-                  <%= enrollment.student.first_name %>
-                </div>
-              </a> 
-            </div>
-            <%end%>
-
+                  
+                <div class="col-lg-3"> 
+                   
+                   <div class="panel panel-default">
+                    <%= link_to enrollment.student do %>
+                    <div class="panel-body panel-project">
+                      <%= image_tag enrollment.student.user.image, :height => "100px" %>
+                      <h3><%= enrollment.student.first_name %></h3>
+                    </div>
+                    <%end%>
+                    <div class="panel-footer">
+                      Event
+                    </div>
+                  </div>
+                  
+                </div> 
+            <% end %>
           </div>
 
           <div id="menu2" class="tab-pane fade">

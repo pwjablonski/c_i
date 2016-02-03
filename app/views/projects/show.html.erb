@@ -13,6 +13,15 @@
 
 <p id="notice"><%= notice %></p>
 
+
+<p>
+  <strong>Github Link:</strong>
+  <a href="<%= @project.github_repo_url%>"> Github </a>
+</p>
+
+<p>
+  <strong>Devpost Link:</strong>
+  <a href="<%= @project.devpost_url%>"> Devpost </a>
 <p>
   <strong>Description:</strong>
   <%= @project.description %>

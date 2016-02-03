@@ -8,8 +8,7 @@ class User < ActiveRecord::Base
 #    self.role ||= :admin
 #  end
 
-   
-    # Include default devise modules. Others available are:
+       # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :confirmable, :validatable, :omniauthable, :omniauth_providers => [:github]
 
@@ -21,10 +20,20 @@ class User < ActiveRecord::Base
       
       #user.name = auth.info.name   # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
+      user.repos = auth.
       
       user.skip_confirmation!
       user.save!
     end
+  end
+
+  def public_repos
+      
+      
+      repos = HTTParty.get("https://api.github.com/users/#{self.student.github_username}/repos", :headers => {"User-Agent" => "#{self.student.github_username}"})
+      
+      return repos
+      
   end
 
 

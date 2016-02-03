@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-          <h1>Create a new project</h1>
+          <h1>Create a New Project</h1>
      </div> 
     </div>
   </div>
@@ -10,6 +10,12 @@
 
 <div class="container">
     <div class="row">
+      
+       <%= link_to projects_add_path, :class => "btn btn-block btn-social btn-github" do %>
+       <span class="fa fa-github"></span>
+       Import
+       <%end%>
+      
       <%= render 'form' %>
 
       <%= link_to 'Explore More Projects', projects_path %>

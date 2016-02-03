@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
 
 
+  resources :resources
+  get 'admin/show'
+
   resources :events
   devise_for :users,
 #    path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' },
@@ -16,9 +19,11 @@ Rails.application.routes.draw do
 #      delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
 #  end
 
+  get 'projects/add', to: 'projects#add'
+  post 'projects/import', to: 'projects#import'
 
   resources :projects
-  resources :notifications
+    resources :notifications
   resources :schools
   resources :teachers
   resources :users

@@ -3,10 +3,11 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :name
       t.string :description
-      t.string :date
+      t.datetime :start_time
+      t.datetime :end_time
       t.string :location
       t.string :image_url
-      t.integer :eventbrite_id
+      t.string :eventbrite_id
   
       t.timestamps null: false
     end

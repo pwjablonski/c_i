@@ -56,6 +56,13 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.user.update_attribute(:role, :student)
+    ca_data_array = @student.update_ca_data
+    
+    ca_badges = ca_data_array[2]
+    ca_total_points = ca_data_array[3]
+    ca_last_coded = ca_data_array.last
+    
+    ca_datum = CaDatum.create(:student_id => @student.id, :total_points => ca_total_points)
     
     respond_to do |format|
       if @student.save
@@ -108,6 +115,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-        params.require(:student).permit(:first_name, :last_name, :profile_name, :profile_pic_url, :about_me, :github_username, :codecademy_username, :user_id, :classroom_id, :school_id, :devpost_username, :credly_member_id )
+        params.require(:student).permit(:first_name, :last_name, :profile_name, :profile_pic_url, :about_me, :github_username, :codecademy_username, :user_id, :classroom_id, :school_id, :devpost_username, :credly_member_id, :cloud9_username )
     end
 end

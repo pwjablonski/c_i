@@ -4,12 +4,18 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+#    @events = Event.all
+
+    @q = Event.ransack(params[:q])
+    @events = @q.result(distinct: true)
+
+    
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+      @eventbrite_event = @event.show_eventbrite_event
   end
 
   # GET /events/new
@@ -25,6 +31,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.create_eventbrite_event(event_params)
 
     respond_to do |format|
       if @event.save
@@ -40,6 +47,8 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+     @event.update_eventbrite_event(event_params)
+      
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -69,6 +78,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-        params.require(:event).permit(:name, :date, :location, :description, :image_url, :eventbrite_id)
+        params.require(:event).permit(:name, :start_time, :end_time, :location, :description, :image_url, :eventbrite_id)
     end
 end

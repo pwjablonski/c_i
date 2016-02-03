@@ -69,3 +69,11 @@ gem 'httparty', '~> 0.13.7'
 gem 'whenever', require: false
 
 gem "figaro"
+
+gem 'ransack'
+
+gem 'credly', '~> 0.0.9'
+
+gem 'ace-rails-ap', '~> 4.0', '>= 4.0.1'
+
+gem 'mailboxer', '~> 0.13.0'

@@ -1,0 +1,28 @@
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1> Import From Github </h1>
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  
+  <% @repos.each do |repo| %>
+    
+      <div class="col-lg-6"> 
+        <%= form_for(@project) do |f| %> 
+        <%= f.hidden_field :student_id, value: current_user.student.id%>
+        <%= f.hidden_field :name, :value => repo["name"] %>
+        <%= f.hidden_field :tag_line, :value => repo["description"] %>
+        <%= f.hidden_field :github_repo_url, :value => repo["html_url"] %>
+        <%= submit_tag "Import", :class => "btn btn-default" %>
+        <% end %>
+         <a href="<%= repo["html_url"]%>"> <%= repo["name"]%></a> 
+      </div> 
+  <% end %>
+  </div>
+</div>

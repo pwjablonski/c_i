@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       elsif resource.try(:student?)
           resource.student
       elsif resource.try(:admin?)
-          users_path
+          admin_show_path
       end
   end
  

@@ -14,7 +14,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require ace-rails-ap
 //= require_tree .
+
 $(function() {
 
     $('#side-menu').metisMenu();

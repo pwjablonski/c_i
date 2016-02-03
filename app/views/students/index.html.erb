@@ -1,50 +1,56 @@
-<div class="page-header ribbon-top">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-          <h1>All Students</h1>        
-     </div> 
+  <div class="page-header ribbon-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+            <h1>All Students</h1>        
+       </div> 
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
+  <div class="container">
 
-      <div class="row">
+        <div class="row">
 
-        <p id="notice"><%= notice %></p>
-        
-        <h1>C/I Students</h1>
+          <p id="notice"><%= notice %></p>
+          
+          <% @students.each do |student| %>
+               
+                  <div class="col-lg-3"> 
+                     
+                     <div class="panel panel-default">
+                      <%= link_to student do %>
+                      <div class="panel-body panel-project">
+                        <%= image_tag student.user.image, :height => "50px", :class => "img-circle img-responsive panel-img-user" %>
+                        <h4><%= student.first_name %> <%= student.last_name %></h4>
+                      </div>
+                      <%end%>
+                      <div class="panel-footer">
+                        <a href='https://github.com/<%=student.github_username%>' class="btn btn-social-icon btn-github">
+                            <span class="fa fa-github"></span>
+                        </a>
 
-             <!--    <div class="card">   
-                  
-                  <img src="http://www.iconsdb.com/icons/preview/orange/plus-5-xxl.png" alt="Add Classroom" height="150" width="150"> 
+                        <a href='https://www.codecademy.com/<%=student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                            <span class="fa fa-code"></span>
+                        </a>
 
-                  <p><%= link_to 'New Student', new_student_path%></p>
-                </div> -->
-        <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-        <%= pie_chart Teacher.group(:school_id).count %>
-
-
-        
-        <% @students.each do |student| %>
+                        <a href='https://devpost.com/<%=student.github_username%>' class="btn btn-social-icon btn-reddit">
+                          <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">        
+                        </a>
+                      </div>
+                    </div>
+                    
+                  </div> 
              
-                <div class="card">   
-                  <p><a href="/students/<%= student.id %>"><%= student.first_name%> <%=student.last_name%></a> </p>
-                  <p> <%= student.school.school_name %></p>
-
-                </div>
-           
-          <% end %>
-        <br>
-        
-        
-        <!-- <h3>Import a CSV File</h3>
-          <%= form_tag import_students_path, multipart: true do %>
-            <%= file_field_tag :file %>
-            <%= submit_tag "Import CSV" %>
-        <% end %> -->
-    </div>
-</div>
+            <% end %>
+          
+          
+          <!-- <h3>Import a CSV File</h3>
+            <%= form_tag import_students_path, multipart: true do %>
+              <%= file_field_tag :file %>
+              <%= submit_tag "Import CSV" %>
+          <% end %> -->
+      </div>
+  </div>
 
 

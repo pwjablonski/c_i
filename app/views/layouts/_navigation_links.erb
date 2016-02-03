@@ -66,9 +66,12 @@
     <ul class="dropdown-menu dropdown-user">
       <% if current_user.try(:teacher?)%>
       <li><%= link_to 'My Profile', current_user.teacher %></li>
-      <li> <%= link_to "Settings", edit_student_path(current_user.teacher)%> </p>
+      
       <% elsif current_user.try(:student?)%>
       <li><%= link_to 'My Profile', current_user.student %></li>
+      
+      <% elsif current_user.try(:admin?)%>
+      <li><%= link_to 'Admin Dashboard', admin_show_path %></li>
       
       <%end%>
       <li class="divider"></li>
