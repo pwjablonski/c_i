@@ -7,9 +7,16 @@
     <%= f.submit 'Change Role', :class => 'button-xs' %>
   <% end %>
 </td>
+
+<td> <%= link_to user.approved, toggle_approved_user_path(user) %> </td>
+
+
+
 <td>
   <%= link_to "Update User Info", edit_user_registration_path(user) unless user == current_user %>
 </td>
+
+
 <td>
   <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
 </td>

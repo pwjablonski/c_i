@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
-  enum role: [:student, :teacher, :admin]
-  validates :role, presence: true
+   
+#   after_create :notify_admin
+
+   
+   enum role: [:student, :teacher, :admin]
+   validates :role, presence: true
    acts_as_messageable
    
    has_one :teacher
@@ -36,14 +40,22 @@ class User < ActiveRecord::Base
   end
 
   def public_repos
-      
-      
       repos = HTTParty.get("https://api.github.com/users/#{self.student.github_username}/repos", :headers => {"User-Agent" => "#{self.student.github_username}"})
-      
       return repos
-      
   end
 
+
+#  def active_for_authentication?
+#     super && approved?
+#  end
+#
+#  def inactive_message
+#    if !approved?
+#        :not_approved
+#    else
+#        super # Use whatever other message
+#    end
+#  end
 
 
 

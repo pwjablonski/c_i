@@ -25,7 +25,12 @@ Rails.application.routes.draw do
   resources :projects
   resources :schools
   resources :teachers
-  resources :users
+  resources :users  do
+      member do
+          get :toggle_approved
+      end
+  end
+
   resources :classrooms do
       resources :enrollments, only: [:create, :destroy, :verify] do
         collection do
@@ -43,7 +48,7 @@ Rails.application.routes.draw do
       resources :attendance_data do
           
           member do
-              post :mark_as_present
+              get :mark_as_present
           end
       end
 

@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only, :except => :show
+ 
 
   def index
-    @users = User.all
+    if params[:approved] == "false"
+        @users = User.find_all_by_approved(false)
+    else
+        @users = User.all
+    end
   end
 
   def show
@@ -36,6 +41,20 @@ class UsersController < ApplicationController
     user.destroy
     redirect_to users_path, :notice => "User deleted."
   end
+  
+  def toggle_approved
+    @user = User.find(params[:id])
+      
+    if @user.approved == true
+    @user.update_attribute(:approved, false)
+    elsif 
+    @user.update_attribute(:approved, true)
+    end
+    
+    redirect_to users_path
+  end
+
+
 
   private
 

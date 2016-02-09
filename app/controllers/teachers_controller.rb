@@ -15,7 +15,14 @@ class TeachersController < ApplicationController
 
   # GET /profiles/new
   def new
-    @teacher = Teacher.new
+    if current_user.approved?
+      @teacher = Teacher.new
+    else
+      User.where(:role => 2).each do |admin|
+          admin.notify("#{current_user.email} wants to be a teacher", "<a href='http://localhost:3000/users/#{current_user.id}/toggle_approved' data-method='post'> Approve Teacher</a>" )
+      end
+      redirect_to new_student_path
+    end
   end
 
   # GET /profiles/1/edit
@@ -62,6 +69,8 @@ class TeachersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  #POST
 
   private
     # Use callbacks to share common setup or constraints between actions.

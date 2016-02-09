@@ -79,3 +79,10 @@ gem 'ace-rails-ap', '~> 4.0', '>= 4.0.1'
 gem 'mailboxer', '~> 0.13.0'
 
 gem 'simple_form'
+
+gem 'rails_12factor'
+
+
+group :production do
+  gem 'rails_12factor'
+end
