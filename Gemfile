@@ -83,6 +83,8 @@ gem 'mailboxer', '~> 0.13.0'
 
 gem 'simple_form'
 
+gem 'font-awesome-sass'
+
 
 
 group :production do

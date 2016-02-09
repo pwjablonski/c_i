@@ -15,7 +15,11 @@
  *= require_bootstrap
  */ 
 
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "bootstrap";
+
 /* Some Style from the Bootstrap Default Theme */
 body {
     background-color: #fff;
