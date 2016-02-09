@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
+
+
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 #Use postgres
@@ -80,7 +83,6 @@ gem 'mailboxer', '~> 0.13.0'
 
 gem 'simple_form'
 
-gem 'rails_12factor'
 
 
 group :production do
