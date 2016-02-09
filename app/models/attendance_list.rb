@@ -19,12 +19,8 @@ class AttendanceList < ActiveRecord::Base
         
         percent_present = (num_present/num_students) * 100.0
         
-        return percent_present
-        
+        return percent_present.round(2)
     end
-    
-    
-    
     
     
     

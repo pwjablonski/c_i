@@ -1,0 +1,27 @@
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+         <h1> <%= conversation.subject %> </h1>
+     </div> 
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+      <%= render 'messages/form', conversation: conversation %>
+      
+      <ul class= "list-group">
+        <%= content_tag_for(:li, conversation.receipts_for(current_user), class: "list-group-item") do |receipt|%>
+          <div class="panel-body">
+            <% message = receipt.message%>
+            <h4> <%= message.subject%> </h4>
+            <p> <%= message.body %> </p>
+            <%end%>
+          </div>
+      </ul>
+</div>

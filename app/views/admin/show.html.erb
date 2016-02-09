@@ -38,7 +38,7 @@
         <div class="tab-pane fade in active" id="classroom-pills">
                <div class="row">
                     <div class="col-lg-12"> 
-                        <%= search_form_for @q do |f| %>
+                        <%= search_form_for @q,  :html => {:class => "form-inline"} do |f| %>
                          <div class="form-group"> 
                         <%= f.search_field :name_cont, :autofocus => true, class: 'form-control', :placeholder => "Search for an classroom..."  %>
                      </div>

@@ -1,5 +1,5 @@
 class AttendanceListsController < ApplicationController
-  before_action :set_attendance_list, only: [:show, :edit, :update, :destroy]
+    before_action :set_attendance_list, only: [:show, :edit, :update, :destroy, :toggle_status]
 
   # GET /attendance_lists
   # GET /attendance_lists.json
@@ -16,11 +16,8 @@ class AttendanceListsController < ApplicationController
   def new
     @attendance_list = AttendanceList.new
     @classroom = Classroom.find(params[:classroom_id])
-    @classroom.enrollments.each do |enrollment|
-        
-        if enrollment.is_verified == true
+    @classroom.verified_enrollments.each do |enrollment|
             @attendance_list.attendance_data.build(:enrollment_id => enrollment.id)
-        end
 #        @attendance_list.attendance_data << AttendanceDatum.new(:enrollment_id => enrollment.id)
     end
     
@@ -30,6 +27,18 @@ class AttendanceListsController < ApplicationController
   def edit
       @classroom = @attendance_list.classroom
   end
+  
+  
+  def toggle_status
+     if @attendance_list.status == "open"
+         @attendance_list.update_attribute(:status, "closed")
+     else
+          @attendance_list.update_attribute(:status, "open")
+     end
+     
+     redirect_to @attendance_list.classroom
+  end
+  
 
   # POST /attendance_lists
   # POST /attendance_lists.json
@@ -40,6 +49,13 @@ class AttendanceListsController < ApplicationController
     
     respond_to do |format|
       if @attendance_list.save
+          
+          @attendance_list.attendance_data.each do |attendance_datum|
+              attendance_datum.enrollment.student.user.notify("Take Attendance #{@attendance_list.date}", "<a href='http://localhost:3000/attendance_lists/#{@attendance_list.id}/attendance_data/#{attendance_datum.id}/mark_as_present' data-method='post'> Mark Present</a>" )
+          end
+
+          
+          
           format.html { redirect_to @classroom, notice: 'Attendance list was successfully created.' }
         format.json { render :show, status: :created, location: @attendance_list }
       else

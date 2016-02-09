@@ -23,13 +23,13 @@
     <div class="panel-body">
       <!-- Nav tabs -->
       <ul class="nav nav-pills nav-justified">
-        <li class="active"><a href="#overview-student-pills" data-toggle="tab">Overview</a>
+        <li class="active"><a href="#overview-student-pills" data-toggle="tab"> <i class="fa fa-tasks"></i>Progress</a>
         </li>
-        <li><a href="#list-student-pills" data-toggle="tab">Students</a>
+        <li><a href="#list-student-pills" data-toggle="tab"><i class="fa fa-users"> </i>Students</a>
         </li>
-        <li><a href="#attendence-student-pills" data-toggle="tab">Attendance</a>
+        <li><a href="#attendence-student-pills" data-toggle="tab"><i class="fa fa-check"> </i>Attendance</a>
         </li>
-        <li><a href="#awards-student-pills" data-toggle="tab">Awards</a>
+        <li><a href="#resources-student-pills" data-toggle="tab"><i class="fa fa-book"> </i>Class Resources</a>
         </li>
       </ul>
 
@@ -37,15 +37,27 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="overview-student-pills">
 
+        <div class = "col-md-6 text-center">
+          <h3> Class Overview </h3>
+          <a href="https://www.codecademy.com/schools/curriculum/labs/<%=@classroom.ca_class_id%>" > CA Class Data </a>
+        </div>
 
+        <div class = "col-md-6 text-center">
+          <h3> CA Progress </h3>
           <%= line_chart @classroom.verified_enrollments.map{|enrollment|
            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, time_zone: "Eastern Time (US & Canada)", range: enrollment.student.ca_data.first.created_at..Time.now).maximum(:total_points)}
          } %>
-
+         </div>
+         <div class = "col-md-6 text-center">
+         <h3> CA Bar </h3>
          <%= column_chart @classroom.verified_enrollments.map{|enrollment|
            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, last: 1).maximum(:total_points)}
          } %>
-
+         </div>
+         <div class = "col-md-6 text-center">
+         <h3> Attendance </h3>
+         <%= pie_chart @classroom.attendance_data.group(:present).count %>
+         </div>
        </div>
 
 
@@ -139,75 +151,62 @@
         </div>
         <div class="tab-pane fade" id="attendence-student-pills">
 
-          <%= pie_chart @classroom.attendance_data.group(:present).count %>
+          <h3> <%=link_to "Record Today's Attendance", new_attendance_list_path(:classroom_id => @classroom.id), :class => "btn btn-primary"%> </h3>
 
-          <h3> <%=link_to "Record Attendance", new_attendance_list_path(:classroom_id => @classroom.id), :class => "btn btn-primary"%> </h3>
-
-          <div class="table-responsive">
+         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Actions </th>
-                  <th> Percent Present </th>
-                  <% @classroom.verified_enrollments.each do |enrollment| %>
-                  <th> <%=enrollment.student.first_name%> </th>
-                  <%end%> 
+
+                  
                 </tr>
               </thead>
               <tbody>              
-                <% @classroom.attendance_lists.each do |attendance_list| %>
+                <% @classroom.verified_enrollments.each do |enrollment| %>
                 <tr>
-                  <td> <%= attendance_list.date %> </td>
                   <td>
-                    <i class="fa fa-pencil-square-o"></i><%=link_to "Update", edit_attendance_list_path(attendance_list)%><i class="fa fa-trash-o"></i> <%= link_to 'Delete', attendance_list, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  
                   </td>
-                  <td>
-                    <%= attendance_list.percent_present %> %
-                  </td>
+                  <% enrollment.attendance_data.reverse[0..4].each do |attendance_datum| %>
+                    <td>
+                      <%= attendance_datum.attendance_list.date%> <br>
+                      <%= attendance_datum.attendance_list.percent_present%> % <br>
+                      <i class="fa fa-pencil-square-o"></i><%=link_to "Update", edit_attendance_list_path(attendance_datum.attendance_list)%>
+                      <i class="fa fa-trash-o"></i> <%= link_to 'Delete', attendance_datum.attendance_list, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      | <%= link_to attendance_datum.attendance_list.status, toggle_status_attendance_list_path(attendance_datum.attendance_list),  method: :post %>
+                    </td>
+                  <%end%> 
+                </tr>
 
-                  <% attendance_list.attendance_data.each do |attendance_datum| %>
+                <tr>
+                  <td>
+                   <%= enrollment.student.first_name%> <br>
+                   <%= enrollment.percent_present%> %
+                  </td>
+                  <% enrollment.attendance_data.reverse[0..4].each do |attendance_datum| %>
                   <td> 
                    <% if  attendance_datum.present == true %>
-                   <i class="fa fa-check"></i>
+                   <i class="fa fa-check fa-2x"></i>
                    <%else%>
-                   <i class="fa fa-times"></i>
+                   <i class="fa fa-times fa-2x"></i>
                    <%end%>
                  </td>
                  <%end%>
-               </tr>
-               <%end%>
+                </tr>
+
+                <%end%>
              </tbody>
            </table>
-         </div>
-
+          </div>
 
 
        </div>
 
-       <div class="tab-pane fade" id="awards-student-pills">
+       <div class="tab-pane fade" id="resources-student-pills">
 
-        <div class="col-lg-12"> 
-
-          <h3>  C/I Badges  </h3>
-
-          <% @classroom.students.each do |student| %>
-          <% student.badges_array.each do |badge| %>
-
-          <div class="col-lg-2"> 
-           <div class="panel panel-default">
-
-            <div class="panel-body panel-project">
-              <%= image_tag badge["image"], :class => "img-responsive" %>
-              <%= link_to student.first_name, student %>
-            </div>
+          <div class="col-lg-12"> 
 
           </div>
-        </div> 
-
-        <% end %>
-        <% end %>
-
 
       </div>
 

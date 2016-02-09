@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
     belongs_to :student
-    
+    acts_as_messageable
     
     def fetch_devpost_data
         devpost_data_array =[]

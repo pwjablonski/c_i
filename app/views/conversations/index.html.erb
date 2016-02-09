@@ -1,0 +1,50 @@
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1> Mailbox </h1>
+     </div> 
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+    
+    <div class="row">
+      <div class="col-sm-3">
+        <ul class="nav nav-pills nav-stacked">
+          <li class=""> <%= link_to :new_conversation do %>
+            <i class="fa fa-comments fa-fw"></i>
+            Start New Conversation
+            <% end -%>
+          </li>
+          <li class=" active">  <a data-toggle="pill" href="#inbox"> <i class="fa fa-inbox fa-fw"></i>Inbox</a></li>
+          <li class=""> <a data-toggle="pill" href="#sent"> <i class="fa fa-paper-plane fa-fw"></i>Sent</a></li>
+          <li class=""> <a data-toggle="pill" href="#trash"><i class="fa fa-trash fa-fw"> </i>Trash</a></li>
+        </ul>
+      </div>
+
+
+      <div class="tab-content">
+        <div id="inbox" class="tab-pane fade in active">
+
+            <div class="col-lg-9">
+              <ul class = "list-group"> <%= render partial: "conversation", collection: mailbox.inbox %> </ul>
+            </div>
+        </div>
+        <div id="sent" class="tab-pane fade">
+            <div class="col-lg-9">
+              <ul class = "list-group"> <%= render partial: "conversation", collection: mailbox.sentbox %> </ul>
+            </div>
+        </div>
+        <div id="trash" class="tab-pane fade">
+            <div class="col-lg-9">
+              <ul class ="list-group"> <%= render partial: "conversation", collection: mailbox.trash %> </ul>
+            </div> 
+        </div>
+      </div>
+      </div>
+</div>
+

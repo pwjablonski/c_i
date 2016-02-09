@@ -1,5 +1,5 @@
 class AttendanceDataController < ApplicationController
-  before_action :set_attendance_datum, only: [:show, :edit, :update, :destroy]
+    before_action :set_attendance_datum, only: [:show, :edit, :update, :destroy, :mark_as_present]
 
   # GET /attendance_data
   # GET /attendance_data.json
@@ -19,6 +19,19 @@ class AttendanceDataController < ApplicationController
 
   # GET /attendance_data/1/edit
   def edit
+  end
+  
+  # POST /attendance_data
+  # POST /attendance_data.json
+  def mark_as_present
+     respond_to do |format|
+      if @attendance_datum.attendance_list.status == "open"
+          @attendance_datum.update_attribute(:present, true)
+          format.html { redirect_to @attendance_datum.enrollment.student, notice: 'Attendance Succesfully Marked' }
+      else
+            format.html { redirect_to @attendance_datum.enrollment.student, notice: 'Attendance Session Closed' }
+      end
+     end
   end
 
   # POST /attendance_data

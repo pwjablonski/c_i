@@ -17,6 +17,19 @@ class Student < ActiveRecord::Base
     belongs_to :school
     
     # require 'iconv'
+    
+    
+    
+    def verified_enrollments
+        verified_enrollments = []
+        self.enrollments.each do |enrollment|
+            if enrollment.is_verified
+                verified_enrollments << enrollment
+            end
+        end
+        return verified_enrollments
+    end
+    
     def update_ca_data
         ca_data_array =[]
 

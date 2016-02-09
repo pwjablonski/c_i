@@ -8,6 +8,7 @@ class Classroom < ActiveRecord::Base
     has_many :attendance_lists
     has_many :attendance_data, through: :attendance_lists
     
+    acts_as_messageable
     
     def add_student(student)
         student_id = student.id

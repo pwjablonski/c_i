@@ -11,61 +11,62 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.text_field :first_name, autofocus: true , :class => "form-control" %>
   </div>
   
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
+    <%= f.text_field :last_name, autofocus: true, :class => "form-control" %>
   </div>
   
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :profile_name %><br />
-    <%= f.text_field :profile_name, autofocus: true %>
+    <%= f.text_field :profile_name, autofocus: true, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :about_me %><br>
-    <%= f.text_field :about_me %>
+    <%= f.text_field :about_me , :class => "form-control"%>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :codecademy_username %><br>
-    <%= f.text_field :codecademy_username %>
+    <%= f.text_field :codecademy_username, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :github_username %><br>
-    <%= f.text_field :github_username %>
+    <%= f.text_field :github_username, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :cloud9_username %><br>
-    <%= f.text_field :cloud9_username %>
+    <%= f.text_field :cloud9_username, :class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :devpost_username %><br>
-    <%= f.text_field :devpost_username %>
+    <%= f.text_field :devpost_username, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :credly_member_id %><br>
-    <%= f.text_field :credly_member_id %>
+  <div class="field form-group">
+    <%= f.label "Credly Member ID" %><br>
+    <%= f.text_field :credly_member_id, :class => "form-control" %>
   </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :school %><br>
-      <%= f.collection_select :school_id, School.all, :id, :school_name %>
+      <%= f.collection_select :school_id, School.all, :id, :school_name, :class => "form-control" %>
     </div>
 
-     <div class="field">
+     <div class="field form-group">
      <%= f.hidden_field :user_id, value: current_user.id%>
     </div>
 
-    <%= f.submit %>
-  
+    <div class="field form-group">
+    <%= f.submit "Save Profile", :class => "btn btn-primary" %>
+    </div>
 
 <% end %>

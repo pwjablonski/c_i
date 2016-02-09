@@ -1,0 +1,11 @@
+<%= content_tag_for(:li, notification, class: "list-group-item") do |notification|%>
+  
+    <%= link_to notification.subject, notification_path(notification)%>
+    |
+    <% if notification.is_read?(current_user)%>
+      <%= link_to 'Mark Unread', mark_as_unread_notification_path(notification), method: :post%>
+    <% elsif notification.is_unread?(current_user)%>
+      <%= link_to 'Mark Read', mark_as_read_notification_path(notification), method: :post%>
+    <%end%>    
+
+<%end%>

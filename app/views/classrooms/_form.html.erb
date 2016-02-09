@@ -15,6 +15,11 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, :class => "form-control" %>
   </div>
+
+  <div class="field form-group">
+    <%= f.label "Codacademy Class ID" %><br>
+    <%= f.text_field :ca_class_id, :class => "form-control" %>
+  </div>
   
   <div class="field">
     <% if current_user.try(:admin?)%>

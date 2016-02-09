@@ -23,27 +23,58 @@ Rails.application.routes.draw do
   post 'projects/import', to: 'projects#import'
 
   resources :projects
-    resources :notifications
   resources :schools
   resources :teachers
   resources :users
   resources :classrooms do
       resources :enrollments, only: [:create, :destroy, :verify] do
-      collection do
+        collection do
           post "verify"
+        end
       end
-  end
-
   end
   
   resources :attendance_lists do
-      resources :attendance_data
+      
+      member do
+          post :toggle_status
+      end
+      
+      resources :attendance_data do
+          
+          member do
+              post :mark_as_present
+          end
+      end
+
   end
 
 
   resources :students do
       collection { post :import }
   end
+  
+  
+  resources :conversations, only: [:index, :show, :new, :create] do
+      member do
+          post :reply
+          post :trash
+          post :untrash
+          post :mark_as_read
+          post :mark_as_unread
+      end
+  end
+  
+  resources :notifications, only: [:index, :show] do
+      member do
+          post :trash
+          post :untrash
+          post :mark_as_read
+          post :mark_as_unread
+      end
+  end
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

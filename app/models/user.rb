@@ -1,7 +1,15 @@
 class User < ActiveRecord::Base
   enum role: [:student, :teacher, :admin]
   validates :role, presence: true
-  
+   acts_as_messageable
+   
+   has_one :teacher
+   has_one :student
+   has_many :classrooms, through: :teachers
+   has_many :students, through: :classrooms
+   
+   
+   
 #  after_initialize :set_default_role, :if => :new_record?
 
 #  def set_default_role
@@ -38,10 +46,16 @@ class User < ActiveRecord::Base
 
 
 
-  has_one :teacher
-  has_one :student
-  has_many :classrooms, through: :teachers
-  has_many :students, through: :classrooms
 
-  
+  def name
+    return "Peter"
+  end
+
+  def mailboxer_email(object)
+    email
+  end
+
+
+
+
 end

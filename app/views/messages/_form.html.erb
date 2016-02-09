@@ -1,0 +1,12 @@
+<%= simple_form_for :message, url: reply_conversation_path(conversation) do |f| %>
+  <div class="form-group">
+  <%= f.input :subject %>
+  </div>
+  <div class="form-group">
+  <%= f.input :body %>
+  </div>
+  <div class="form-group">  
+    <%= f.button :submit, "Send Message", class: 'btn btn-primary' %>
+   <%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger' %>
+   </div>
+<%end%>

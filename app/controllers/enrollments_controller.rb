@@ -38,6 +38,8 @@ class EnrollmentsController < ApplicationController
        @enrollment = Enrollment.find(params[:enrollment_id])
        @enrollment.verify
        @student = @enrollment.student
+       @student.user.notify("Enrollment Verification", "You succesfully enrolled!")
+       @enrollment.classroom.teacher.user.notify("Enrollment Verification", "#{@student.first_name} accepted your enrollment request")
        
        respond_to do |format|
            format.html { redirect_to @student, notice: 'You succesfully enrolled!' }

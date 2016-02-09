@@ -2,62 +2,67 @@
    
      <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            <i class="fa fa-bell fa-fw"></i>   <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu ">
-            <li>
-                <a href="#">
+            
+        <% current_user.mailbox.notifications.each do |notification|  %>
+            <% if notification.is_unread?(current_user)%>
+            <li>      
+                    <%= link_to notification_path(notification) do %>
                     <div>
-                        <i class="fa fa-comment fa-fw"></i> New Comment
-                        <span class="pull-right text-muted small">4 minutes ago</span>
-                    </div>
-                </a>
+                        <i class="fa fa-bell fa-fw"></i>
+                        <%= notification.subject%> 
+                        <span class="pull-right text-muted small"> <%=notification.created_at %> </span>
+                    </div>  
+                    <%end%>
             </li>
             <li class="divider"></li>
+            <%end%>
+        <%end%>
             <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                        12 minutes ago
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                        <span class="pull-right text-muted small">4 minutes ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-tasks fa-fw"></i> New Task
-                        <span class="pull-right text-muted small">4 minutes ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                        <span class="pull-right text-muted small">4 minutes ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a class="text-center" href="#">
-                    <strong>See All Alerts</strong>
-                    <i class="fa fa-angle-right"></i>
-                </a>
+               <%= link_to :notifications, :class =>"text-center" do %>
+                   <strong> See All Notifications </strong>
+                  <i class="fa fa-angle-right"></i>
+              <%end%>   
             </li>
         </ul>
       </li>
+
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu ">
+            
+        <% current_user.mailbox.inbox.each do |conversation|  %>
+            <% if conversation.is_unread?(current_user)%>
+            <li>  
+                <%= link_to conversation_path(conversation) do %>    
+                <div>
+                    <i class="fa fa-comment fa-fw"></i>
+                    <%= conversation.subject%> 
+                    <span class="pull-right text-muted small">4 minutes ago</span>
+                </div>   
+                <%end%>      
+            </li>
+            <li class="divider"></li>
+            <%end%>
+        <%end%>
+            <li>
+               <%= link_to :conversations, :class =>"text-center" do %>
+                   <strong> See All Conversations </strong>
+                  <i class="fa fa-angle-right"></i>
+              <%end%>   
+            </li>
+        </ul>
+      </li>
+
+
+
+
+
 
    <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -65,10 +70,10 @@
     </a>
     <ul class="dropdown-menu dropdown-user">
       <% if current_user.try(:teacher?)%>
-      <li><%= link_to 'My Profile', current_user.teacher %></li>
+      <li><%= link_to 'My Teacher Account', current_user.teacher %></li>
       
       <% elsif current_user.try(:student?)%>
-      <li><%= link_to 'My Profile', current_user.student %></li>
+      <li><%= link_to 'My Portfolio', current_user.student %></li>
       
       <% elsif current_user.try(:admin?)%>
       <li><%= link_to 'Admin Dashboard', admin_show_path %></li>

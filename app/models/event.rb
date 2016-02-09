@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+    acts_as_messageable
+    
     
     def eventbrite_api
         

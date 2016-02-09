@@ -17,7 +17,7 @@ class Enrollment < ActiveRecord::Base
         
         percent_present = (days_present/total_days) * 100.0
         
-        return percent_present
+        return percent_present.round(2)
         
     end
     
