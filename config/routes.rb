@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :badges
   resources :resources
   get 'admin/show'
 
