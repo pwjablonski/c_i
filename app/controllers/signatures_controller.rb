@@ -20,7 +20,7 @@ class SignaturesController < ApplicationController
   def create_embedded_request(opts = {})
     HelloSign.create_embedded_signature_request(
       test_mode: 1, #Set this to 1 for 'true'. 'false' is 0
-      client_id: 'your_client_id',
+      client_id: 'f72982478d6230927805fbb87c36daf4',
       subject: 'My first embedded signature request',
       message: 'Awesome, right?',
       signers: [
