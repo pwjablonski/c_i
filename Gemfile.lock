@@ -90,6 +90,10 @@ GEM
     groupdate (2.5.1)
       activesupport (>= 3)
     hashie (3.4.3)
+    hellosign-ruby-sdk (3.2.7)
+      faraday
+      mime-types
+      multi_json
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httparty (0.13.7)
@@ -261,6 +265,7 @@ DEPENDENCIES
   figaro
   font-awesome-sass
   groupdate (~> 2.5)
+  hellosign-ruby-sdk
   httparty (~> 0.13.7)
   jbuilder (~> 2.0)
   jquery-rails

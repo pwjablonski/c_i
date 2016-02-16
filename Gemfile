@@ -85,6 +85,7 @@ gem 'simple_form'
 
 gem 'font-awesome-sass'
 
+gem 'hellosign-ruby-sdk'
 
 
 group :production do

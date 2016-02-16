@@ -33,6 +33,10 @@
   <%= @event.description %>
 </p>
 
+<%= link_to "Sign Permission Slip", new_signature_path %>
+
+
+
 
 <% if current_user.try(:admin?) %>
 <%= link_to 'Edit', edit_event_path(@event) %> |

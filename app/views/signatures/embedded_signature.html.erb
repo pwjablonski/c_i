@@ -1,0 +1,17 @@
+<!-- app/views/signatures/embedded_signature.html.erb -->
+
+<!-- Gotta include the HelloSign embedded.js library -->
+<script src="//s3.amazonaws.com/cdn.hellofax.com/js/embedded.js" type="text/javascript"></script>
+<!-- Open the embedded signer iFrame -->
+<script type="text/javascript">
+// <![CDATA[
+  HelloSign.init("f72982478d6230927805fbb87c36daf4");
+  HelloSign.open({
+    'url': '<%= @sign_url %>',
+    'allowCancel': true,
+    'messageListener': function(eventData) {
+      alert("HelloSign event received");
+    }
+  });
+// ]]>
+</script>

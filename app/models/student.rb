@@ -9,9 +9,9 @@ class Student < ActiveRecord::Base
     
     belongs_to :user
     
-    has_many :ca_data
-    has_many :projects
-    has_many :enrollments
+    has_many :ca_data,  dependent: :destroy
+    has_many :projects, dependent: :destroy
+    has_many :enrollments, dependent: :destroy
     has_many :classrooms, through: :enrollments
     has_many :badges
     
