@@ -19,7 +19,7 @@ class TeachersController < ApplicationController
       @teacher = Teacher.new
     else
       User.where(:role => 2).each do |admin|
-          admin.notify("#{current_user.email} wants to be a teacher", "<a href='http://localhost:3000/users/#{current_user.id}/toggle_approved' data-method='post'> Approve Teacher</a>" )
+          admin.notify("#{current_user.email} wants to be a teacher", "<a href='http://weareci.herokuapp.com/users/#{current_user.id}/toggle_approved' data-method='post'> Approve Teacher</a>" )
       end
       redirect_to new_student_path
     end
