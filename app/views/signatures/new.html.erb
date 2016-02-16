@@ -1,7 +1,23 @@
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1>Sign Permisson Slip </h1>
+     </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<p id="notice"><%= notice %></p>
+
 <%= form_tag signatures_path, method: :post do %>
-  <%= label_tag 'Name' %>
+  <%= label_tag 'Parent/Gaurdian Name' %>
   <%= text_field_tag :name %>
-  <%= label_tag 'Email' %>
+  <%= label_tag 'Parent/Gaurdian Email' %>
   <%= text_field_tag :email %>
-  <%= submit_tag 'Create Embedded Signature Request' %>
+  <%= submit_tag 'View and Sign Document' %>
 <% end %>
+
+</div>
