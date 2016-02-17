@@ -50,9 +50,6 @@
           <%end%>
           <div class="panel-footer">
             <%= image_tag project.student.user.image, :class => "img-circle img-responsive panel-img-footer"%>
-            <% if current_user.try(:admin?) %> 
-            <%= link_to 'Remove', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%end%>
           </div>
         </div>
         
