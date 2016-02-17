@@ -51,7 +51,7 @@ class AttendanceListsController < ApplicationController
       if @attendance_list.save
           
           @attendance_list.attendance_data.each do |attendance_datum|
-              attendance_datum.enrollment.student.user.notify("Take Attendance #{@attendance_list.date}", "<a href='http://localhost:3000/attendance_lists/#{@attendance_list.id}/attendance_data/#{attendance_datum.id}/mark_as_present' data-method='post'> Mark Present</a>" )
+              attendance_datum.enrollment.student.user.notify("Take Attendance #{@attendance_list.date}", "<a href='http://weareci.herokuapp.com/attendance_lists/#{@attendance_list.id}/attendance_data/#{attendance_datum.id}/mark_as_present' data-method='post'> Mark Present</a>" )
           end
 
           
