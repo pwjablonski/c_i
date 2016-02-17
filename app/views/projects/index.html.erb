@@ -1,9 +1,16 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
           <h1> C/I Projects </h1>
      </div> 
+
+      <div class="col-lg-2">  
+        <% if current_user.try(:admin?) || current_user.try(:student?)%>
+        
+        <h1><%= link_to "Create a New Project", new_project_path, :class => "btn btn-primary"%></h1>
+        <% end%> 
+      </div>
     </div>
   </div>
 </div>
@@ -28,13 +35,6 @@
     <% end %>
   </div>
 
-  <div class="col-lg-2">
-    
-    <% if current_user.try(:admin?) || current_user.try(:student?)%>
-    
-    <%= link_to "Create a New Project", new_project_path, :class => "btn btn-primary"%>
-    <% end%> 
-  </div>
 
   
   <% @projects.each do |project| %>

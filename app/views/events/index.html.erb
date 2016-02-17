@@ -1,9 +1,14 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
           <h1> C/I Events </h1>
      </div> 
+     <div class = "col-lg-2">
+      <% if current_user.try(:admin?) || current_user.try(:teacher?)%>
+      <h1><%= link_to "Create a New Event", new_event_path, :class => "btn btn-primary"%></h1>
+      <% end%> 
+    </div>
     </div>
   </div>
 </div>
@@ -26,31 +31,29 @@
       <% end %>
     </div>
 
-    <div class = "col-lg-2">
-      <% if current_user.try(:admin?) || current_user.try(:teacher?)%>
-    
-      <%= link_to "Create a New Event", new_event_path, :class => "btn btn-primary"%>
-      <% end%> 
-    </div>
   </div>
   
   <div class="row">
   
   <% @events.each do |event| %>
     
-      <div class="col-lg-3"> 
+      <div class="col-lg-12"> 
          
          <div class="panel panel-default">
           <%= link_to event do %>
-          <div class="panel-body panel-project">
+          <div class="panel-body panel-event">
+            <div class="col-lg-2">
+            <%= image_tag event.image_url, :height => "90px", :width => "90px"  %>
+            </div>
+            <div class="col-lg-6">
             <h3><%= event.name%></h3>
-            <p><%= event.start_time %> </p>
-            
+              <p><%= event.description%></p>
+            </div>
+            <div class="col-lg-4">
+              <p><%= event.start_time %> </p>
+            </div>
           </div>
           <%end%>
-          <div class="panel-footer">
-            Event
-          </div>
         </div>
         
       </div> 

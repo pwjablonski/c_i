@@ -182,6 +182,16 @@ img.navbar-brand {
     padding: 5px 0;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #F38120;
+    border-color: #F38120;
+}
+
+.btn-primary:hover {
+    background-color: #e06d0c;
+}
+
 .btn-outline {
     color: inherit;
     background-color: transparent;
@@ -403,7 +413,10 @@ table.dataTable thead .sorting:after {
 
 .panel-project {
    height: 200px;
+}
 
+.panel-event {
+   height: 120px;
 }
 
 .panel-img-footer {
