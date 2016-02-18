@@ -19,7 +19,7 @@
   <p id="notice"><%= notice %></p>
 
  <div class="row">
-  <div class="col-lg-10"> 
+  <div class="col-md-10"> 
     <%= search_form_for @q, :html => {:class => "form-inline"} do |f| %>
     
     <div class="form-group"> 
@@ -33,19 +33,22 @@
     </div>
     
     <% end %>
+
   </div>
 
 
   
   <% @projects.each do |project| %>
     
-      <div class="col-lg-3"> 
+      <div class="col-md-3"> 
          
          <div class="panel panel-default">
           <%= link_to project do %>
           <div class="panel-body panel-project">
+            <%= image_tag project.image_url  %>
             <h3><%= project.name%></h3>
             <p><%= project.tag_line %> </p>
+
           </div>
           <%end%>
           <div class="panel-footer">

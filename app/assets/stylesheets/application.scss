@@ -412,11 +412,21 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-project {
-   height: 200px;
+   height: 250px;
 }
 
-.panel-event {
-   height: 120px;
+.panel-project img{
+    width: 100%;
+    height: 60%;
+}
+
+
+
+
+.panel-project p {
+   overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .panel-img-footer {

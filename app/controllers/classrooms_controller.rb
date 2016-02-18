@@ -6,11 +6,10 @@ class ClassroomsController < ApplicationController
   def index
     
     if current_user.try(:admin?)
-        @classrooms = Classroom.all
-    elsif current_user.try(:teacher?)
-        @classrooms = current_user.teacher.classrooms
-    elsif current_user.try(:student?)
-        @classrooms = current_user.student.classrooms
+        @q = Classroom.ransack(params[:q])
+        @classrooms = @q.result(distinct: true)
+    else
+        redirect_to root_path
     end
   end
 

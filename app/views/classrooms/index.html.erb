@@ -1,36 +1,81 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
          <h1> C/I Classrooms  </h1>
      </div> 
+     <div class="col-lg-2">
+        <h3>  <%= link_to "Create a New Classroom", new_classroom_path, :class => "btn btn-primary"%> </h3>
     </div>
   </div>
 </div>
 
   <div class="container">
      <div class="row">
+                    <div class="col-lg-12"> 
+                        <%= search_form_for @q,  :html => {:class => "form-inline"} do |f| %>
+                         <div class="form-group"> 
+                        <%= f.search_field :name_cont, :autofocus => true, class: 'form-control', :placeholder => "Search for an classroom..."  %>
+                     </div>
+                    <div class="form-group"> 
+                        <%= f.submit "Search Classroom", :class => 'btn btn-primary' %>
+                        </div>
+                        <% end %>
+                        
+                        
+                      </div>
 
-          <p id="notice"><%= notice %></p>            
-             
-              <% @classrooms.each do |classroom| %>
-                <div class="col-lg-4">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                           <%=classroom.name%>
-                        </div>
-                        <div class="panel-body">
-                            <p>Teacher: <%=classroom.teacher.last_name%></p>
-                        </div>
-                        <div class="panel-footer">
-                             <%= link_to "View Classroom", classroom%>
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
+
+                     
+                      <% @classrooms.each do |classroom| %>
+
+                        <div class="col-lg-6">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">
+                                   <%=classroom.name%>: <%=classroom.teacher.last_name%>  
+                                   <div class="pull-right">
+                                   <%=classroom.verified_enrollments.count%> Students Enrolled
+                                   </div>
+                                </div>
+                                <div class="panel-body">
+                                      <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#overview-<%=classroom.id%>" data-toggle="tab">Overview</a>
+                                        </li>
+                                        <li><a href="#ca-data-<%=classroom.id%>" data-toggle="tab">CA Data</a>
+                                        </li>
+                                        <li><a href="#attendence-<%=classroom.id%>" data-toggle="tab">Attendance</a>
+                                        </li>
+                                      
+                                      </ul>
+
+                                      <div class="tab-content">
+                                          <div class="tab-pane fade in active" id="overview-<%=classroom.id%>">
+                                             <h4> <%=classroom.name%></h4>
+                                             <p> Teacher: <%=classroom.teacher.last_name%>  </p>
+                                             <p> School: <%=classroom.school.school_name%> </p>
+                                             <p> Students Enrolled: <%=classroom.verified_enrollments.count%>  </p>
+                                             <p> Class Attendance: </p>
+                                             <p> Events Attended: </p>
+                                           </div>
+                                           <div class="tab-pane fade" id="ca-data-<%=classroom.id%>">
+                                             <%= line_chart classroom.verified_enrollments.map{|enrollment|
+                                            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, time_zone: "Eastern Time (US & Canada)", range: enrollment.student.ca_data.first.created_at..Time.now).maximum(:total_points)}
+                                              } %>
+                                            </div>
+                                            <div class="tab-pane fade" id="attendence-<%=classroom.id%>">
+                                            <%= pie_chart classroom.attendance_data.group(:present).count %>
+                                            </div>
+                                            
+                                      </div>
+                                </div>
+                                <div class="panel-footer">
+                                     <%= link_to "View Classroom", classroom%>
+                                </div>
+                            </div>
+                            <!-- /.col-lg-4 -->
+                        </div>  
+                      <% end %> 
                 </div>  
-              <% end %> 
-           
-      </div>
     </div>
 
 
