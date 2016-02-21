@@ -54,6 +54,8 @@
             <p><%= @ca_datum.total_points %> CA Points </p>
             <p><%= @student.projects.count %> C/I Projects </p>
             <p><%= @student.user.public_repos.count %> Repositiories on Github </p>
+            <p><%= @student.events.count %> Events </p>
+            
       </div>
 
       <div class="col-md-3">
@@ -102,34 +104,62 @@
         </div>
 
         <div id="menu1" class="tab-pane fade">
-          <div class="col-lg-12"> 
-          
-          <% if current_user.try(:admin?) || current_user == @student.user%>
-          <h3>  <%= link_to "Create a New Project", new_project_path, :class => "btn btn-primary"%> </h3>
-          <% end%> 
-          </div>
+          <div class="row">
+            <div class="col-lg-12"> 
+            <% if current_user.try(:admin?) || current_user == @student.user%>
+            <h3>  <%= link_to "Create a New Project", new_project_path, :class => "btn btn-primary"%> </h3>
+            <% end%> 
+            </div>
 
-          <% @student.projects.each do |project| %>
-          
-              <div class="col-lg-3"> 
-                 <div class="panel panel-default">
+            <% @student.projects.each do |project| %>
+            
+                <div class="col-lg-3"> 
+                   <div class="panel panel-default">
 
-                  <div class="panel-body panel-project">
-                    <h3><%= link_to project.name, project%></h3>
-                    <p><%= project.tag_line %> </p>
-                  </div>
-                    
-                    <div class="panel-footer">
-                      <% if current_user.try(:admin?) || current_user == @student.user%> 
-                      <%= link_to 'Remove', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      <%end%>
+                    <div class="panel-body panel-project">
+                      <h3><%= link_to project.name, project%></h3>
+                      <p><%= project.tag_line %> </p>
                     </div>
-                </div>
-              </div> 
-          <% end %>
+                      
+                      <div class="panel-footer">
+                        <% if current_user.try(:admin?) || current_user == @student.user%> 
+                        <%= link_to 'Remove', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <%end%>
+                      </div>
+                  </div>
+                </div> 
+            <% end %>
+          </div>
         </div>
-        <div id="menu2" class="tab-pane fade">
-                    
+        <div id="menu2" class="tab-pane fade">    
+           <div class="row">
+              <div class="col-lg-12"> 
+                <h3>  <%= link_to "Search Events", events_path, :class => "btn btn-primary"%> </h3>
+              </div>
+              <% @student.events.each do |event| %>
+              <div class="col-lg-12">   
+                   <div class="panel panel-default">
+                    <%= link_to event do %>
+                    <div class="panel-body panel-event">
+                      <div class="col-md-2">
+                      <%= image_tag event.image_url, :height => "90px", :width => "90px"  %>
+                      </div>
+                      <div class="col-md-6">
+                      <h3><%= event.name%></h3>
+                        <p><%= event.description%></p>
+                      </div>
+                      <div class="col-md-4">
+                        <p><span class="fa fa-map-marker"></span>    <%= event.location %> </p>
+                        <p><span class="fa fa-calendar"></span>     <%= event.start_time.strftime("%B, %d %Y") %> </p>
+                        <p><span class="fa fa-clock-o"></span>      <%= event.start_time.strftime("%I:%M %p") %> </p>
+                       
+                      </div>
+                    </div>
+                    <%end%>
+                  </div>
+                </div> 
+                <% end %>
+            </div>     
           
         </div>
         

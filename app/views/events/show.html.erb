@@ -1,42 +1,43 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
           <h1><%= @event.name %> </h1>
      </div> 
+
+     <div class="col-lg-2">
+          <% if @event.status == "draft" %>
+            <h1><%= link_to "Publish" , publish_event_path(@event),  method: :post, :class => "btn btn-primary" %></h1>
+          <%else%>
+            <h1> <%= link_to "Unpublish" , unpublish_event_path(@event),  method: :post, :class => "btn btn-primary" %></h1>
+          <%end%>
+     </div> 
+
     </div>
   </div>
 </div>
+
 
 <div class="container">
 
 <p id="notice"><%= notice %></p>
 
-<a href="<%= @eventbrite_event["url"]%>" class=""> See Event/SignUp </a> 
+<div style="width:100%; text-align:left;" ><iframe  src="https://www.eventbrite.com/e/test-6-tickets-<%=@event.eb_event_id%>?ref=eweb" frameborder="0" height="1000" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe><div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" ><a class="powered-by-eb" style="color: #dddddd; text-decoration: none;" target="_blank" href="http://www.eventbrite.com/r/eweb">Powered by Eventbrite</a></div></div>
 
-<p>
-  <strong>About:</strong>
-  <%= @event.location %>
-</p>
-<p>
-  <strong>Start Time:</strong>
-  <%= @event.start_time %>
-</p>
-
-<p>
-  <strong>Start Time:</strong>
-  <%= @event.end_time %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-
-
-
-
+Attendees
+<table>
+    <tr>
+      <th> Name </th>
+      <th> Email </th>
+      <th> Time Signed Up </th> 
+      <th> Permission </th>    
+    </tr>
+    <% @event.event_registrations.each do |event_registration|%>
+      <td> <%= event_registration.student.first_name %> <%= event_registration.student.last_name %></td>
+      <td> </td>
+      <td> </td>
+    <%end%>
+  </table>
 
 <% if current_user.try(:admin?) %>
 <%= link_to 'Edit', edit_event_path(@event) %> |

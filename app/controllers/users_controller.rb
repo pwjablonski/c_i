@@ -4,11 +4,8 @@ class UsersController < ApplicationController
  
 
   def index
-    if params[:approved] == "false"
-        @users = User.find_all_by_approved(false)
-    else
-        @users = User.all
-    end
+      @q = User.ransack(params[:q])
+      @users = @q.result(distinct: true)
   end
 
   def show

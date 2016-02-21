@@ -31,9 +31,33 @@ class Classroom < ActiveRecord::Base
         return verified_enrollments
     end
 
+def percent_present
+    total_percent_present = 0.0
+   
     
+    self.verified_enrollments.each do |enrollment|
+        total_percent_present += enrollment.percent_present
+    end
     
+    class_percent_present = (total_percent_present/self.verified_enrollments.count)
     
+    return class_percent_present.round(2)
+    
+end
+
+def total_ca_points
+    class_total_ca_score = 0.0
+    
+    self.verified_enrollments.each do |enrollment|
+        class_total_ca_score = enrollment.student.current_ca_score
+    end
+    
+    class_total_ca_score
+end
+
+
+
+
 #    def remove_student(student_id)
 #        current_student = self.enrollments.find_by(student_id: student_id)
 #        current_student

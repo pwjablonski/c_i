@@ -40,8 +40,17 @@
     <%= f.text_field :image_url, :class => "form-control" %>
   </div>
 
+<div class="field form-goup">
+    <%= f.label :permission_url %><br>
+    <%= f.text_field :permission_url, :class => "form-control" %>
+  </div>
+
+  <div class="field form-goup">
+    <%= f.label :num_tickets %><br>
+    <%= f.text_field :num_tickets, :class => "form-control" %>
+  </div>
 
   <div class="actions">
-    <%= f.submit "Create Event", :class => "btn btn-primary" %>
+    <%= f.submit "Save Event", :class => "btn btn-primary" %>
   </div>
 <% end %>

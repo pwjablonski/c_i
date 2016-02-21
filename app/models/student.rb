@@ -14,6 +14,8 @@ class Student < ActiveRecord::Base
     has_many :enrollments, dependent: :destroy
     has_many :classrooms, through: :enrollments
     has_many :badges
+    has_many :event_registrations
+    has_many :events, through: :event_registrations
     
     belongs_to :school
     
@@ -52,6 +54,12 @@ class Student < ActiveRecord::Base
       return ca_data_array
 
     end
+    
+    def current_ca_score
+       self.ca_data.last.total_points
+    end
+    
+    
 
     def badges_array 
         response = HTTParty.get("http://api.credly.com/v1.1/members/#{self.credly_member_id}/badges?page=1&per_page=10&order_direction=ASC&access_token=dbd3cb19ee7c5fff3626b1be51dfef3c1c41fe73b624ff090e9d3b33c16db75530651552986b4897384c99f69a53bcea1fd2524daf8796d57bbab31869b5baa6",

@@ -1,0 +1,14 @@
+<%= simple_form_for(@event_registration) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :event_id %>
+    <%= f.input :eb_event_id %>
+    <%= f.input :eb_attendee_id %>
+    <%= f.input :student_id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -7,12 +7,13 @@ class SignaturesController < ApplicationController
 
 
   def new
+      @event_id = params[:event_id]
   end
 
   def create
-  embedded_request = create_embedded_request(name: params[:name], email: params[:email])
-  @sign_url = get_sign_url(embedded_request)
-  render :embedded_signature
+      embedded_request = create_embedded_request(name: params[:name], email: params[:email], file_url: params[:file_url])
+      @sign_url = get_sign_url(embedded_request)
+      render :embedded_signature
   end
 
   private
@@ -29,7 +30,7 @@ class SignaturesController < ApplicationController
           name: opts[:name]
         }
       ],
-      :file_urls => ['https://bitcoin.org/bitcoin.pdf']
+      :file_urls => ["https://bitcoin.org/bitcoin.pdf"]
     )
   end
 

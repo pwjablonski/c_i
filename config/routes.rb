@@ -5,11 +5,27 @@ Rails.application.routes.draw do
 
 
 
+
+  resources :tracks
   resources :badges
   resources :resources
   get 'admin/show'
 
-  resources :events
+  resources :events do
+      resources :event_registrations, only: [:create, :destroy, :sign] do
+          collection do
+              post "sign"
+          end
+      end
+      
+      member do
+          post :publish
+          post :unpublish
+      end
+  end
+  
+  
+  
   devise_for :users,
 #    path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' },
     controllers: { registrations: "users/registrations", sessions: "users/sessions", :omniauth_callbacks => "users/omniauth_callbacks" }

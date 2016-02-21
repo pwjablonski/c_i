@@ -18,6 +18,7 @@
   <%= label_tag 'Parent/Gaurdian Email' %>
   <%= text_field_tag :email %>
   <%= submit_tag 'View and Sign Document' %>
+  <%= hidden_field_tag(:event_id, @event_id)%>
 <% end %>
 
 </div>

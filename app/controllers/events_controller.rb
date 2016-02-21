@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   # GET /events
   # GET /events.json
@@ -15,7 +15,11 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+      @event.create_eventbrite_registrations
       @eventbrite_event = @event.show_eventbrite_event
+      @orders = @event.orders["orders"]
+      @attendees = @event.attendees["attendees"]
+      
   end
 
   # GET /events/new
@@ -32,6 +36,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.create_eventbrite_event(event_params)
+    @event.create_eventbrite_tickets
+
 
     respond_to do |format|
       if @event.save
@@ -59,10 +65,23 @@ class EventsController < ApplicationController
       end
     end
   end
-
+  
+  def publish
+      @event.publish_eventbrite_event
+      @event.update_attribute(:status, "live")
+      redirect_to @event, notice: 'Event upublished. This may take several seconds for the tickets to update.'
+  end
+  
+  def unpublish
+      @event.unpublish_eventbrite_event
+      @event.update_attribute(:status, "draft")
+      redirect_to @event, notice: 'Event upublished. This may take several seconds for the tickets to update.'
+  end
+  
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    @event.destroy_eventbrite_event
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
@@ -78,6 +97,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-        params.require(:event).permit(:name, :start_time, :end_time, :location, :description, :image_url, :eventbrite_id)
+        params.require(:event).permit(:name, :start_time, :end_time, :location, :description, :image_url, :eb_event_id, :permission_url, :num_tickets)
     end
 end

@@ -1,20 +1,45 @@
-
-        <div class="container">
-          <div class="row">
-            <h3>Users</h3>
-            <div class="column">
-              <table class="table">
-                <tbody>
-                  <td>
-                    <%= link_to "Users awaiting approval", :action => "index", :approved => "false"%>
-                    </td>
-                  <% @users.each do |user| %>
-                    <tr>
-                      <%= render user %>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1>Users</h1>
+      </div> 
+    </div>
+    <!-- /.col-lg-12 -->
+  </div>
+</div> 
+       
+<div class="container">
+  <div class="row">
+    
+   <div class="col-lg-12"> 
+      <%= search_form_for @q,  :html => {:class => "form-inline"} do |f| %>
+       <div class="form-group"> 
+      <%= f.search_field :email_cont, :autofocus => true, class: 'form-control', :placeholder => "Search for an classroom..."  %>
+   </div>
+  <div class="form-group"> 
+      <%= f.submit "Search Users", :class => 'btn btn-primary' %>
+      </div>
+      <% end %>
+</div>
+           
+    <div class="column">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= sort_link(@q, :role, 'User Type') %></td>
+            <td><%= sort_link(@q, :email, 'Email') %></td>
+            <td><%= sort_link(@q, :approved, 'Approved To Be Teacher') %></td>
+            <td>Update User</td>
+            <td>Delete User</td>
+          </tr> 
+          <% @users.each do |user| %>
+          <tr>
+            <%= render user %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

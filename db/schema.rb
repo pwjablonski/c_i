@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212205027) do
+ActiveRecord::Schema.define(version: 20160220205600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 20160212205027) do
     t.boolean  "is_verified",  default: false
   end
 
+  create_table "event_registrations", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "eb_event_id",    limit: 8
+    t.integer  "eb_attendee_id", limit: 8
+    t.integer  "student_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -68,9 +77,20 @@ ActiveRecord::Schema.define(version: 20160212205027) do
     t.datetime "end_time"
     t.string   "location"
     t.string   "image_url"
-    t.string   "eventbrite_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "permission_url"
+    t.string   "status",                   default: "draft"
+    t.integer  "num_tickets"
+    t.integer  "eb_event_id",    limit: 8
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "unit_id"
+    t.string   "repo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
@@ -192,6 +212,20 @@ ActiveRecord::Schema.define(version: 20160212205027) do
     t.string   "devpost_username"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "github_repo_url"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
