@@ -5,7 +5,10 @@ class TeachersController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @teachers = Teacher.all
+#    @teachers = Teacher.all
+
+     @q = Teacher.ransack(params[:q])
+     @teachers = @q.result(distinct: true).page(params[:page]).per(12)
   end
 
   # GET /profiles/1

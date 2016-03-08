@@ -10,10 +10,37 @@
 
   <div class="container">
 
-        <div class="row">
-
           <p id="notice"><%= notice %></p>
-          
+
+          <div class="row">
+            <% if current_user.try(:admin?) %>
+            <div class="col-lg-6"> 
+            <h4>Invite Teacher</h4>
+
+              <%= form_tag users_invite_teacher_path do %>
+              <div class="form-group">
+                <%= text_field_tag(:teacher_email, "Add teacher by email...", :class => "form-control") %>
+              </div>   
+              
+              <%= submit_tag "Invite Teacher", :class => "btn btn-default" %>
+              <% end %>
+            </div>
+            <%end%>
+              
+             <div class="col-lg-6"> 
+              <h4>Search For Teacher</h4>
+                <%= search_form_for @q  do |f| %>
+                 <div class="form-group"> 
+                <%= f.search_field :last_name_cont, :autofocus => true, class: 'form-control', :placeholder => "Search for an teacher..."  %>
+             </div>
+              <div class="form-group"> 
+                <%= f.submit "Search", :class => 'btn btn-primary' %>
+              </div>
+                <% end %>
+            </div>
+          </div>  
+
+          <div class="row">
           <% @teachers.each do |teacher| %>
                
                   <div class="col-lg-3"> 
