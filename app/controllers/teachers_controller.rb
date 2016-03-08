@@ -30,7 +30,7 @@ class TeachersController < ApplicationController
   def create
     @teacher = Teacher.new(teacher_params)
     User.where(:role => 2).each do |admin|
-        admin.notify("#{current_user.email} created a teacher profile" )
+        admin.notify("C/I has a new teacher!","#{current_user.email} created a teacher profile" )
     end
 
     respond_to do |format|
