@@ -21,8 +21,11 @@
                      <div class="panel panel-default">
                       <%= link_to student do %>
                       <div class="panel-body panel-project">
-                        <%= image_tag student.user.image, :height => "50px", :class => "img-circle img-responsive panel-img-user" %>
+                        <%= image_tag student.user.image, :class => "img-circle img-responsive panel-img-user" %>
                         <h4><%= student.first_name %> <%= student.last_name %></h4>
+                        <p> <%= student.school.school_name %> </p>
+                        <p> <%= student.ca_data.last.total_points%> Points on CA </p>
+                        <p> <%= student.projects.count%> Projects : <%= student.events.count%> Events</p>
                       </div>
                       <%end%>
                       <div class="panel-footer">

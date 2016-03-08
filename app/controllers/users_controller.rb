@@ -39,6 +39,20 @@ class UsersController < ApplicationController
     redirect_to users_path, :notice => "User deleted."
   end
   
+  
+  def invite_teacher
+     
+     teacher_email = params[:teacher_email]
+     if User.find_by(email: teacher_email)
+         redirect_to teachers_path
+     else
+     User.create!({:email => teacher_email, :role => :teacher, :password => "12345678", :password_confirmation => "12345678" })
+     
+     redirect_to teachers_path
+     end
+  end
+  
+  
   def toggle_approved
     @user = User.find(params[:id])
       

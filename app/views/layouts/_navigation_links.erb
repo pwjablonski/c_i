@@ -2,7 +2,11 @@
    
      <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-bell fa-fw"></i>   <i class="fa fa-caret-down"></i>
+            <% if current_user.mailbox.notifications.unread.count != 0%>
+            <i class="fa fa-bell-o fa-fw"></i>   <i class="fa fa-caret-down"></i>
+            <%else%>
+              <i class="fa fa-bell fa-fw"></i>   <i class="fa fa-caret-down"></i>
+            <%end%>
         </a>
         <ul class="dropdown-menu ">
             
@@ -32,7 +36,11 @@
 
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            <% if current_user.mailbox.inbox(:unread => true).count != 0%>
+            <i class="fa fa-envelope-o fa-fw"></i>   <i class="fa fa-caret-down"></i>
+            <%else%>
+              <i class="fa fa-envelope fa-fw"></i>   <i class="fa fa-caret-down"></i>
+            <%end%>
         </a>
         <ul class="dropdown-menu ">
             

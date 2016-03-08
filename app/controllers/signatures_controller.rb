@@ -11,12 +11,47 @@ class SignaturesController < ApplicationController
   end
 
   def create
-      embedded_request = create_embedded_request(name: params[:name], email: params[:email], file_url: params[:file_url])
-      @sign_url = get_sign_url(embedded_request)
-      render :embedded_signature
+#      embedded_request = create_embedded_request(name: params[:name], email: params[:email], file_url: params[:file_url])
+#      @sign_url = get_sign_url(embedded_request)
+#      render :embedded_signature
   end
+  
+  
+  def sendsigrequest
+      @event = Event.find(params[:event_id])
+      @registration = Registration.find(params[:registration_id])
+      
+      if @registration.signature_request_id == nil
+          signature_request = send_signature_request(@registration, @event)
+          @registration.update_attribute(:signature_request_id, signature_request.signature_request_id)
+          redirect_to @event
+      else
+          redirect_to @event
+      end
+                                         
+  end
+      
 
   private
+
+    def send_signature_request(registration, event)
+        
+        signature_request = HelloSign.send_signature_request(
+                                         :test_mode => 1,
+                                         :title => 'Test Signature',
+                                         :subject => 'PLease sign the this',
+                                         :message => 'Please sign this and then we can discuss more. Let me know if you have any
+                                         questions.',
+                                         :signers => [
+                                         {
+                                         :email_address => registration.student.user.email,
+                                         :name => "#{registration.student.first_name} #{registration.student.last_name} "
+                                         }
+                                         ],
+                                         :file_urls => [event.permission_url]
+                                         )
+        return signature_request
+    end
 
   def create_embedded_request(opts = {})
     HelloSign.create_embedded_signature_request(

@@ -4,10 +4,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-#    @projects = Project.all
-    
+#    @projects = Project.page(params[:page]).per(3)
+
     @q = Project.ransack(params[:q])
-    @projects = @q.result.includes(:student)
+    @projects = @q.result.includes(:student).page(params[:page]).per(12)
   end
 
   # GET /projects/1

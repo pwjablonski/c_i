@@ -10,7 +10,22 @@
     'url': '<%= @sign_url %>',
     'allowCancel': true,
     'messageListener': function(eventData) {
-      alert("HelloSign event received");
+      alert("Got message data: " + JSON.stringify(eventData));
+        
+        if (eventData.event == HelloSign.EVENT_SIGNED) {
+          
+        }
+        else if (eventData.event == HelloSign.EVENT_CANCELED) {
+      //do something else for document closing before getting signed
+        }
+        else if (eventData.event == HelloSign.EVENT_ERROR) {
+      //do something for an error situation
+        }
+        else if (eventData.event == HelloSign.EVENT_SENT) {
+      //not used in this example
+      //only used for embedded requesting
+        }
+        
     }
   });
 // ]]>

@@ -1,5 +1,6 @@
 class AttendanceList < ActiveRecord::Base
     belongs_to :classroom
+    belongs_to :event
     has_many :attendance_data, dependent: :destroy
     
     accepts_nested_attributes_for :attendance_data

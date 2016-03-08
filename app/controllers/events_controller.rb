@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-    before_action :set_event, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :publish, :unpublish, :add_students_by_classroom, :add_students_by_school]
 
   # GET /events
   # GET /events.json
@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 #    @events = Event.all
 
     @q = Event.ransack(params[:q])
-    @events = @q.result(distinct: true)
+    @events = @q.result(distinct: true).page(params[:page]).per(3)
 
     
   end
@@ -15,11 +15,11 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-      @event.create_eventbrite_registrations
-      @eventbrite_event = @event.show_eventbrite_event
-      @orders = @event.orders["orders"]
-      @attendees = @event.attendees["attendees"]
-      
+#      @event.create_eventbrite_registrations
+#      @eventbrite_event = @event.show_eventbrite_event
+#      @orders = @event.orders["orders"]
+#      @attendees = @event.attendees["attendees"]
+
   end
 
   # GET /events/new
@@ -35,8 +35,8 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.create_eventbrite_event(event_params)
-    @event.create_eventbrite_tickets
+#    @event.create_eventbrite_event(event_params)
+#    @event.create_eventbrite_tickets
 
 
     respond_to do |format|
@@ -49,12 +49,13 @@ class EventsController < ApplicationController
       end
     end
   end
+  
 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-     @event.update_eventbrite_event(event_params)
-      
+#     @event.update_eventbrite_event(event_params)
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -66,14 +67,59 @@ class EventsController < ApplicationController
     end
   end
   
+  
+  
+  def send_reminder
+      student = Student.find(params[:student_id])
+      student.user.notify("You have been invited", "Please either <a href='http://localhost:3000/events/:event_id/registrations/accept'> Accept</a> or <a href='http://localhost:3000/events/:event_id/registrations/decline'> Decline</a>")
+      redirect_to @event
+  end
+  
+  
+  
+  def add_students_by_classroom
+      @notice =""
+      @classroom = Classroom.find(params[:post][:classroom_id])
+      
+      @classroom.students.each do |student|
+          @registration = @event.add_student(student, "invited")
+          
+          if @registration == nil
+              @notice = @notice + "#{student.first_name} #{student.last_name} already registered  "
+          else
+              student.user.notify("You have been invited", "Please either <a href='http://localhost:3000/events/#{@event.id}/registrations/#{@registration.id}/accept'> Accept</a> or <a href='http://localhost:3000/events/#{@event.id}/registrations/#{@registration.id}/decline'> Decline</a>")
+              @notice = @notice + "#{student.first_name} #{student.last_name} successfully enrolled  "
+          end
+      end
+     redirect_to @event
+  end
+  
+  
+  def add_students_by_school
+      @notice =""
+      @school = School.find(params[:post][:school_id])
+      
+      @school.students.each do |student|
+          @registration = @event.add_student(student, "invited")
+          
+          if @registration == nil
+              @notice = @notice + "#{student.first_name} #{student.last_name} already registered  "
+              else
+              @notice = @notice + "#{student.first_name} #{student.last_name} successfully enrolled  "
+          end
+      end
+      redirect_to @event
+  end
+  
+  
   def publish
-      @event.publish_eventbrite_event
+#      @event.publish_eventbrite_event
       @event.update_attribute(:status, "live")
       redirect_to @event, notice: 'Event upublished. This may take several seconds for the tickets to update.'
   end
   
   def unpublish
-      @event.unpublish_eventbrite_event
+#      @event.unpublish_eventbrite_event
       @event.update_attribute(:status, "draft")
       redirect_to @event, notice: 'Event upublished. This may take several seconds for the tickets to update.'
   end
@@ -97,6 +143,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-        params.require(:event).permit(:name, :start_time, :end_time, :location, :description, :image_url, :eb_event_id, :permission_url, :num_tickets)
+        params.require(:event).permit(:name, :start_time, :end_time, :location, :description, :image_url, :eb_event_id, :permission_url, :num_tickets, :registration_type)
     end
 end

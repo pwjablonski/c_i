@@ -12,15 +12,28 @@ Rails.application.routes.draw do
   get 'admin/show'
 
   resources :events do
-      resources :event_registrations, only: [:create, :destroy, :sign] do
-          collection do
-              post "sign"
+      resources :registrations, only: [:create, :destroy, :add_students_by_classroom, :add_students_by_school] do
+          
+          resources :signatures, only: [:new, :create, :send] do
+              collection do
+                  post :callbacks
+                  post :sendsigrequest
+              end
+          end
+          
+          
+          member do
+              post :sign
+              get :accept
+              get :decline
           end
       end
       
       member do
           post :publish
           post :unpublish
+          post :add_students_by_classroom
+          post :add_students_by_school
       end
   end
   
@@ -40,6 +53,8 @@ Rails.application.routes.draw do
   post 'projects/import', to: 'projects#import'
 
   post '/signatures/callbacks', to: 'signatures#callbacks'
+  
+  post '/users/invite_teacher', to: 'users#invite_teacher'
 
 
   resources :signatures, only: [:new, :create] do

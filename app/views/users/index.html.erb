@@ -11,6 +11,16 @@
        
 <div class="container">
   <div class="row">
+
+  <h4>Invite Teacher</h4>
+
+    <%= form_tag users_invite_teacher_path do %>
+    <div class="form-group">
+      <%= text_field_tag(:teacher_email, "Add teacher by email...", :class => "form-control") %>
+    </div>   
+    
+    <%= submit_tag "Invite Teacher", :class => "btn btn-default" %>
+    <% end %>
     
    <div class="col-lg-12"> 
       <%= search_form_for @q,  :html => {:class => "form-inline"} do |f| %>
@@ -21,8 +31,9 @@
       <%= f.submit "Search Users", :class => 'btn btn-primary' %>
       </div>
       <% end %>
-</div>
-           
+  </div>
+
+
     <div class="column">
       <table class="table">
         <tbody>

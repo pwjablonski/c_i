@@ -45,13 +45,13 @@ def percent_present
     
 end
 
-def total_ca_points
+def calculate_ca_points
     class_total_ca_score = 0.0
     
     self.verified_enrollments.each do |enrollment|
         class_total_ca_score = enrollment.student.current_ca_score
     end
-    
+    self.update_attribute(:ca_points, class_total_ca_score)
     class_total_ca_score
 end
 

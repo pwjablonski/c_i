@@ -15,14 +15,7 @@ class TeachersController < ApplicationController
 
   # GET /profiles/new
   def new
-    if current_user.approved?
-      @teacher = Teacher.new
-    else
-      User.where(:role => 2).each do |admin|
-          admin.notify("#{current_user.email} wants to be a teacher", "<a href='http://weareci.herokuapp.com/users/#{current_user.id}/toggle_approved' data-method='post'> Approve Teacher</a>" )
-      end
-      redirect_to new_student_path
-    end
+    @teacher = Teacher.new
   end
 
   # GET /profiles/1/edit
@@ -33,7 +26,9 @@ class TeachersController < ApplicationController
   # POST /profiles.json
   def create
     @teacher = Teacher.new(teacher_params)
-    @teacher.user.update_attribute(:role, :teacher)
+    User.where(:role => 2).each do |admin|
+        admin.notify("#{current_user.email} created a teacher profile" )
+    end
 
     respond_to do |format|
       if @teacher.save

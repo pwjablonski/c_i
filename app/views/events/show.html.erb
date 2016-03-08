@@ -1,15 +1,31 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-10">
+      <div class="col-lg-9">
           <h1><%= @event.name %> </h1>
      </div> 
 
-     <div class="col-lg-2">
-          <% if @event.status == "draft" %>
+     <div class="col-lg-3">
+          <% if @event.status == "draft" && current_user.admin?%>
             <h1><%= link_to "Publish" , publish_event_path(@event),  method: :post, :class => "btn btn-primary" %></h1>
-          <%else%>
+          <%elsif  @event.status == "live" && current_user.admin?%>
             <h1> <%= link_to "Unpublish" , unpublish_event_path(@event),  method: :post, :class => "btn btn-primary" %></h1>
+          <%end%>
+          
+          <% if current_user.student? && @event.find_registration(current_user.student) == nil && @event.registration_type == "open"%>
+            <h1> <%= link_to "Register For Event" , event_registrations_path(:event_id => @event.id, :student_id => current_user.student.id, :status => "Pending" ), method: :post, :class => "btn btn-primary" %></h1>
+
+
+          <%elsif current_user.student? && @event.find_registration(current_user.student) && @event.find_registration(current_user.student).status == "invited"%>
+            <h1><%= link_to 'Accept', [@event, @event.find_registration(current_user.student)], method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %>
+            <%= link_to 'Decline', [@event, @event.find_registration(current_user.student)], method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %></h1> 
+
+          <%elsif current_user.student? && @event.find_registration(current_user.student)%>
+            <h1><%= link_to 'Unregister', [@event, @event.find_registration(current_user.student)], method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %>
+           
+            <%= link_to "Email Permission Slip", sendsigrequest_event_registration_signatures_path(@event, @event.find_registration(current_user.student) ), method: :post, :class => "btn btn-primary" %>
+
+             <a href="<%=@event.permission_url %>" class = "btn btn-primary" target="_blank"> View Permission Form</a></h1>
           <%end%>
      </div> 
 
@@ -20,29 +36,128 @@
 
 <div class="container">
 
-<p id="notice"><%= notice %></p>
+  <% flash.each do |name, msg| -%>
+  <div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= msg %> 
+  </div>
+  <%end%>
+  <!-- /.row -->
+  <div class="row">
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+      <!-- Nav tabs -->
+      <%if current_user.admin? %>
+      <ul class="nav nav-pills nav-justified">
+        <li class="active"><a href="#overview-student-pills" data-toggle="tab"> <i class="fa fa-tasks"></i>Event Details</a>
+        </li>
+        <li><a href="#list-student-pills" data-toggle="tab"><i class="fa fa-users"> </i>Manage Students</a>
+        </li>        
+      </ul>
+      <%end%>
 
-<div style="width:100%; text-align:left;" ><iframe  src="https://www.eventbrite.com/e/test-6-tickets-<%=@event.eb_event_id%>?ref=eweb" frameborder="0" height="1000" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe><div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" ><a class="powered-by-eb" style="color: #dddddd; text-decoration: none;" target="_blank" href="http://www.eventbrite.com/r/eweb">Powered by Eventbrite</a></div></div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+          <div class="tab-pane fade in active" id="overview-student-pills">
+         
+            <div class="col-md-12">
+            <%= image_tag @event.image_url,  :class => "img-responsive"  %>
+            </div>
 
-Attendees
-<table>
-    <tr>
-      <th> Name </th>
-      <th> Email </th>
-      <th> Time Signed Up </th> 
-      <th> Permission </th>    
-    </tr>
-    <% @event.event_registrations.each do |event_registration|%>
-      <td> <%= event_registration.student.first_name %> <%= event_registration.student.last_name %></td>
-      <td> </td>
-      <td> </td>
-    <%end%>
-  </table>
+            <div class="col-md-6">
+            <h3><%= @event.name%></h3>
+              <p><%= @event.description%></p>
+            </div>
 
-<% if current_user.try(:admin?) %>
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<% end %>
-<%= link_to "Sign Permission Slip", new_signature_path %> |
-<%= link_to 'Explore More Projects', events_path %>
+            <div class="col-md-4">
+              <h3> Event Details </h3>
+              <p><span class="fa fa-map-marker"></span>    <%= @event.location %> </p>
+              <p><span class="fa fa-calendar"></span>     <%= @event.start_time.strftime("%B, %d %Y") %> </p>
+              <p><span class="fa fa-clock-o"></span>      <%= @event.start_time.strftime("%I:%M %p") %> </p>
+              <p><span class="fa fa-pencil"></span>      <%= @event.registration_type %> </p>
+              <% if current_user.try(:admin?) %>
+              <%= link_to 'Edit', edit_event_path(@event) %> |
+              <% end %>
 
+            </div>
+
+          </div>
+       
+
+
+       <div class="tab-pane fade" id="list-student-pills">
+        
+
+        <div class = "col-md-3">
+        <h3> Invite/Add Student </h3>
+        
+        
+
+        <h4>By Email</h4>
+        <%= form_tag event_registrations_path(@event ) do %>
+        <div class="form-group">
+          <%= text_field_tag(:student_email, "Add students by email...", :class => "form-control") %>
+        </div>   
+        <%= hidden_field_tag(:event_id, @event.id) %>
+        <%= submit_tag "Add Student", :class => "btn btn-default" %>
+        <% end %>
+        
+         <h4>By Classroom</h4>
+         <%= form_tag add_students_by_classroom_event_path(@event) do %>
+          <div class="form-group">
+          <%= collection_select(:post, :classroom_id, Classroom.all, :id, :name, { :class => "form-control"}) %>
+          </div>
+          <%= submit_tag "Add Students", :class => "btn btn-default" %>
+         <%end%>
+         
+         <h4>By School</h4>
+         <%= form_tag add_students_by_school_event_path(@event) do %>
+          <div class="form-group">
+          <%= collection_select(:post, :school_id, School.all, :id, :school_name, { :class => "form-control"}) %>
+          </div>
+          <%= submit_tag "Add Students", :class => "btn btn-default" %>
+         <%end%>
+         
+
+
+
+         </div>
+         <div class="col-md-9">
+          <h3> Student List</h3>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th>C/I ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>School</th>
+                    <th>Status</th>
+                    <th>Permission Status</th>
+                    <th>Attended</th>
+                    <th>Remove/DisInvite</th>
+                  </tr>
+                </thead>
+                <tbody>              
+                  <% @event.registrations.each do |registration| %>
+                  <tr>
+                    <td><%= registration.student.id %></td>
+                    <td><a href="/students/<%=registration.student.id %>"><%= registration.student.first_name %> <%= registration.student.last_name %></a></td>                    
+                    <td><%= registration.student.user.email %></td>
+                    <td><%= registration.student.school.school_name %></td>
+                    <td><%= registration.status %> </td>
+                    <td> <a href = "<%= registration.get_signature_status_url %>" target= "_blank"> <%= registration.get_signature_status %></a></td>
+                    <td><%= registration.attendance_datum.present%></td>  
+                    <td><%= link_to 'Remove', [@event, registration], method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+                  </tr>
+                  <%end%>
+                </tbody>
+              </table>
+            </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
 </div>

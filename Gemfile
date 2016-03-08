@@ -87,7 +87,9 @@ gem 'font-awesome-sass'
 
 gem 'hellosign-ruby-sdk'
 
+gem 'kaminari', '~> 0.16.3'
 
 group :production do
   gem 'rails_12factor'
 end
+

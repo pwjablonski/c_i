@@ -39,7 +39,14 @@
 
         <div class = "col-md-6 text-center">
           <h3> Class Overview </h3>
-          <a href="https://www.codecademy.com/schools/curriculum/labs/<%=@classroom.ca_class_id%>" > CA Class Data </a>
+          <h4><a href="https://www.codecademy.com/schools/curriculum/labs/<%=@classroom.ca_class_id%>" > <%=@classroom.name%> </a> </h4>
+          <p> Teacher: <%=@classroom.teacher.last_name%>  </p>
+          <p> School: <%=@classroom.school.school_name%> </p>
+          <p> Students Enrolled: <%=@classroom.verified_enrollments.count%>  </p>
+          <p> Students Awaiting Acceptance: <%= @classroom.enrollments.count - @classroom.verified_enrollments.count%>  </p>
+          <p> Class Attendance:  <%= @classroom.percent_present %></p>
+          
+
         </div>
 
         <div class = "col-md-6 text-center">
@@ -75,7 +82,7 @@
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#home">Student Data</a></li>
           <li><a data-toggle="tab" href="#menu1">Student Profiles</a></li>
-          <li><a data-toggle="tab" href="#menu2">Parent Data</a></li>
+<!--           <li><a data-toggle="tab" href="#menu2">Parent Data</a></li> -->
         </ul>
 
         <div class="tab-content"> 
@@ -122,23 +129,35 @@
 
 
           <div id="menu1" class="tab-pane fade">
+          <br>
             <% @classroom.verified_enrollments.each do |enrollment| %>
-                  
-                <div class="col-lg-3"> 
-                   
-                   <div class="panel panel-default">
-                    <%= link_to enrollment.student do %>
-                    <div class="panel-body panel-project">
-                      <%= image_tag enrollment.student.user.image, :height => "100px" %>
-                      <h3><%= enrollment.student.first_name %></h3>
+     
+                  <div class="col-lg-3">                      
+                     <div class="panel panel-default">
+                      <%= link_to enrollment.student do %>
+                      <div class="panel-body panel-project">
+                        <%= image_tag enrollment.student.user.image, :class => "img-circle img-responsive panel-img-user" %>
+                        <h4><%= enrollment.student.first_name %> <%= enrollment.student.last_name %></h4>
+                        <p> <%= enrollment.student.school.school_name %> </p>
+                        <p> <%= enrollment.student.ca_data.last.total_points%> Points on CA </p>
+                        <p> <%= enrollment.student.projects.count%> Projects : <%= enrollment.student.events.count%> Events</p>
+                      </div>
+                      <%end%>
+                      <div class="panel-footer">
+                        <a href='https://github.com/<%=enrollment.student.github_username%>' class="btn btn-social-icon btn-github">
+                            <span class="fa fa-github"></span>
+                        </a>
+
+                        <a href='https://www.codecademy.com/<%=enrollment.student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                            <span class="fa fa-code"></span>
+                        </a>
+
+                        <a href='https://devpost.com/<%=enrollment.student.github_username%>' class="btn btn-social-icon btn-reddit">
+                          <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">        
+                        </a>
+                      </div>
                     </div>
-                    <%end%>
-                    <div class="panel-footer">
-                      Event
-                    </div>
-                  </div>
-                  
-                </div> 
+                  </div> 
             <% end %>
           </div>
 
@@ -207,7 +226,6 @@
           <div class="col-lg-12"> 
 
           </div>
-
       </div>
 
     </div>

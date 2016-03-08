@@ -9,7 +9,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 #
   # POST /resource
    def create
-       build_resource(sign_up_params)
+       puts "before change role #{sign_up_params}"
+       new_sign_up_params = sign_up_params
+       new_sign_up_params[:role] = 0
+       
+       
+        puts "change role #{sign_up_params}"
+       build_resource(new_sign_up_params)
+       puts "sign up params after build #{sign_up_params}"
+       
        resource.save
        
 #       if resource.try(:student?)

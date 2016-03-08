@@ -5,6 +5,8 @@ class AdminController < ApplicationController
       @users = User.all
       @students = Student.all
       @teachers = Teacher.all
+      @projects = Project.all
+      @events = Event.all
       
       @q = Classroom.ransack(params[:q])
       @classrooms = @q.result(distinct: true)

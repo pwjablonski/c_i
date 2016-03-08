@@ -18,6 +18,10 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
+
+
+
+
  <div class="row">
   <div class="col-md-10"> 
     <%= search_form_for @q, :html => {:class => "form-inline"} do |f| %>
@@ -33,6 +37,8 @@
     </div>
     
     <% end %>
+
+    <%= paginate @projects %>
 
   </div>
 

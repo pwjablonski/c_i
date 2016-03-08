@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="field form-goup">
+    <%= f.radio_button :registration_type, 'open', :checked => true  %> 
+    <%= label :registration_type, 'open' %>
+    <%= f.radio_button :registration_type, 'invite_only'   %>
+    <%= label :registration_type, 'Invite Only' %>
+  </div>
+  <div class="field form-goup">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, :class => "form-control" %>
   </div>

@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
 
    
    enum role: [:student, :teacher, :admin]
-   validates :role, presence: true
    acts_as_messageable
    
    has_one :teacher

@@ -14,8 +14,8 @@ class Student < ActiveRecord::Base
     has_many :enrollments, dependent: :destroy
     has_many :classrooms, through: :enrollments
     has_many :badges
-    has_many :event_registrations
-    has_many :events, through: :event_registrations
+    has_many :registrations
+    has_many :events, through: :registrations
     
     belongs_to :school
     
