@@ -1,8 +1,16 @@
 
+
   <div class="jumbotron">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
+          <% flash.each do |name, msg| -%>
+             <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <%= msg %> 
+             </div>
+            <%end%>
+        
             <h1>We Are C/I</h1>
             <p> Inspiring the next generation of diverse technology leaders </p>
             <% if user_signed_in? == false %>
