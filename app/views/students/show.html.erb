@@ -25,6 +25,9 @@
               <%= hidden_field_tag :enrollment_id, enrollment.id %>
               <%= submit_tag "Accept Enrollment Request" %>
             <% end %> 
+
+            <%= link_to 'Accept Enrollment Request', [enrollment.classroom, enrollment], method: :post, data: { confirm: 'Are you sure?' } %>
+
              <%= link_to 'Decline Enrollment Request', [enrollment.classroom, enrollment], method: :delete, data: { confirm: 'Are you sure?' } %>
        </div>
       <% end%>
