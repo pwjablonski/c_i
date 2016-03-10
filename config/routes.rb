@@ -18,6 +18,7 @@ Rails.application.routes.draw do
               collection do
                   post :callbacks
                   post :sendsigrequest
+                  post :authorize_adobe
               end
           end
           

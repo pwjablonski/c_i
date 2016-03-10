@@ -13,14 +13,65 @@ class SignaturesController < ApplicationController
         
         response = HTTParty.post("https://api.na1.echosign.com/oauth/token?code=#{code}&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&client_secret=4FhKpvbTj0k0_9dd_qkfgL8GXsUIg8XB&redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&grant_type=authorization_code")
         
+        puts "MY TOKEn " + response.access_token
+        
+        session[:token] = response.access_token
+        
         redirect_to events_path
     end
 
 
-    def sendsigrequest
+    def authorize_adobe
         @event = Event.find(params[:event_id])
         @registration = Registration.find(params[:registration_id])
         redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send"
+    end
+    
+    def sendsigrequest
+              @event = Event.find(params[:event_id])
+              @registration = Registration.find(params[:registration_id])
+    
+    
+    response = HTTParty.post("https://api.na1.echosign.com/api/rest/v5/",
+                             :header => {"Access-Token" => "3AAABLblqZhDaGCwkX4DnfpQ-UiMtCwAYCz6f3k5ggbtFr1USk_dY31hDV9VPBOIlcEYiLyaMtV049w3pi_oQaKneiIItPCTi"},
+                             
+                             :body => { "AgreementCreationInfo" =>
+                             {
+                                "documentCreationInfo"=>
+                                {
+                                    "name"=> "Test Document",
+                                    "message"=> "This is a test",
+                                    "recipientSetInfos"=> [
+                                        {
+                                            "recipientSetRole"=> "SIGNER",
+                                            "recipientSetMemberInfos"=> [
+                                                {
+                                                    "email"=> "pwjablonski@gmail.com"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "fileInfos"=> [
+                                        {
+                                            "transientDocumentId"=> "3AAABLblqZhCyvMjiP_RA04XJwbqV7u77Jssvfzr3yM8gG8f4U1YK4heYTZSQay5hf_bI_jId-j3HY9LHsFMcXFeNwJ7wIaDod4HWlC9Cf9M87oUmJ5-kHb35x9VxD_X4EuKlQoqMYJ3tO086IOjg1DmNSP7dTs5a50gSciBCyo3iBRQKf0_bKLorX4E_4Lt4RAivgSU5tAwAWZrXfZ6t5g1U6b8XRf21af-rYNOiPB94rUZFlBz-bOsdFKzpiRfCNDkfO8bs1mw*"
+                                        }
+                                    ],
+                                    "signatureType"=> " ESIGN",
+                                    "signatureFlow"=> "SENDER_SIGNATURE_NOT_REQUIRED",
+                                    "securityOptions"=>
+                                        {
+                                            "passwordProtection"=> "NONE",
+                                            "kbaProtection"=> "NONE",
+                                            "webIdentityProtection"=> "NONE",
+                                            "protectOpen"=> false,
+                                            "internalPassword"=> "",
+                                            "externalPassword"=> "",
+                                            "openPassword"=> ""
+                                        }
+                                }
+                             }
+                             }
+            )
     end
 
 

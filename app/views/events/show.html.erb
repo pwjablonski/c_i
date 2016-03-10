@@ -22,8 +22,6 @@
 
           <%elsif current_user.student? && @event.find_registration(current_user.student)%>
             <h1><%= link_to 'Unregister', [@event, @event.find_registration(current_user.student)], method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %>
-           
-           <%= link_to "Email Permission Slip", sendsigrequest_event_registration_signatures_path(@event, @event.find_registration(current_user.student) ), method: :post, :class => "btn btn-primary" %>
 
              <a href="<%=@event.permission_url %>" class = "btn btn-primary" target="_blank"> View Permission Form</a></h1>
           <%end%>
@@ -92,7 +90,7 @@
 
 
 
-
+        <%= link_to "Authorize Adobe", authorize_adobe_event_registration_signatures_path(@event, @event.find_registration(current_user.student) ), method: :post, :class => "btn btn-primary" %>
 
 
         <h3> Invite/Add Student </h3>
@@ -153,6 +151,9 @@
                     <td><%= registration.student.school.school_name %></td>
                     <td><%= registration.status %> </td>
                     <!-- <td> <a href = "<%= registration.get_signature_status_url %>" target= "_blank"> <%= registration.get_signature_status %></a></td> -->
+
+
+                    <td>  <%= link_to "Email Permission Slip", sendsigrequest_event_registration_signatures_path(@event, @event.find_registration(current_user.student) ), method: :post, :class => "btn btn-primary" %> </td>
                     <td><%= registration.attendance_datum.present%></td>  
                     <td><%= link_to 'Remove', [@event, registration], method: :delete, data: { confirm: 'Are you sure?' } %></td> 
                   </tr>
