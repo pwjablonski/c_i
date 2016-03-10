@@ -29,7 +29,8 @@ class SignaturesController < ApplicationController
     def sendsigrequest
               @event = Event.find(params[:event_id])
               @registration = Registration.find(params[:registration_id])
-    
+              
+            puts "Session TOKEN #{session[:token]}"
     
             response = HTTParty.post("https://api.na1.echosign.com/api/rest/v5/",
                              :header => {"Access-Token" => session[:token]},
@@ -71,6 +72,8 @@ class SignaturesController < ApplicationController
                              }
                         }
             )
+            
+            puts response
             
             redirect_to @event
     end
