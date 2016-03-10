@@ -18,7 +18,6 @@ Rails.application.routes.draw do
               collection do
                   post :callbacks
                   post :sendsigrequest
-                  post :authorize_adobe
               end
           end
           
@@ -55,6 +54,7 @@ Rails.application.routes.draw do
 
   post '/signatures/callbacks', to: 'signatures#callbacks'
   get '/signatures/callbacks', to: 'signatures#callbacks'
+  post 'signatures/authorize_adobe', to: 'signatures#authorize_adobe'
   
   post '/users/invite_teacher', to: 'users#invite_teacher'
 
