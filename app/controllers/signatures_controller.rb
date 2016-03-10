@@ -32,12 +32,12 @@ class SignaturesController < ApplicationController
     
     
             response = HTTParty.post("https://api.na1.echosign.com/api/rest/v5/",
-                             :header => {"Access-Token" => "3AAABLblqZhDaGCwkX4DnfpQ-UiMtCwAYCz6f3k5ggbtFr1USk_dY31hDV9VPBOIlcEYiLyaMtV049w3pi_oQaKneiIItPCTi"},
+                             :header => {"Access-Token" => session[:token]},
                              
-                            :body => { "AgreementCreationInfo" => session[:token]
+                            :body => { "AgreementCreationInfo" =>
                              {
                                 "documentCreationInfo"=>
-                                {
+                                     {
                                     "name"=> "Test Document",
                                     "message"=> "This is a test",
                                     "recipientSetInfos"=> [
@@ -67,9 +67,9 @@ class SignaturesController < ApplicationController
                                             "externalPassword"=> "",
                                             "openPassword"=> ""
                                         }
-                                }
+                                    }
                              }
-                             }
+                        }
             )
             
             redirect_to @event
