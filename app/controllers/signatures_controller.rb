@@ -22,8 +22,7 @@ class SignaturesController < ApplicationController
 
 
     def authorize_adobe
-        @event = Event.find(params[:event_id])
-        @registration = Registration.find(params[:registration_id])
+        
         redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send"
     end
     
@@ -32,10 +31,10 @@ class SignaturesController < ApplicationController
               @registration = Registration.find(params[:registration_id])
     
     
-    response = HTTParty.post("https://api.na1.echosign.com/api/rest/v5/",
+            response = HTTParty.post("https://api.na1.echosign.com/api/rest/v5/",
                              :header => {"Access-Token" => "3AAABLblqZhDaGCwkX4DnfpQ-UiMtCwAYCz6f3k5ggbtFr1USk_dY31hDV9VPBOIlcEYiLyaMtV049w3pi_oQaKneiIItPCTi"},
                              
-                             :body => { "AgreementCreationInfo" =>
+                            :body => { "AgreementCreationInfo" => session[:token]
                              {
                                 "documentCreationInfo"=>
                                 {
@@ -72,6 +71,8 @@ class SignaturesController < ApplicationController
                              }
                              }
             )
+            
+            redirect_to @event
     end
 
 
