@@ -53,15 +53,10 @@ Rails.application.routes.draw do
   post 'projects/import', to: 'projects#import'
 
   post '/signatures/callbacks', to: 'signatures#callbacks'
+  get '/signatures/callbacks', to: 'signatures#callbacks'
   
   post '/users/invite_teacher', to: 'users#invite_teacher'
 
-
-  resources :signatures, only: [:new, :create] do
-    collection do
-      post 'callbacks'
-    end
-  end
 
   resources :projects
   resources :schools
