@@ -89,6 +89,8 @@ gem 'hellosign-ruby-sdk'
 
 gem 'kaminari', '~> 0.16.3'
 
+gem 'echochamber', '~> 1.0', '>= 1.0.2'
+
 group :production do
   gem 'rails_12factor'
 end
