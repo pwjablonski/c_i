@@ -59,7 +59,12 @@ class SignaturesController < ApplicationController
                                     ],
                                     "fileInfos"=> [
                                         {
-                                            "transientDocumentId"=> "3AAABLblqZhCyvMjiP_RA04XJwbqV7u77Jssvfzr3yM8gG8f4U1YK4heYTZSQay5hf_bI_jId-j3HY9LHsFMcXFeNwJ7wIaDod4HWlC9Cf9M87oUmJ5-kHb35x9VxD_X4EuKlQoqMYJ3tO086IOjg1DmNSP7dTs5a50gSciBCyo3iBRQKf0_bKLorX4E_4Lt4RAivgSU5tAwAWZrXfZ6t5g1U6b8XRf21af-rYNOiPB94rUZFlBz-bOsdFKzpiRfCNDkfO8bs1mw*"
+                                            "documentURL"=>
+                                                {
+                                                    "name" => "file",
+                                                    "url" => "https://bitcoin.org/bitcoin.pdf"
+                                                    "mimeType" => "application/pdf"
+                                                }
                                         }
                                     ],
                                     "signatureType"=> " ESIGN",
