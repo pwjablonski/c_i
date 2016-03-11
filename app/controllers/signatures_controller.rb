@@ -15,13 +15,13 @@ class SignaturesController < ApplicationController
         
         puts response.parsed_response
         puts response.parsed_response[:access_token]
-        puts response.parsed_response.access_token
         
-        session[:token1] = response.parsed_response[:access_token]
-        session[:token2] = response.parsed_response.access_token
         
-        puts session[:token1]
-        puts session[:token2]
+        session[:token] = response.parsed_response[:access_token]
+        
+        
+        puts session[:token]
+       
         
         redirect_to events_path
     end
