@@ -29,7 +29,7 @@ class SignaturesController < ApplicationController
 
     def authorize_adobe
         
-        redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send:self"
+        redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send:self+agreement_write:self+agreement_read:self+user_login:self"
     end
     
     def sendsigrequest
@@ -39,7 +39,11 @@ class SignaturesController < ApplicationController
             puts "Session TOKEN #{session[:token]}"
     
             response = HTTParty.get("https://api.na1.echosign.com/api/rest/v5/agreements",
-                                    :headers => {"Access-Token" => session[:token]},
+                                    :headers => {
+                                        "Access-Token" => "3AAABLblqZhB_0V8gh94qgnuaT5PqO5xAGQ_jU95ylgvNfnnApsSArZ7ztgQ0wMuQfayzIARsPfzSETndS-jByrOgg354IZ4k",
+                                    "x-api-user" => "email:peter@campinteractive.org"
+                                    
+                                    },
                              
                             :query => { "AgreementCreationInfo" =>
                              {
@@ -59,12 +63,13 @@ class SignaturesController < ApplicationController
                                     ],
                                     "fileInfos"=> [
                                         {
-                                            "documentURL"=>
-                                                {
-                                                    "name" => "file",
-                                                    "url" => "https://bitcoin.org/bitcoin.pdf",
-                                                    "mimeType" => "application/pdf"
-                                                }
+                                            "transientDocumentId" => "3AAABLblqZhCyvMjiP_RA04XJwbqV7u77Jssvfzr3yM8gG8f4U1YK4heYTZSQay5hf_bI_jId-j3HY9LHsFMcXFeNwJ7wIaDod4HWlC9Cf9M87oUmJ5-kHb35x9VxD_X4EuKlQoqMYJ3tO086IOjg1DmNSP7dTs5a50gSciBCyo3iBRQKf0_bKLorX4E_4Lt4RAivgSU5tAwAWZrXfZ6t5g1U6b8XRf21af-rYNOiPB94rUZFlBz-bOsdFKzpiRfCNDkfO8bs1mw*"
+#                                            "documentURL"=>
+#                                                {
+#                                                    "name" => "file",
+#                                                    "url" => "https://bitcoin.org/bitcoin.pdf",
+#                                                    "mimeType" => "application/pdf"
+#                                                }
                                         }
                                     ],
                                     "signatureType"=> " ESIGN",
@@ -89,6 +94,17 @@ class SignaturesController < ApplicationController
             puts response
             
             redirect_to @event
+    end
+    
+    def get_agreement
+        response = HTTParty.get("https://api.na1.echosign.com:443/api/rest/v5/agreements/3AAABLblqZhBpq4KklZp7i-wN3sivwzpJVFdUJq5Cw-TM7xTr4sJ-crJ1sMT0-8btft63Zi0lDEHB7ubieayZqRhLg5LdPai5",
+                                :headers => {
+                                "Access-Token" => "3AAABLblqZhAS1PeU-p_2bauwyvHmvK6SoLRJZHDbAmLMsyd4oAufA8lZrFkJGLO0ZoSBIKCHV8QshBu21M_D-slggMUyXKTV",
+                                "x-api-user" => "email:peter@campinteractive.org"
+                                
+                                },
+                    )
+ 
     end
 
 
