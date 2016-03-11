@@ -38,10 +38,10 @@ class SignaturesController < ApplicationController
               
             puts "Session TOKEN #{session[:token]}"
     
-            response = HTTParty.post("https://api.na1.echosign.com/api/rest/v5/",
-                             :header => {"Access-Token" => session[:token]},
+            response = HTTParty.get("https://api.na1.echosign.com/api/rest/v5/agreements",
+                                    :headers => {"Access-Token" => session[:token]},
                              
-                            :body => { "AgreementCreationInfo" =>
+                            :query => { "AgreementCreationInfo" =>
                              {
                                 "documentCreationInfo"=>
                                      {
@@ -78,6 +78,8 @@ class SignaturesController < ApplicationController
                              }
                         }
             )
+            
+            
             
             puts response
             
