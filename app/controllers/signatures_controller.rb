@@ -29,7 +29,7 @@ class SignaturesController < ApplicationController
 
     def authorize_adobe
         
-        redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=user_login:self+agreement_send:self"
+        redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send:self"
     end
     
     def sendsigrequest
@@ -39,7 +39,7 @@ class SignaturesController < ApplicationController
             puts "Session TOKEN #{session[:token]}"
     
             response = HTTParty.get("https://api.na1.echosign.com/api/rest/v5/agreements",
-                                    :headers => {"Access-Token" => session[:token]},
+                                    :headers => {"Access-Token" => "3AAABLblqZhBcytlCgOIBzmViToTKKJ-9QaH1yNEtWc1HZiK_ZtKOL0s4K81MPCEtaCFZoDVBG9bQ8HuLfhBzyTN0owH9I0Sc"},
                              
                             :query => { "AgreementCreationInfo" =>
                              {
