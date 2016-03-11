@@ -62,7 +62,7 @@ class SignaturesController < ApplicationController
                                             "documentURL"=>
                                                 {
                                                     "name" => "file",
-                                                    "url" => "https://bitcoin.org/bitcoin.pdf"
+                                                    "url" => "https://bitcoin.org/bitcoin.pdf",
                                                     "mimeType" => "application/pdf"
                                                 }
                                         }
