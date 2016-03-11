@@ -14,10 +14,10 @@ class SignaturesController < ApplicationController
         response = HTTParty.post("https://api.na1.echosign.com/oauth/token?code=#{code}&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&client_secret=4FhKpvbTj0k0_9dd_qkfgL8GXsUIg8XB&redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&grant_type=authorization_code")
         
         puts response.parsed_response
-        puts response.parsed_response[:access_token]
+        puts response.parsed_response["access_token"]
         
         
-        session[:token] = response.parsed_response[:access_token]
+        session[:token] = response.parsed_response["access_token"]
         
         
         puts session[:token]
