@@ -29,7 +29,7 @@ class SignaturesController < ApplicationController
 
     def authorize_adobe
         
-        redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send"
+        redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=user_login:self+agreement_send:self"
     end
     
     def sendsigrequest
