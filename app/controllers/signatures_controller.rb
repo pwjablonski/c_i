@@ -39,7 +39,7 @@ class SignaturesController < ApplicationController
             puts "Session TOKEN #{session[:token]}"
     
             response = HTTParty.get("https://api.na1.echosign.com/api/rest/v5/agreements",
-                                    :headers => {"Access-Token" => "3AAABLblqZhBcytlCgOIBzmViToTKKJ-9QaH1yNEtWc1HZiK_ZtKOL0s4K81MPCEtaCFZoDVBG9bQ8HuLfhBzyTN0owH9I0Sc"},
+                                    :headers => {"Access-Token" => session[:token]},
                              
                             :query => { "AgreementCreationInfo" =>
                              {
