@@ -136,7 +136,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>School</th>
-                    <th>Status</th>
+                    <th>Registraion Status</th>
                     <th>Permission Status</th>
                     <th>Attended</th>
                     <th>Remove/DisInvite</th>
@@ -150,6 +150,7 @@
                     <td><%= registration.student.user.email %></td>
                     <td><%= registration.student.school.school_name %></td>
                     <td><%= registration.status %> </td>
+                    <td><%= registration.get_signature_status %> </td>
                     <td>  <%= link_to "Email Permission Slip", sendsigrequest_event_registration_signatures_path(@event, registration ), method: :post %></td>
                     <td><%= registration.attendance_datum.present%></td>  
                     <td><%= link_to 'Remove', [@event, registration], method: :delete, data: { confirm: 'Are you sure?' } %></td> 

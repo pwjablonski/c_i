@@ -7,8 +7,15 @@ class Registration < ActiveRecord::Base
     
     def get_signature_status
         if self.signature_request_id
-            signature_request = HelloSign.get_signature_request :signature_request_id => self.signature_request_id
-             signature_request.signatures[0].status_code
+            signature_request = HTTParty.get("https://api.na1.echosign.com:443/api/rest/v5/agreements/#{self.signature_request_id}",
+                                             :headers => {
+                                             "Access-Token" => "session[:token]",
+                                             "x-api-user" => "email:peter@campinteractive.org"
+                                             
+                                             },
+                                             )
+                                             signature_request.parsed_reponse[:status]
+
         else
             return "Not Sent"
         end

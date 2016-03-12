@@ -20,7 +20,6 @@ class SignaturesController < ApplicationController
 
 
     def authorize_adobe
-        
         redirect_to "https://secure.na1.echosign.com/public/oauth?redirect_uri=https://weareci.herokuapp.com/signatures/callbacks&response_type=code&client_id=CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_&scope=agreement_send:self+agreement_write:self+agreement_read:self+user_login:self"
     end
     
@@ -90,16 +89,6 @@ class SignaturesController < ApplicationController
             return response
     end
     
-    def get_agreement
-        response = HTTParty.get("https://api.na1.echosign.com:443/api/rest/v5/agreements/3AAABLblqZhBpq4KklZp7i-wN3sivwzpJVFdUJq5Cw-TM7xTr4sJ-crJ1sMT0-8btft63Zi0lDEHB7ubieayZqRhLg5LdPai5",
-                                :headers => {
-                                "Access-Token" => "session[:token]",
-                                "x-api-user" => "email:peter@campinteractive.org"
-                                
-                                },
-                    )
- 
-    end
 
 
 #  def callbacks
