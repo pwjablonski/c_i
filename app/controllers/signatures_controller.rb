@@ -15,6 +15,12 @@ class SignaturesController < ApplicationController
         
         session[:token] = response.parsed_response["access_token"]
         
+        puts session[:token]
+        
+        credentials = Echochamber::Credentials.new("CBJCHBCAABAAXTQdZQjOfCXBUwVnTynIiynrwVsXGVl_", "4FhKpvbTj0k0_9dd_qkfgL8GXsUIg8XB", response.parsed_response["access_token"], "peter@campinteractive.org", "Chowndir0")
+        
+        client = Echochamber::Client.new(credentials)
+        
         redirect_to events_path
     end
 

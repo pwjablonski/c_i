@@ -22,14 +22,14 @@ class Registration < ActiveRecord::Base
     end
     
     
-    def get_signature_status_url
-        if self.signature_request_id
-            signature_request = HelloSign.get_signature_request :signature_request_id => self.signature_request_id
-            signature_request.details_url
-        else
-            return ""
-        end
-    end
-    
+#    def get_signature_status_url
+#        if self.signature_request_id
+#            signature_request = HelloSign.get_signature_request :signature_request_id => self.signature_request_id
+#            signature_request.details_url
+#        else
+#            return ""
+#        end
+#    end
+
     
 end
