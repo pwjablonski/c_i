@@ -6,7 +6,9 @@ class Registration < ActiveRecord::Base
     
     
     def get_signature_status(adobe_token)
-        if self.signature_request_id
+        if adobe_token == nil
+             return "Confrim Adobe Account"
+        elsif self.signature_request_id
             signature_request = HTTParty.get("https://api.na1.echosign.com:443/api/rest/v5/agreements/#{self.signature_request_id}",
                                              :headers => {
                                              "Access-Token" => adobe_token,
