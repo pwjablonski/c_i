@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308043858) do
+ActiveRecord::Schema.define(version: 20160312163129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 20160308043858) do
     t.string   "devpost_url"
     t.string   "image",                  default: "http://riskid.nl/assets/testimonials/user-3995d1ed5f9b6ea6ef9c7bc9ead47415.jpg"
     t.boolean  "approved"
+    t.string   "adobe_token"
   end
 
   add_index "users", ["approved"], name: "index_users_on_approved", using: :btree

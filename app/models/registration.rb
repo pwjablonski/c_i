@@ -5,11 +5,11 @@ class Registration < ActiveRecord::Base
     has_one :attendance_datum
     
     
-    def get_signature_status
+    def get_signature_status(adobe_token)
         if self.signature_request_id
             signature_request = HTTParty.get("https://api.na1.echosign.com:443/api/rest/v5/agreements/#{self.signature_request_id}",
                                              :headers => {
-                                             "Access-Token" => "session[:token]",
+                                             "Access-Token" => adobe_token,
                                              "x-api-user" => "email:peter@campinteractive.org"
                                              
                                              },
