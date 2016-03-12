@@ -16,7 +16,7 @@ class Registration < ActiveRecord::Base
                                              
                                              },
                                              )
-        signature_request.parsed_response
+        signature_request.parsed_response["status"]
 
         else
             return "Not Sent"
