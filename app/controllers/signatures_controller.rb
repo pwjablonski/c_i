@@ -29,7 +29,7 @@ class SignaturesController < ApplicationController
             
             if @registration.signature_request_id == nil
                 signature_request = send_signature_request(@registration, @event)
-                @registration.update_attribute(:signature_request_id, signature_request.parsed_response["agreementID"])
+                @registration.update_attribute(:signature_request_id, signature_request.parsed_response["agreementId"])
                 redirect_to @event
             else
                 redirect_to @event
