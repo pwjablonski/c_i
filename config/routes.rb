@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
 
 
-
-
+  resources :quizzes
+  resources :lessons
+  resources :units
   resources :tracks
   resources :badges
   resources :resources
@@ -97,14 +98,15 @@ Rails.application.routes.draw do
   end
   
   
-  resources :conversations, only: [:index, :show, :new, :create] do
-      member do
-          post :reply
-          post :trash
-          post :untrash
-          post :mark_as_read
-          post :mark_as_unread
-      end
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      post :reply
+      post :mark_as_read
+      post :restore
+    end
+    collection do
+      delete :empty_trash
+    end
   end
   
   resources :notifications, only: [:index, :show] do
@@ -115,6 +117,8 @@ Rails.application.routes.draw do
           post :mark_as_unread
       end
   end
+
+  resources :messages, only: [:new, :create]
   
   
   # The priority is based upon order of creation: first created -> highest priority.

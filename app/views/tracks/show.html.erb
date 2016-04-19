@@ -3,6 +3,8 @@
     <div class="row">
       <div class="col-lg-8">
         <h1><%= @track.name %></h1>
+        <%= link_to 'Edit Track', edit_track_path(@track) %> | 
+        <%= link_to 'All Tracks', tracks_path %>
       </div> 
     </div>
     <!-- /.col-lg-12 -->
@@ -25,12 +27,21 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+
+                        <% @track.units.each do |unit| %>
                         <li>
-                          <%= link_to admin_show_path do %>
-                            <i class="fa fa-dashboard fa-fw"></i> Dashboard
-                          <%end%>
-                        </li>
-                        
+                          <a href= "#"> <%= unit.name %> <span class="fa arrow"></span></a>
+                          <ul class="nav nav-second-level">
+                            <% unit.lessons.each do |lesson| %>
+                            <li>
+                              <%= link_to lesson do %>
+                                <%= lesson.name%>
+                              <%end%>
+                            </li>
+                            <%end%>  
+                          </ul>
+                        </li>      
+                        <% end %>      
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -49,14 +60,5 @@
                 <!-- /.col-lg-12 -->
             </div>
 
-            <p>
-              <strong>Github repo url:</strong>
-              <%= @track.github_repo_url %>
-              <%= @track.units.first %>
-            </p>
-
-            <%= raw @readme %>
-
-            <%= link_to 'Edit', edit_track_path(@track) %> |
-            <%= link_to 'Back', tracks_path %>
+            
           </div>

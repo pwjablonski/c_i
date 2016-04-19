@@ -12,7 +12,7 @@ gem 'rails', '4.2.1'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -83,7 +83,7 @@ gem 'mailboxer', '~> 0.13.0'
 
 gem 'simple_form'
 
-gem 'font-awesome-sass'
+#gem 'font-awesome-sass'
 
 gem 'hellosign-ruby-sdk'
 
@@ -95,3 +95,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'bootstrap-will_paginate'
+gem 'will_paginate'
+
+gem 'jquery-turbolinks'
+gem 'chosen_assets', '~> 1.1', '>= 1.1.0.2'

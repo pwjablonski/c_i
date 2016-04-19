@@ -1,0 +1,21 @@
+
+<%= form_for(@lesson) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :presentation_url %><br>
+    <%= f.text_field :presentation_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit_id %><br>
+    <%= f.collection_select(:unit_id, Unit.all, :id, :name) %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

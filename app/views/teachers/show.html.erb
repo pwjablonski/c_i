@@ -73,20 +73,25 @@
         </div> 
 
         <% @teacher.classrooms.each do |classroom| %>
-        <div class="col-lg-3"> 
-                   
-           <div class="panel panel-default">
-            <%= link_to classroom do %>
-            <div class="panel-body panel-project">
-              <h3><%= classroom.name %></h3>
-            </div>
-            <%end%>
-            <div class="panel-footer">
-              <%= classroom.num_students %> Students
-            </div>
-          </div>
-                  
-        </div> 
+        <div class="col-lg-3">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                       <%=classroom.name%>: <%=classroom.teacher.last_name%>  
+                       
+                    </div>
+                    <div class="panel-body">
+
+                                 <h4> <%=classroom.name%></h4>
+                                 <p> Teacher: <%=classroom.teacher.last_name%>  </p>
+                                 <p> School: <%=classroom.school.school_name%> </p>
+                                 <p> Students Enrolled: <%=classroom.verified_enrollments.count%>  </p>
+                                 <p> Class Attendance: <%= classroom.percent_present %></p>
+                    </div>
+                    <div class="panel-footer">
+                         <%= link_to "View Classroom", classroom%>
+                    </div>
+                </div>
+            </div>  
         <% end %>
     </div>
 

@@ -11,16 +11,14 @@ class TracksController < ApplicationController
   # GET /tracks/1
   # GET /tracks/1.json
   def show
-      request = HTTParty.get("https://api.github.com/repos/weareci/#{@track.github_repo_url}/readme", :headers => {"User-Agent" => "weareci", "Accept" => "application/vnd.github.VERSION.html+json"})
-      @readme = request.parsed_response
+      
   end
   
 
   # GET /tracks/new
   def new
     @track = Track.new
-    unit= @track.units.build
-    unit.lessons.build
+   
   end
 
   # GET /tracks/1/edit
@@ -75,6 +73,6 @@ class TracksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def track_params
-        params.require(:track).permit(:name, :github_repo_url, unit_attributes: [:name, :track_id, lesson_attributes:[:name, :tracks, :unit_id]])
+        params.require(:track).permit(:name)
     end
 end

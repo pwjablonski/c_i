@@ -4,22 +4,7 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :github_repo_url %><br>
-    <%= f.text_field :github_repo_url %>
-  </div>
-  Unit:<br>
-  <%= f.fields_for :units do |ff| %>
-    <%= ff.label :name %>
-    <%= ff.text_field :name %><br>
-      Lesson:<br>
-      <%= ff.fields_for :lessons do |fff| %>
-        <%= fff.label :name %>
-        <%= fff.text_field :name %>
-        <%= fff.label :repo %>
-        <%= fff.text_field :repo %>
-      <% end %>
-  <% end %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

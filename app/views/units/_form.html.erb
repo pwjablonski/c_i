@@ -1,0 +1,16 @@
+
+<%= form_for(@unit) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :track_id %><br>
+    <%= f.collection_select(:track_id, Track.all, :id, :name) %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

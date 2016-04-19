@@ -12,12 +12,12 @@
  *
  *= require_tree .
  *= require_self
+ *= require chosen
  
  */ 
 
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+
 @import "bootstrap";
 
 /* Some Style from the Bootstrap Default Theme */

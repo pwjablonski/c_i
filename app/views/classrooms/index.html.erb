@@ -26,43 +26,19 @@
  
           <% @classrooms.each do |classroom| %>
 
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <div class="panel panel-yellow">
                     <div class="panel-heading">
                        <%=classroom.name%>: <%=classroom.teacher.last_name%>  
-                       <div class="pull-right">
-                       <%=classroom.verified_enrollments.count%> Students Enrolled
-                       </div>
+                       
                     </div>
                     <div class="panel-body">
-                          <ul class="nav nav-tabs">
-                            <li class="active"><a href="#overview-<%=classroom.id%>" data-toggle="tab">Overview</a>
-                            </li>
-                            <li><a href="#ca-data-<%=classroom.id%>" data-toggle="tab">CA Data</a>
-                            </li>
-                            <li><a href="#attendence-<%=classroom.id%>" data-toggle="tab">Attendance</a>
-                            </li>
-                          
-                          </ul>
 
-                          <div class="tab-content">
-                              <div class="tab-pane fade in active" id="overview-<%=classroom.id%>">
                                  <h4> <%=classroom.name%></h4>
                                  <p> Teacher: <%=classroom.teacher.last_name%>  </p>
                                  <p> School: <%=classroom.school.school_name%> </p>
                                  <p> Students Enrolled: <%=classroom.verified_enrollments.count%>  </p>
                                  <p> Class Attendance: <%= classroom.percent_present %></p>
-                                
-                               </div>
-                               <div class="tab-pane fade" id="ca-data-<%=classroom.id%>">
-                                 <%= line_chart classroom.verified_enrollments.map{|enrollment|
-                                {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, time_zone: "Eastern Time (US & Canada)", range: enrollment.student.ca_data.first.created_at..Time.now).maximum(:total_points)}
-                                  } %>
-                                </div>
-                                <div class="tab-pane fade" id="attendence-<%=classroom.id%>">
-                                <%= pie_chart classroom.attendance_data.group(:present).count %>
-                                </div>                               
-                          </div>
                     </div>
                     <div class="panel-footer">
                          <%= link_to "View Classroom", classroom%>

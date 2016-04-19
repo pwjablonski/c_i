@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160312163129) do
+ActiveRecord::Schema.define(version: 20160418215158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,8 +85,9 @@ ActiveRecord::Schema.define(version: 20160312163129) do
     t.string   "name"
     t.integer  "unit_id"
     t.string   "repo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "presentation_url"
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
@@ -161,6 +162,11 @@ ActiveRecord::Schema.define(version: 20160312163129) do
     t.datetime "updated_at",      null: false
     t.string   "devpost_url"
     t.string   "github_repo_url"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "registrations", force: :cascade do |t|

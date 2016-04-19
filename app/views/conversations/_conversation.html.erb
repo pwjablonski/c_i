@@ -1,23 +1,22 @@
-<%= content_tag_for(:li, conversation, class: "list-group-item clearfix") do |conversation|%>
-  
-    <h4> <%= link_to conversation.subject, conversation_path(conversation)%> </h4>
-    <p> Subject: <%=conversation.last_message.subject %></p>
-    <span class="text-muted"> <%=conversation.last_message.updated_at %> </span>
+<li class="list-group-item clearfix">
+  <%= link_to conversation.subject, conversation_path(conversation) %>
 
-    <div class="pull-right btn-group-vertical">
-    <% if conversation.is_read?(current_user)%>
-      <%= link_to 'Mark as Unread', mark_as_unread_conversation_path(conversation), method: :post, class: 'btn btn-primary'%>
-    <% elsif conversation.is_unread?(current_user)%>
-      <%= link_to 'Mark as Read', mark_as_read_conversation_path(conversation), method: :post, class: 'btn btn-primary'%>
-    <%end%>
-    
-    <% if conversation.is_completely_trashed?(current_user)%>
-      <%= link_to 'Untrash', untrash_conversation_path(conversation), method: :post, class: 'btn btn-danger'%>
-    <% else%>
-      <%= link_to  trash_conversation_path(conversation), method: :post, class: 'btn btn-danger' do %>
-        <i class="fa fa-trash fa-fw"></i>
-        Move to trash
-      <% end -%>
-    <%end%>
-    </div>
-<%end%>
+  <div class="btn-group-vertical pull-right">
+    <% if conversation.is_trashed?(current_user) %>
+      <%= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-xs btn-info', method: :post %>
+    <% else %>
+      <%= link_to 'Move to trash', conversation_path(conversation), class: 'btn btn-xs btn-danger', method: :delete,
+                  data: {confirm: 'Are you sure?'} %>
+
+      <% if conversation.is_unread?(current_user) %>
+        <%= link_to 'Mark as read', mark_as_read_conversation_path(conversation),
+                    class: 'btn btn-xs btn-info', method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <p><%= render 'conversations/participants', conversation: conversation %></p>
+
+  <p><%= conversation.last_message.body %>
+    <small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></span>)</small></p>
+</li>

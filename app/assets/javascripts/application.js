@@ -16,6 +16,10 @@
 //= require bootstrap
 //= require_tree .
 
+//= require jquery.turbolinks
+//= require chosen.jquery
+//= require messages
+
 $(function() {
 
     $('#side-menu').metisMenu();
