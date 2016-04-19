@@ -234,13 +234,13 @@
                   <td>
                   
                   </td>
-                  <% @classroom.attendance_data.reverse[0..4].each do |attendance_datum| %>
+                  <% @classroom.attendance_lists.reverse.each do |attendance_list| %>
                     <td>
-                      <%= attendance_datum.attendance_list.date%> <br>
-                      <%= attendance_datum.attendance_list.percent_present%> % <br>
-                      <i class="fa fa-pencil-square-o"></i><%=link_to "Update", edit_attendance_list_path(attendance_datum.attendance_list)%>
-                      <i class="fa fa-trash-o"></i> <%= link_to 'Delete', attendance_datum.attendance_list, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      | <%= link_to attendance_datum.attendance_list.status, toggle_status_attendance_list_path(attendance_datum.attendance_list),  method: :post %>
+                      <%= attendance_list.date%> <br>
+                      <%= attendance_list.percent_present%> % <br>
+                      <i class="fa fa-pencil-square-o"></i><%=link_to "Update", edit_attendance_list_path(attendance_list)%>
+                      <i class="fa fa-trash-o"></i> <%= link_to 'Delete', attendance_list, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      | <%= link_to attendance_list.status, toggle_status_attendance_list_path(attendance_list),  method: :post %>
                     </td>
                   <%end%> 
                 </tr>
