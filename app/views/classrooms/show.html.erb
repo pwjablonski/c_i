@@ -95,14 +95,14 @@
 
         <div class="tab-pane fade" id="overview-student-pills">
 
-        <div class = "col-md-6 text-center">
+        <div class = "col-md-12 text-center">
            <h3><a href="https://www.codecademy.com/schools/curriculum/labs/<%=@classroom.ca_class_id%>" > Codacademy Data </a> </h3>
           <%= line_chart @classroom.verified_enrollments.map{|enrollment|
            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, time_zone: "Eastern Time (US & Canada)", range: enrollment.student.ca_data.first.created_at..Time.now).maximum(:total_points)}
          } %>
          </div>
-         <div class = "col-md-6 text-center">
-         <h3> CA Bar </h3>
+         <div class = "col-md-12 text-center">
+         
          <%= column_chart @classroom.verified_enrollments.map{|enrollment|
            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, last: 1).maximum(:total_points)}
          } %>
@@ -216,7 +216,7 @@
           <h3> <%=link_to "Record Today's Attendance", new_attendance_list_path(:classroom_id => @classroom.id), :class => "btn btn-primary"%> </h3>
 
           <div class = "col-md-3 text-center">
-           <h3> Attendance </h3>
+           
            <%= pie_chart @classroom.attendance_data.group(:present).count %>
          </div>
 

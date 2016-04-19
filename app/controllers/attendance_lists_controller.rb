@@ -20,7 +20,6 @@ class AttendanceListsController < ApplicationController
             @attendance_list.attendance_data.build(:enrollment_id => enrollment.id)
 #        @attendance_list.attendance_data << AttendanceDatum.new(:enrollment_id => enrollment.id)
     end
-    
   end
 
   # GET /attendance_lists/1/edit
