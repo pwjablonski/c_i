@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :tracks
   resources :badges
   resources :resources
-  get '/loaderio-1b19d1cc5db77033a543463b11bc8324', to: 'static_pages#loaderio'
-  get 'projects/add'
+  get 'admin/show'
+  get 'projects/add', to: 'projects#add'
 
   resources :events do
       resources :registrations, only: [:create, :destroy, :add_students_by_classroom, :add_students_by_school] do
