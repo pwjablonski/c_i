@@ -229,12 +229,12 @@
                 </tr>
               </thead>
               <tbody>              
-                <% @classroom.verified_enrollments.each do |enrollment| %>
+                
                 <tr>
                   <td>
                   
                   </td>
-                  <% enrollment.attendance_data.reverse[0..4].each do |attendance_datum| %>
+                  <% @classroom.attendance_data.reverse[0..4].each do |attendance_datum| %>
                     <td>
                       <%= attendance_datum.attendance_list.date%> <br>
                       <%= attendance_datum.attendance_list.percent_present%> % <br>
@@ -245,6 +245,7 @@
                   <%end%> 
                 </tr>
 
+                <% @classroom.verified_enrollments.each do |enrollment| %>
                 <tr>
                   <td>
                    <%= enrollment.student.first_name%> <br>
