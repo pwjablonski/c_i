@@ -1,5 +1,334 @@
-<p>Welcome <%= @email %>!</p>
+<!-- <p>Welcome <%= @email %>!</p>
 
 <p>You can confirm your account email through the link below:</p>
 
-<p><%= link_to 'Confirm my account', user_confirmation_url(confirmation_token: @token) %></p>
+<p><%= link_to 'Confirm my account', user_confirmation_url(confirmation_token: @token) %></p> -->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+<meta name="format-detection" content="telephone=no">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+    .ReadMsgBody{
+      width:100%;
+      background-color:#ffffff;
+    }
+    .ExternalClass{
+      width:100%;
+      background-color:#ffffff;
+    }
+    .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{
+      line-height:100%;
+      font-family:proxima nova, regular;
+    }
+    html{
+      width:100%;
+    }
+    body{
+      -webkit-text-size-adjust:none;
+      -ms-text-size-adjust:none;
+      margin:0;
+      padding:0;
+    }
+    table{
+      border-spacing:0;
+      border-collapse:collapse;
+      table-layout:fixed;
+      margin:0 auto;
+    }
+    table table table{
+      table-layout:auto;
+    }
+    img{
+      display:block !important;
+      over-flow:hidden !important;
+    }
+    table td{
+      border-collapse:collapse;
+    }
+    body{
+      margin:0 !important;
+      padding:0 !important;
+      -webkit-text-size-adjust:100% !important;
+      -ms-text-size-adjust:100% !important;
+      -webkit-font-smoothing:antialiased !important;
+    }
+    img{
+      border:0 !important;
+      outline:none !important;
+    }
+    p{
+      margin:0px !important;
+      padding:0px !important;
+    }
+    table{
+      border-collapse:collapse;
+      mso-table-lspace:0px;
+      mso-table-rspace:0px;
+    }
+    td,a,span{
+      border-collapse:collapse;
+      mso-line-height-rule:exactly;
+    }
+    .ExternalClass *{
+      line-height:100%;
+    }
+    .em_red_link a{
+      text-decoration:none;
+      color:#ffffff;
+    }
+    .em_white_link a{
+      text-decoration:none;
+      color:#ffffff;
+    }
+    .em_dark_grey_txt a{
+      text-decoration:none;
+      color:#ffffff;
+    }
+    .em_grey_txt a{
+      text-decoration:none;
+      color:#808080;
+    }
+    .em_yellow_link a{
+      text-decoration:none;
+      color:#d9bc32;
+    }
+    .em_green_link a{
+      text-decoration:none;
+      color:#94b93b;
+    }
+    .em_blue_link a{
+      text-decoration:none;
+      color:#58b2d4;
+    }
+    .em_golden_link a{
+      text-decoration:none;
+      color:#daca8f;
+    }
+    .em_footer a{
+      text-decoration:none;
+      color:#808080;
+    }
+    .em_br1{
+      display:none;
+    }
+  @media only screen and (max-width:480px){
+    table[class=em_main_table]{
+      width:100% !important;
+    }
+
+} @media only screen and (max-width:480px){
+    table[class=em_wrapper]{
+      width:100% !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_hide],br[class=em_hide]{
+      display:none !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_align_center]{
+      text-align:center !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_pad_top]{
+      padding-top:20px !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_side_space]{
+      padding-left:20px !important;
+      padding-right:20px !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_bg_center]{
+      background-position:center !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_height_80]{
+      height:200px !important;
+    }
+
+} @media only screen and (max-width:480px){
+    img[class=em_full_width]{
+      width:100% !important;
+      height:auto !important;
+      max-width:100% !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_pad_btm]{
+      padding-bottom:28px !important;
+    }
+
+} @media only screen and (max-width:480px){
+    td[class=em_width_178]{
+      width:178px !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    table[class=em_main_table]{
+      width:100% !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    table[class=em_wrapper]{
+      width:100% !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    td[class=em_hide],br[class=em_hide]{
+      display:none !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    td[class=em_align_center]{
+      text-align:center !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    td[class=em_pad_top]{
+      padding-top:20px !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    td[class=em_side_space]{
+      padding-left:20px !important;
+      padding-right:20px !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    td[class=em_bg_center]{
+      background-position:center !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    img[class=em_full_width]{
+      width:100% !important;
+      height:auto !important;
+      max-width:100% !important;
+    }
+
+} @media only screen and (min-width:480px) and (max-width:650px){
+    td[class=em_pad_btm]{
+      padding-bottom:28px !important;
+    }
+
+}</style></head>
+<body style="margin:0px; padding:0px; background-color:#ffffff;"><!--[if mso]>
+<style> body,table tr,table td,a, span,table.MsoNormalTable {  font-family:Verdana, Helvetica, sans-serif !important;  }</style>
+<!--<![endif]-->
+<!--Full width table start-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#ffffff;">
+  <tr>
+    <td bgcolor="#EEF3FA" align="center" valign="top"><table align="center" class="em_main_table" width="650" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;" bgcolor="#ffffff">
+        <!-- ===== BANNER WITH CONTENT & CTA ===== -->
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="30" class="em_hide">&nbsp;</td>
+                <td valign="top" class="em_side_space"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="26"></td>
+                    </tr>
+          <tr align="center">
+                      <td><a href="http://www.weare.ci/" target="_blank"><img src="http://i.imgur.com/apORU1b.png" alt="Image" width="250" height="250" class="em_full_width" style="display:block;max-width:590px;" border="0"></a></td>
+                    </tr>
+                    <tr>
+                      <td height="26"></td>
+                    </tr>
+                    <tr>
+                      <td class="em_dark_grey_txt" style="font-family: 'Futura', STD;font-size:20px;text-align:center;color:#184378;line-height:23px;">Welcome <%= @email %>!</td>
+                    </tr>
+                    <tr>
+                      <td height="10" style="line-height:1px;font-size:1px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td class="em_grey_txt" style="font-family: 'Proxima Nova', bold;font-size:16px;text-align:center;color:#184378;line-height:20px;">You can confirm your account email through the link below</td>
+                    </tr>
+                    <tr>
+                      <td height="18" style="line-height:1px;font-size:1px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td><table width="181" border="0" cellspacing="0" cellpadding="0" align="center" class="em_wrapper">
+                          <tr>
+                            <td class="em_pad_btm"><table width="181" border="0" cellspacing="0" cellpadding="0" align="center">
+                                <tr>
+                                  <td class="em_white_link" valign="middle" bgcolor="#F48220" height="43" style="font-family: 'Montserrat', sans-serif;font-size:16px;text-align:center;border-radius:4px;color:#ffffff;letter-spacing:1px;text-transform:uppercase;"><%= link_to 'Confirm My Account', user_confirmation_url(confirmation_token: @token), :style => "text-decoration:none;color:#ffffff;display:block;" %></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+          <tr>
+                      <td height="25" style="line-height:1px;font-size:1px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+            <td style="font-family: 'Montserrat', sans-serif;font-size:20px;text-align:center;color:#184378;line-height:25px;">To Know More</td>
+          </tr>
+          <tr>
+            <td height="20" style="line-height:1px;font-size:1px;">&nbsp;</td>
+          </tr>
+                    
+                  </table></td>
+                <td width="30" class="em_hide">&nbsp;</td>
+              </tr>
+            </table></td>
+        </tr>
+        <!-- ===== //BANNER WITH CONTENT & CTA ===== -->
+    
+    
+        
+        <!-- ===== SOCIAL ICON ===== -->
+        <tr>
+          <td bgcolor="#F28121"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="14" style="line-height:1px;font-size:1px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td width="150" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td width="24"><a href="http://facebook.com/weareci" target="_blank"><img src="http://i.imgur.com/WxhuMyi.png" alt="Facebook" width="24" height="24" style="display:block;" border="0"></a></td>
+                            <td>&nbsp;</td>
+                            <td width="24"><a href="http://twitter.com/weareci" target="_blank"><img src="http://i.imgur.com/7qfZkHz.png" alt="Twitter" width="24" height="24" style="display:block;" border="0"></a></td>
+                            <td>&nbsp;</td>
+                            <td width="24"><a href="http://flickr.com/campinteractive" target="_blank"><img src="http://i.imgur.com/X1PnfIt.png" alt="Linkedin" width="24" height="24" style="display:block;" border="0"></a></td>
+                            <td>&nbsp;</td>
+                            <td width="24"><a href="http://instagram.com/weareci" target="_blank"><img src="http://i.imgur.com/SiLonIn.png" alt="Pinterest" width="24" height="24" style="display:block;" border="0"></a></td>
+                            <td>&nbsp;</td>
+              <td width="24"><a href="http://vimeo.com/weareci" target="_blank"><img src="http://i.imgur.com/oksPYgQ.png" alt="Pinterest" width="24" height="24" style="display:block;" border="0"></a></td>
+                          </tr>
+                        </table></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td height="14" style="line-height:1px;font-size:1px;">&nbsp;</td>
+              </tr>
+            </table></td>
+        </tr>
+        
+        <!-- ===== //SOCIAL ICON ===== -->
+        
+      </table></td>
+  </tr>
+</table>
+<!--Full width table End-->
+<div style="display:none; white-space:nowrap; font:20px courier; color:#ffffff; background-color:#ffffff;">- - - - - - - - - - - - - - - - - - - - - - -</div>
+</body>
+</html>
