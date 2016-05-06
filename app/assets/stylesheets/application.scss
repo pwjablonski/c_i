@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  *= require chosen
+ *= require select2
+ *= require select2-bootstrap
  
  */ 
 
@@ -535,3 +537,10 @@ table.dataTable thead .sorting:after {
 }
 
 
+.select2.select2-container.select2-container--bootstrap  {
+    width: 100% !important; /* or any value that fits your needs */
+}
+
+.chosen-container.chosen-container-single {
+    width: 300px !important; /* or any value that fits your needs */
+}

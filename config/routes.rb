@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       
       member do
           post :toggle_status
+          get :record
       end
       
       resources :attendance_data do

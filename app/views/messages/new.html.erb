@@ -1,20 +1,44 @@
+  <script>
+    $(document).ready(function() {
 
 
-<%= form_tag messages_path, method: :post do %>
-  <div class="form-group">
-    <%= label_tag 'message[subject]', 'Subject' %>
-    <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+      $('.select2-tag').select2({
+      
+        theme: "bootstrap"
+      });
+    });
+
+  </script>
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+          <h1>New Message</h1>
+     </div> 
+    </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <%= label_tag 'message[body]', 'Message' %>
-    <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
-  </div>
+<div class="container">
 
-  <div class="form-group">
-    <%= label_tag 'recipients', 'Choose recipients' %>
-    <%= select_tag 'recipients', recipients_options(@chosen_recipient), multiple: true, class: 'form-control chosen-it' %>
-  </div>
+<div class="col-md-10 col-sm-offset-1"> 
+  <%= form_tag messages_path, method: :post do %>
+    <div class="form-group">
+      <%= label_tag 'message[subject]', 'Subject' %>
+      <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+    </div>
 
-  <%= submit_tag 'Send', class: 'btn btn-primary' %>
-<% end %>
+    <div class="form-group">
+      <%= label_tag 'message[body]', 'Message' %>
+      <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag 'recipients', 'Choose recipients' %>
+      <%= select_tag 'recipients', recipients_options(@chosen_recipient), multiple: true, class: 'form-control select2-tag' %>
+    </div>
+
+    <%= submit_tag 'Send', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+</div>

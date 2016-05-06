@@ -92,6 +92,37 @@ class AttendanceListsController < ApplicationController
     end
   end
 
+
+  def record
+    @attendance_list = AttendanceList.new(:classroom_id => params[:classroom_id], :date => DateTime.now)
+    @classroom = Classroom.find(params[:classroom_id])
+    @classroom.verified_enrollments.each do |enrollment|    
+        if enrollment.student.user.current_sign_in_at >= (DateTime.now.to_time - 1.hours).to_datetime
+            @attendance_list.attendance_data.build(:enrollment_id => enrollment.id, :present => true)
+        else
+            @attendance_list.attendance_data.build(:enrollment_id => enrollment.id, :present => false)
+        end
+    end
+    
+    
+    respond_to do |format|
+      if @attendance_list.save   
+          format.html { redirect_to @classroom, notice: 'Attendance list was successfully created.' }
+        format.json { render :show, status: :created, location: @attendance_list }
+      else
+        format.html { render :new }
+        format.json { render json: @attendance_list.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
+
+
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance_list

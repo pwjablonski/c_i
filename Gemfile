@@ -100,3 +100,5 @@ gem 'will_paginate'
 
 gem 'jquery-turbolinks'
 gem 'chosen_assets', '~> 1.1', '>= 1.1.0.2'
+
+gem 'select2-rails', '~> 4.0', '>= 4.0.1'

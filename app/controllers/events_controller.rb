@@ -78,19 +78,16 @@ class EventsController < ApplicationController
   
   
   def add_students_by_classroom
-      @notice =""
-      @classroom = Classroom.find(params[:post][:classroom_id])
-      
-      @classroom.students.each do |student|
-          @registration = @event.add_student(student, "invited")
-          
-          if @registration == nil
-              @notice = @notice + "#{student.first_name} #{student.last_name} already registered  "
-          else
-              student.user.notify("You have been invited", "Please either <a href='http://localhost:3000/events/#{@event.id}/registrations/#{@registration.id}/accept'> Accept</a> or <a href='http://localhost:3000/events/#{@event.id}/registrations/#{@registration.id}/decline'> Decline</a>")
-              @notice = @notice + "#{student.first_name} #{student.last_name} successfully enrolled  "
-          end
+      # @notice =""
+      # @classroom = Classroom.find(params[:post][:classroom_id])    
+      # @event.add_students(@classroom.students)
+
+      @notice = ""
+      classrooms = Classroom.where(id: params['recipients'])
+      classrooms.each do |classroom|
+        @notice = @notice + @event.add_students(classroom.students)
       end
+
      redirect_to @event
   end
   
@@ -99,15 +96,7 @@ class EventsController < ApplicationController
       @notice =""
       @school = School.find(params[:post][:school_id])
       
-      @school.students.each do |student|
-          @registration = @event.add_student(student, "invited")
-          
-          if @registration == nil
-              @notice = @notice + "#{student.first_name} #{student.last_name} already registered  "
-              else
-              @notice = @notice + "#{student.first_name} #{student.last_name} successfully enrolled  "
-          end
-      end
+      @event.add_students(@school.students)
       redirect_to @event
   end
   

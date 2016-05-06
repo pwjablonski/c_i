@@ -4,41 +4,26 @@ class RegistrationsController < ApplicationController
   # POST /event_registrations
   # POST /event_registrations.json
   def create
-      @notice = ""
-      @event = Event.find(params[:event_id])
-      @student = Student.find(params[:student_id])
-      status = params[:status]
+      # @notice = ""
+      # @event = Event.find(params[:event_id])
+      # @student = Student.find(params[:student_id])
+      # status = params[:status]
       
-      @registration = @event.add_student(@student, status)
+      # @registration = @event.add_student(@student, status)
      
       
-      if @registration == nil
-        @notice = @notice + "#{@student.first_name} #{@student.last_name} already registered  "
-      else
-        @notice = @notice + "#{@student.first_name} #{@student.last_name} successfully enrolled  "
-      end
-      
-      
-#      user_email_string = params[:student_email]
-#      user_email_list = user_email_string.split(",")
-#      
-#      
-#      user_email_list.each do |user_email|
-#          if User.find_by(email: user_email).try(:student?)
-#              @student = User.find_by(email: user_email).student
-#              
-#              @event_registration = @event.add_student(@student)
-#              
-#              if @event_registration == nil
-#                  @notice = @notice + "#{user_email} already registered  "
-#              else
-#                  @event_registration.save
-#                  @notice = @notice + "#{user_email} successfully enrolled  "
-#              end
-#              else
-#              @notice = @notice + "#{user_email} not found  "
-#          end
-#      end
+      # if @registration == nil
+      #   @notice = @notice + "#{@student.first_name} #{@student.last_name} already registered  "
+      # else
+      #   @notice = @notice + "#{@student.first_name} #{@student.last_name} successfully enrolled  "
+      # end
+
+      @notice = ""
+      @event = Event.find(params[:event_id])
+
+      recipients = Student.where(id: params['recipients'])
+      @notice = @event.add_students(recipients)
+
 
       respond_to do |format|
           format.html {redirect_to event_path(@event),

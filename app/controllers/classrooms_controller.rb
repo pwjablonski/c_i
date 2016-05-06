@@ -16,7 +16,7 @@ class ClassroomsController < ApplicationController
   # GET /classrooms/1
   # GET /classrooms/1.json
   def show
-        
+        @chosen_recipient = Student.find_by(id: params[:to].to_i) if params[:to]
   end
 
   # GET /classrooms/new

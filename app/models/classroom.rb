@@ -10,15 +10,25 @@ class Classroom < ActiveRecord::Base
     
     acts_as_messageable
     
-    def add_student(student)
-        student_id = student.id
-        current_student = self.enrollments.find_by(student_id: student_id)
-        if current_student
-            return nil;
-        else
-            current_student = self.enrollments.build(student_id: student_id)
+    def add_students(students)
+        response = ""
+
+        students.each do |student|
+            student_id = student.id
+            current_student = self.enrollments.find_by(student_id: student_id)
+            if current_student
+                response = response + "#{student.first_name} already enrolled:  "
+            else
+                current_student = self.enrollments.build(student_id: student_id)
+                current_student.save
+                response = response + "#{student.first_name} successfully enrolled: "
+
+            end
+            current_student
         end
-        current_student
+
+        return response
+
     end
     
     def verified_enrollments
@@ -55,6 +65,11 @@ def calculate_ca_points
     class_total_ca_score
 end
 
+def mailboxer_email(object)
+    
+      return self.teacher.user.email   # or whatever address the email is to be sent to
+ 
+end
 
 
 

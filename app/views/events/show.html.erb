@@ -1,3 +1,33 @@
+<head>
+  <script>
+    $(document).ready(function() {
+
+
+      $('.select2-tag').select2({
+      
+        theme: "bootstrap"
+      });
+    });
+
+  </script>
+</head>
+
+<div class="jumbotron" style="background-image: url( <%= @event.image_url %>)">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <% flash.each do |name, msg| -%>
+             <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <%= msg %> 
+             </div>
+            <%end%>
+       </div> 
+      </div>
+    </div>
+  </div>
+
+
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
@@ -7,9 +37,17 @@
 
      <div class="col-lg-3">
           <% if @event.status == "draft" && current_user.admin?%>
-            <h1><%= link_to "Publish" , publish_event_path(@event),  method: :post, :class => "btn btn-primary" %></h1>
+            <h1>
+              <%= link_to "Publish" , publish_event_path(@event),  method: :post, :class => "btn btn-primary" %>
+
+
+              <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %>
+             
+            </h1>
           <%elsif  @event.status == "live" && current_user.admin?%>
-            <h1> <%= link_to "Unpublish" , unpublish_event_path(@event),  method: :post, :class => "btn btn-primary" %></h1>
+            <h1> <%= link_to "Unpublish" , unpublish_event_path(@event),  method: :post, :class => "btn btn-primary" %>
+             <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %>
+             </h1>
           <%end%>
           
           <% if current_user.student? && @event.find_registration(current_user.student) == nil && @event.registration_type == "open"%>
@@ -34,12 +72,6 @@
 
 <div class="container">
 
-  <% flash.each do |name, msg| -%>
-  <div class="alert alert-success alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <%= msg %> 
-  </div>
-  <%end%>
   <!-- /.row -->
   <div class="row">
     <!-- /.panel-heading -->
@@ -49,7 +81,7 @@
       <ul class="nav nav-pills nav-justified">
         <li class="active"><a href="#overview-student-pills" data-toggle="tab"> <i class="fa fa-tasks"></i>Event Details</a>
         </li>
-        <li><a href="#list-student-pills" data-toggle="tab"><i class="fa fa-users"> </i>Manage Students</a>
+        <li><a href="#list-student-pills" data-toggle="tab"><i class="fa fa-users"> </i>Manage Event</a>
         </li>        
       </ul>
       <%end%>
@@ -57,25 +89,21 @@
       <!-- Tab panes -->
       <div class="tab-content">
           <div class="tab-pane fade in active" id="overview-student-pills">
-         
-            <div class="col-md-12">
-            <%= image_tag @event.image_url,  :class => "img-responsive"  %>
-            </div>
 
-            <div class="col-md-6">
-            <h3><%= @event.name%></h3>
+           <div class="col-md-6 col-md-offset-3">
+
+
+              <h2 class="text-center">Eevent Description</h2>
               <p><%= @event.description%></p>
-            </div>
+            
 
-            <div class="col-md-4">
-              <h3> Event Details </h3>
+            
+              <h2 class="text-center"> Event Details </h2>
               <p><span class="fa fa-map-marker"></span>    <%= @event.location %> </p>
               <p><span class="fa fa-calendar"></span>     <%= @event.start_time.strftime("%B, %d %Y") %> </p>
               <p><span class="fa fa-clock-o"></span>      <%= @event.start_time.strftime("%I:%M %p") %> </p>
               <p><span class="fa fa-pencil"></span>      <%= @event.registration_type %> </p>
-              <% if current_user.try(:admin?) %>
-              <%= link_to 'Edit', edit_event_path(@event) %> |
-              <% end %>
+              
 
             </div>
 
@@ -90,38 +118,32 @@
 
 
 
-        <%= link_to "Authorize Adobe", signatures_authorize_adobe_path, method: :post, :class => "btn btn-primary" %>
+<!--         <%= link_to "Authorize Adobe", signatures_authorize_adobe_path, method: :post, :class => "btn btn-primary" %> -->
 
 
-        <h3> Invite/Add Student </h3>
+        <h3> Invite Student </h3>
         
-        
+        <%= form_tag event_registrations_path(@event), method: :post do %>
+          <div class="form-group">
+            <%= select_tag 'recipients', registrations_options(@chosen_recipient), multiple: true, class: 'form-control select2-tag' %>
+          </div>
 
-        <h4>By Email</h4>
-        <%= form_tag event_registrations_path(@event ) do %>
-        <div class="form-group">
-          <%= text_field_tag(:student_email, "Add students by email...", :class => "form-control") %>
-        </div>   
-        <%= hidden_field_tag(:event_id, @event.id) %>
-        <%= submit_tag "Add Student", :class => "btn btn-default" %>
+          <%= submit_tag 'Register', class: 'btn btn-primary' %>
         <% end %>
         
-         <h4>By Classroom</h4>
-         <%= form_tag add_students_by_classroom_event_path(@event) do %>
+
+
+
+        <h4>Invite a Classroom</h4>
+
+         <%= form_tag add_students_by_classroom_event_path, method: :post do %>
           <div class="form-group">
-          <%= collection_select(:post, :classroom_id, Classroom.all, :id, :name, { :class => "form-control"}) %>
+            <%= select_tag 'recipients', classroom_registrations_options(@chosen_recipient), multiple: true, class: 'form-control select2-tag' %>
           </div>
-          <%= submit_tag "Add Students", :class => "btn btn-default" %>
-         <%end%>
-         
-         <h4>By School</h4>
-         <%= form_tag add_students_by_school_event_path(@event) do %>
-          <div class="form-group">
-          <%= collection_select(:post, :school_id, School.all, :id, :school_name, { :class => "form-control"}) %>
-          </div>
-          <%= submit_tag "Add Students", :class => "btn btn-default" %>
-         <%end%>
-         
+
+          <%= submit_tag 'Register', class: 'btn btn-primary' %>
+        <% end %>
+
 
 
 
@@ -137,8 +159,8 @@
                     <th>Email</th>
                     <th>School</th>
                     <th>Registraion Status</th>
-                    <th>Permission Status</th>
-                    <th>Email Permission</th>
+                    <!-- <th>Permission Status</th>
+                    <th>Email Permission</th> -->
                     <th>Attended</th>
                     <th>Remove/DisInvite</th>
                   </tr>
@@ -151,8 +173,8 @@
                     <td><%= registration.student.user.email %></td>
                     <td><%= registration.student.school.school_name %></td>
                     <td><%= registration.status %> </td>
-                    <td><%= registration.get_signature_status(current_user.adobe_token) %> </td>
-                    <td>  <%= link_to "Email Permission Slip", sendsigrequest_event_registration_signatures_path(@event, registration ), method: :post %></td>
+                    <!-- <td><%= registration.get_signature_status(current_user.adobe_token) %> </td>
+                    <td>  <%= link_to "Email Permission Slip", sendsigrequest_event_registration_signatures_path(@event, registration ), method: :post %></td> -->
                     <td><%= registration.attendance_datum.present%></td>  
                     <td><%= link_to 'Remove', [@event, registration], method: :delete, data: { confirm: 'Are you sure?' } %></td> 
                   </tr>

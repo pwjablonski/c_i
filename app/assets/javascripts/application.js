@@ -19,6 +19,15 @@
 //= require jquery.turbolinks
 //= require chosen.jquery
 //= require messages
+//= require select2
+
+
+$( "#dropdown" ).select2({
+    theme: "bootstrap"
+});
+
+
+
 
 $(function() {
 

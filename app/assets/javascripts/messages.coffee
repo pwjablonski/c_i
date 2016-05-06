@@ -4,3 +4,5 @@
 
 jQuery ->
   $('.chosen-it').chosen()
+
+  

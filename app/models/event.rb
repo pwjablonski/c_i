@@ -10,17 +10,24 @@ class Event < ActiveRecord::Base
     
     
     
-    def add_student(student, status)
-        student_id = student.id
-        registration = self.registrations.find_by(student_id: student_id)
-        if registration
-            return nil;
-        else
-        registration = self.registrations.build(student_id: student_id, status: status)
-        registration.save
-        AttendanceDatum.create(registration_id: registration.id, present: false)
-        end
-        registration
+    def add_students(students)
+       response = ""
+       students.each do |student|
+            student_id = student.id
+            registration = self.registrations.find_by(student_id: student_id)
+            if registration
+               response = response + "#{student.first_name} already registered:  "
+            else
+                registration = self.registrations.build(student_id: student_id, status: "Pending")
+                registration.save
+                AttendanceDatum.create(registration_id: registration.id, present: false)
+                student.user.notify("You have been invited", "Please either <a href='http://localhost:3000/events/#{self.id}/registrations/#{registration.id}/accept'> Accept</a> or <a href='http://localhost:3000/events/#{self.id}/registrations/#{registration.id}/decline'> Decline</a>")
+                response = response + "#{student.first_name} successfully registered:  "
+            end
+            registration
+       end
+
+       return response
     end
     
     def find_registration(student)
