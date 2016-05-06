@@ -244,6 +244,7 @@
                                                     <th> School</th>
                                                     <th> Number Students Enrolled </th>
                                                     <th>CA Total</th>
+                                                    <th>CA Average</th>
                                                     <th>Attendance</th>
                                                 </tr>
                                             </thead>
@@ -257,6 +258,7 @@
                                                     <td><%= classroom.school.school_name%></td>
                                                     <td><%=classroom.verified_enrollments.count%></td>
                                                     <td><%=classroom.calculate_ca_points%> </td>
+                                                    <td><%=classroom.calculate_average_ca_points%> </td>
                                                     <td><%= classroom.percent_present%></td>
                                                 </tr>
                                                 <%end%>

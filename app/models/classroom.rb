@@ -65,6 +65,13 @@ def calculate_ca_points
     class_total_ca_score
 end
 
+def calculate_average_ca_points
+    return (self.ca_points / self.verified_enrollments.count) 
+end
+
+
+
+
 def mailboxer_email(object)
     
       return self.teacher.user.email   # or whatever address the email is to be sent to

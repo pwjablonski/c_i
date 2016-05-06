@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418215158) do
+ActiveRecord::Schema.define(version: 20160506162927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20160418215158) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "ca_class_id"
-    t.string   "ca_points"
+    t.integer  "ca_points"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20160418215158) do
     t.integer  "eb_event_id",       limit: 8
     t.string   "registration_type"
     t.string   "event_type"
+    t.string   "header_image"
   end
 
   create_table "lessons", force: :cascade do |t|
