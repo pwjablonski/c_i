@@ -22,7 +22,6 @@ class Student < ActiveRecord::Base
     # require 'iconv'
     
     
-    
     def verified_enrollments
         verified_enrollments = []
         self.enrollments.each do |enrollment|
@@ -32,6 +31,26 @@ class Student < ActiveRecord::Base
         end
         return verified_enrollments
     end
+
+
+     def pending_response
+        self.registrations.where(:status => "Pending Response")
+    end 
+
+    def pending_permission
+        self.registrations.where(:status => "Attending: Pending Permission")
+    end
+
+    def completed
+        self.registrations.where(:status => "Complete")
+    end
+    
+    def self.upcoming_events
+        all.where(start_time: (Time.now .. Time.now + 7.days))
+    end
+
+
+    
     
     def update_ca_data
         ca_data_array =[]

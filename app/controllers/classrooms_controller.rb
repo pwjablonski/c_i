@@ -1,5 +1,5 @@
 class ClassroomsController < ApplicationController
-  before_action :set_classroom, only: [:show, :edit, :update, :destroy]
+  before_action :set_classroom, only: [:show, :edit, :update, :destroy, :export_attendance]
 
   # GET /classrooms
   # GET /classrooms.json
@@ -11,6 +11,7 @@ class ClassroomsController < ApplicationController
     else
         redirect_to root_path
     end
+
   end
 
   # GET /classrooms/1
@@ -68,6 +69,16 @@ class ClassroomsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def export_attendance
+    respond_to do |format|
+      format.html
+      format.csv { send_data @classroom.to_csv }
+      #format.xls  { send_data @products.to_csv(col_sep: "\t") }
+    end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506162927) do
+ActiveRecord::Schema.define(version: 20160509022426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.string   "message"
+    t.integer  "classroom_id"
+    t.string   "subject"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "attendance_data", force: :cascade do |t|
     t.integer  "enrollment_id"

@@ -38,7 +38,7 @@
 
  <div class="field form-goup">
     <%= f.label :description %><br>
-    <%= f.text_field :description, :class => "form-control" %>
+    <%= f.text_area :description, :class => "form-control" %>
   </div>
 
   <div class="field form-goup">
@@ -56,10 +56,10 @@
     <%= f.text_field :permission_url, :class => "form-control" %>
   </div>
 
-  <div class="field form-goup">
+  <!-- <div class="field form-goup">
     <%= f.label :num_tickets %><br>
     <%= f.text_field :num_tickets, :class => "form-control" %>
-  </div>
+  </div> -->
 
   <div class="actions">
     <%= f.submit "Save Event", :class => "btn btn-primary" %>

@@ -21,3 +21,13 @@
 
 en:
   hello: "Hello world"
+
+
+
+en:
+  mailboxer:
+    message_mailer:
+      subject_new: "New Message in C/I Portal: %{subject}"
+      subject_reply: "New Reply in C/I Portal: %{subject}"
+    notification_mailer:
+      subject: "New Notification in C/Portal: %{subject}"

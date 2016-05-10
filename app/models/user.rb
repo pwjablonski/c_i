@@ -56,7 +56,9 @@ class User < ActiveRecord::Base
 #    end
 #  end
 
-
+   def self.active_users
+        all.where(current_sign_in_at: (Time.now - 1.days.. Time.now))
+    end
 
   def name
     return "Peter"

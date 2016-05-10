@@ -21,5 +21,10 @@ class Project < ActiveRecord::Base
         return devpost_data_array
         
     end
+
+
+    def self.recent_projects
+        all.where(created_at: (Time.now - 7.days .. Time.now))
+    end
     
 end

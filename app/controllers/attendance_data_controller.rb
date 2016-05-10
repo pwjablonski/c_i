@@ -1,5 +1,5 @@
 class AttendanceDataController < ApplicationController
-    before_action :set_attendance_datum, only: [:show, :edit, :update, :destroy, :mark_as_present]
+    before_action :set_attendance_datum, only: [:show, :edit, :update, :destroy, :mark_as_present, :toggle_present]
 
   # GET /attendance_data
   # GET /attendance_data.json
@@ -33,6 +33,17 @@ class AttendanceDataController < ApplicationController
       end
      end
   end
+
+  def toggle_present
+     if @attendance_datum.present == true
+         @attendance_datum.update_attribute(:present, false)
+     else
+         @attendance_datum.update_attribute(:present, true)
+     end
+     redirect_to :back
+  end
+
+
 
   # POST /attendance_data
   # POST /attendance_data.json

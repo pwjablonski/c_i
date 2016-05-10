@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :announcements
   resources :quizzes
   resources :lessons
   resources :units
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
       end
       
       member do
+          get :manage
           post :publish
           post :unpublish
           post :add_students_by_classroom
@@ -71,6 +73,10 @@ Rails.application.routes.draw do
   end
 
   resources :classrooms do
+      member do 
+        get :export_attendance
+      end
+
       resources :enrollments, only: [:create, :destroy, :verify] do
         collection do
           post "verify"
@@ -78,6 +84,12 @@ Rails.application.routes.draw do
       end
   end
   
+  resources :attendance_data do
+          member do
+              get :toggle_present
+          end
+  end
+
   resources :attendance_lists do
       
       member do
@@ -89,6 +101,7 @@ Rails.application.routes.draw do
           
           member do
               get :mark_as_present
+              get :toggle_present
           end
       end
 

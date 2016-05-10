@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+<div class="col-md-6">
   <div class="field form-group">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name, autofocus: true, :class => "form-control" %>
@@ -28,35 +29,40 @@
 
   <div class="field form-group">
     <%= f.label :about_me %><br>
-    <%= f.text_field :about_me, :class => "form-control" %>
+    <%= f.text_area :about_me, :class => "form-control" %>
   </div>
-
-  <div class="field form-group">
-    <%= f.label :codecademy_username %><br>
-    <%= f.text_field :codecademy_username, :class => "form-control" %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label :github_username %><br>
-    <%= f.text_field :github_username, :class => "form-control" %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label :devpost_username%><br>
-    <%= f.text_field :devpost_username, :class => "form-control" %>
-  </div>
-
 
   <div class="field form-group">
       <%= f.label :school %><br>
-      <%= f.collection_select :school_id, School.all, :id, :school_name, :class => "form-control" %>  
-  </div>
-  
-  <div class="field form-group">
-    <%= f.hidden_field :user_id, value: current_user.id%>
+      <%= f.collection_select :school_id, School.all, :id, :school_name, :class => "form-control select2-tag" %>  
   </div>
 
   <div class="actions form-group">
     <%= f.submit "Save Profile", :class => "btn btn-primary" %>
   </div>
+
+</div>
+<div class="col-md-6">
+  <div class="field form-group">
+    <%= f.label :codecademy_username %><a href="www.codacademy.com"> Sign Up/Visit Codacademy </a><br>
+    <%= f.text_field :codecademy_username, :class => "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :github_username %> <a href="www.github.com"> Sign Up/Visit Github </a><br>
+    <%= f.text_field :github_username, :class => "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :devpost_username%> <a href="www.devpost.com"> Sign Up/Visit Devpost </a><br>
+    <%= f.text_field :devpost_username, :class => "form-control" %>
+  </div>
+
+  </div>
+  
+  <div class="field form-group">
+    <%= f.hidden_field :user_id, value: current_user.id%>
+  </div>
+</div>
+  
 <% end %>

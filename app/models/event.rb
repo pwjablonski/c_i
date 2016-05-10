@@ -10,7 +10,10 @@ class Event < ActiveRecord::Base
     
     
     
-    def add_students(students)
+    def add_students(students, status)
+       if status = ""
+         status="Pending Response"
+       end
        response = ""
        students.each do |student|
             student_id = student.id
@@ -18,7 +21,7 @@ class Event < ActiveRecord::Base
             if registration
                response = response + "#{student.first_name} already registered:  "
             else
-                registration = self.registrations.build(student_id: student_id, status: "Pending")
+                registration = self.registrations.build(student_id: student_id, status: status)
                 registration.save
                 AttendanceDatum.create(registration_id: registration.id, present: false)
                 student.user.notify("You have been invited", "Please either <a href='http://localhost:3000/events/#{self.id}/registrations/#{registration.id}/accept'> Accept</a> or <a href='http://localhost:3000/events/#{self.id}/registrations/#{registration.id}/decline'> Decline</a>")
@@ -34,8 +37,33 @@ class Event < ActiveRecord::Base
         registration = self.registrations.find_by(student: student.id)
         return registration
     end
+
     
+    def pending_response
+        self.registrations.where(:status => "Pending Response")
+    end 
+
+    def pending_permission
+        self.registrations.where(:status => "Attending: Pending Permission")
+    end
+
+    def completed
+        self.registrations.where(:status => "Complete")
+    end
     
+    def self.upcoming_events
+        all.where(start_time: (Time.now .. Time.now + 7.days))
+    end
+
+    def attendance_percentage
+        count = 0
+        self.registrations.each do |registration|
+            if registration.attendance_datum.present==true
+                count +=1
+            end
+        end
+        return (count / registrations.count) * 100
+    end
     
 #    
 #    def eventbrite_api

@@ -20,13 +20,13 @@ class RegistrationsController < ApplicationController
 
       @notice = ""
       @event = Event.find(params[:event_id])
-
+      status = params[:status]
       recipients = Student.where(id: params['recipients'])
-      @notice = @event.add_students(recipients)
+      @notice = @event.add_students(recipients, status)
 
 
       respond_to do |format|
-          format.html {redirect_to event_path(@event),
+          format.html {redirect_to manage_event_path(@event),
               notice: @notice }
       end
 
@@ -34,7 +34,7 @@ class RegistrationsController < ApplicationController
   
   def accept
      @registration = Registration.find(params[:id])
-     @registration.update_attribute(:status, "accepted")
+     @registration.update_attribute(:status, "Attending: Pending Permission")
      if user_signed_in?
          redirect_to @registration.event
      else
@@ -45,7 +45,7 @@ class RegistrationsController < ApplicationController
   
   def decline
       @registration = Registration.find(params[:id])
-      @registration.update_attribute(:status, "declined")
+      @registration.update_attribute(:status, "Declined")
       if user_signed_in?
           redirect_to @registration.event
       else
@@ -68,7 +68,7 @@ class RegistrationsController < ApplicationController
     @event = @registration.event
     @registration.destroy
     respond_to do |format|
-      format.html { redirect_to @event, notice: 'Event registration was successfully destroyed.' }
+      format.html { redirect_to manage_event_path(@event), notice: 'Event registration was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,93 +1,75 @@
 <head>
   <script>
     $(document).ready(function() {
-
-
-      $('.select2-tag').select2({
-      
-        theme: "bootstrap"
-      });
-    });
-
+    
+    
+          $('.select2-tag').select2({
+    
+            theme: "bootstrap"
+          });
+        });
   </script>
 </head>
-
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
         <h1><%= @classroom.name%></h1>
-      </div> 
+      </div>
     </div>
     <!-- /.col-lg-12 -->
   </div>
-</div> 
-
+</div>
 <div class="page-header">
   <div class="container">
     <% flash.each do |name, msg| -%>
-     <div class="alert alert-success alert-dismissable">
+      <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%= msg %> 
-     </div>
+        <%= msg %>
+      </div>
     <%end%>
-
     <div class="row">
-       <div class="col-lg-3">
-           
-      </div>
-
       <div class="col-lg-3">
-            <h3> "My Class Goal"</h3> 
-            <p> <span class="fa fa-university"></span> <%= @classroom.school.school_name %></p>
-            <p> <span class="fa fa-map-marker"></span>   New York, New York</p> 
-            <p> <%=@classroom.teacher.first_name%> <%=@classroom.teacher.last_name%>  </p>
       </div>
-
-
       <div class="col-lg-3">
-         <h3> Overview</h3> 
-          <p> Students Enrolled: <%=@classroom.verified_enrollments.count%>  </p>
-          <p> Students Awaiting Acceptance: <%= @classroom.enrollments.count - @classroom.verified_enrollments.count%>  </p>
-          <p> Total CA Points:  <%= @classroom.percent_present %></p>
-          <p> Class Attendance:  <%= @classroom.percent_present %></p>
-            
+        <h3> "My Class Goal"</h3>
+        <p> <span class="fa fa-university"></span> <%= @classroom.school.school_name %></p>
+        <p> <span class="fa fa-map-marker"></span>   New York, New York</p>
+        <p> <%=@classroom.teacher.first_name%> <%=@classroom.teacher.last_name%>  </p>
       </div>
-
+      <div class="col-lg-3">
+        <h3> Overview</h3>
+        <p> Students Enrolled: <%=@classroom.verified_enrollments.count%>  </p>
+        <p> Students Awaiting Acceptance: <%= @classroom.enrollments.count - @classroom.verified_enrollments.count%>  </p>
+        <p> Total CA Points:  <%= @classroom.percent_present %></p>
+        <p> Class Attendance:  <%= @classroom.percent_present %></p>
+      </div>
       <div class="col-md-3">
-            <h3> Developer Toolbox </h3>
-            <a href='https://github.com/' class="btn btn-social-icon btn-github">
-                <span class="fa fa-github"></span>
-            </a>
-
-            <a href='https://www.codecademy.com/' class="btn btn-social-icon btn-instagram">
-                <span class="fa fa-code"></span>
-                
-            </a>
-
-            <a href='https://devpost.com/' class="btn btn-social-icon btn-reddit">
-              <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">         
-            </a>
-
-            <a href='https://c9.io/' class="btn btn-social-icon btn-reddit">
-              <%=image_tag "c9-logo.png" %>       
-            </a>
+        <h3> Developer Toolbox </h3>
+        <a href='https://github.com/' class="btn btn-social-icon btn-github">
+          <span class="fa fa-github"></span>
+        </a>
+        <a href='https://www.codecademy.com/' class="btn btn-social-icon btn-instagram">
+          <span class="fa fa-code"></span>
+        </a>
+        <a href='https://devpost.com/' class="btn btn-social-icon btn-reddit">
+          <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">
+        </a>
+        <a href='https://c9.io/' class="btn btn-social-icon btn-reddit">
+          <%=image_tag "c9-logo.png" %>
+        </a>
       </div>
-
     </div>
-  
-  </div> 
+  </div>
 </div>
-
 <div class="container">
-
   <!-- /.row -->
   <div class="row">
     <!-- /.panel-heading -->
     <div class="panel-body">
       <!-- Nav tabs -->
       <ul class="nav nav-pills nav-justified">
-       <li class="active"><a href="#home-student-pills" data-toggle="tab"><i class="fa fa-house"> </i>Home</a>
+        <li class="active"><a href="#home-student-pills" data-toggle="tab"><i class="fa fa-house"> </i>Home</a>
         </li>
         <li ><a href="#overview-student-pills" data-toggle="tab"> <i class="fa fa-tasks"></i>Progress</a>
         </li>
@@ -95,43 +77,84 @@
         </li>
         <li><a href="#attendence-student-pills" data-toggle="tab"><i class="fa fa-check"> </i>Attendance</a>
         </li>
-       
       </ul>
-
       <!-- Tab panes -->
       <div class="tab-content">
-        
-         <div class="tab-pane fade in active" id="home-student-pills">
-          <div class="col-lg-12"> 
-              <ul class="list-group">
-                 <%= render partial: 'conversations/conversation', collection: @classroom.mailbox.inbox %>
-              </ul>
+        <div class="tab-pane fade in active" id="home-student-pills">
+          
+          <!-- Trigger the modal with a button -->
+
+            <div class="col-md-8 col-lg-offset-2"
+          <!-- Trigger the modal with a button -->
+            <h2> Announcements  <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal" >New Message</button><h2>
+            <hr>
+          </div>
+
+            
+          <div class="col-lg-8 col-lg-offset-2">
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create a Classroom Announcement</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= simple_form_for(Announcement.new) do |f| %>
+                      <%= f.error_notification %>
+
+                      <div class="field form-group">
+                        <%= f.label :subject %><br>
+                        <%= f.text_field :subject, :class => "form-control" %><br>
+                        <%= f.label :message %><br>
+                        <%= f.text_area :message, :class => "form-control"%><br>
+                        <%= f.hidden_field :classroom_id, value: @classroom.id%>
+                      </div>
+
+                      <div class="form-actions">
+                        <%= f.button :submit %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+         
+          <%@classroom.announcements.reverse.each do |announcment| %>
+            <h3><%= announcment.subject %> </h3>
+            <h4><%= announcment.created_at.strftime("%B, %d %Y %I:%M %p") %></h4> 
+            <p><%= announcment.message%></p>
+            <hr>
+          <%end%>
           </div>
         </div>
-
         <div class="tab-pane fade" id="overview-student-pills">
-
-        <div class = "col-md-12 text-center">
-           <h3><a href="https://www.codecademy.com/schools/curriculum/labs/<%=@classroom.ca_class_id%>" > Codacademy Data </a> </h3>
-          <%= line_chart @classroom.verified_enrollments.map{|enrollment|
+          <div class = "col-md-12 text-center">
+            <h3><a href="https://www.codecademy.com/schools/curriculum/labs/<%=@classroom.ca_class_id%>" > Codacademy Data </a> </h3>
+            <%= line_chart @classroom.verified_enrollments.map{|enrollment|
            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, time_zone: "Eastern Time (US & Canada)", range: enrollment.student.ca_data.first.created_at..Time.now).maximum(:total_points)}
          } %>
-         </div>
-         <div class = "col-md-12 text-center">
-         
-         <%= column_chart @classroom.verified_enrollments.map{|enrollment|
+          </div>
+          <div class = "col-md-12 text-center">
+            <%= column_chart @classroom.verified_enrollments.map{|enrollment|
            {name: enrollment.student.first_name + enrollment.student.last_name, data: enrollment.student.ca_data.group_by_day(:created_at, last: 1).maximum(:total_points)}
          } %>
-         </div>
-         
-       </div>
-
-
-       <div class="tab-pane fade" id="list-student-pills">
-        
-        <div class="row">
-
-        <!-- <div class="col-md-6">
+          </div>
+          <div class = "col-md-12 text-center">
+            <h3> Attendance Data </h3>
+            <%= pie_chart @classroom.attendance_data.group(:present).count %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="list-student-pills">
+          <div class="row">
+            <!-- <div class="col-md-6">
 
         <h4>Invite Students</h4>
 
@@ -143,81 +166,66 @@
         <%= submit_tag "Add Student", :class => "btn btn-default" %>
         <% end %>
         </div> -->
-
-        <div class="col-md-6">
-        <h4> Invite Students to Enroll </h4>
-
-
-        <%= form_tag classroom_enrollments_path(@classroom), method: :post do %>
-          <div class="form-group">
-            <%= select_tag 'recipients', enrollments_options(@chosen_recipient), multiple: true, class: 'form-control select2-tag' %>
-          </div>
-
-          <%= submit_tag 'Enroll', class: 'btn btn-primary' %>
-        <% end %>
-        </div>
-
-        </div>
-
-
-
-
-        <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#home">Student Data</a></li>
-          <li><a data-toggle="tab" href="#menu1">Student Profiles</a></li>
-<!--           <li><a data-toggle="tab" href="#menu2">Parent Data</a></li> -->
-        </ul>
-
-        <div class="tab-content"> 
-
-          <div id="home" class="tab-pane fade in active">
-            <div class="table-responsive">
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>C/I ID</th>
-                    <th>Name</th>
-                    <th>Profile Name</th>
-                    <th>Email</th>
-                    <th>Code Academy Score</th>
-                    <th>Attendance Percentage</th>
-                    <th>Remove Student?</th> 
-                  </tr>
-                </thead>
-                <tbody>              
-                  <% @classroom.enrollments.each do |enrollment| %>
-                  <tr>
-                    <td><%= enrollment.student.id %></td>
-                    <td><a href="/students/<%= enrollment.student.id %>"><%= enrollment.student.first_name %></a></td>
-                    <td><%= enrollment.student.profile_name %></td>
-                    <%if enrollment.is_verified == true%>
-                    <td><a href="mailto:<%= enrollment.student.user.email%>"> <%= enrollment.student.user.email%></a></td>
-                    <td><%= enrollment.student.ca_data.last.total_points %></td>
-                    <td><%= enrollment.percent_present %> %</td>
-                    <%else%>
-                    <td>Enrollment </td>
-                    <td>Currently</td>
-                    <td>Pending</td>
-                    <%end%>
-                    <% if current_user == @classroom.teacher.user || current_user == enrollment.student.user%> 
-                    <td><%= link_to 'Remove', [@classroom, enrollment], method: :delete, data: { confirm: 'Are you sure?' } %></td> 
-                    <%end%>
-                  </tr>
-                  <%end%>
-                </tbody>
-              </table>
+            <div class="col-md-6">
+              <h4> Invite Students to Enroll </h4>
+              <%= form_tag classroom_enrollments_path(@classroom), method: :post do %>
+                <div class="form-group">
+                  <%= select_tag 'recipients', enrollments_options(@chosen_recipient), multiple: true, class: 'form-control select2-tag' %>
+                </div>
+                <%= submit_tag 'Enroll', class: 'btn btn-primary' %>
+              <% end %>
             </div>
           </div>
-
-
-
-          <div id="menu1" class="tab-pane fade">
-          <br>
-            <% @classroom.verified_enrollments.each do |enrollment| %>
-     
-                  <div class="col-lg-3">                      
-                     <div class="panel panel-default">
-                      <%= link_to enrollment.student do %>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Student Data</a></li>
+            <li><a data-toggle="tab" href="#menu1">Student Profiles</a></li>
+            <!--           <li><a data-toggle="tab" href="#menu2">Parent Data</a></li> -->
+          </ul>
+          <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>C/I ID</th>
+                      <th>Name</th>
+                      <th>Profile Name</th>
+                      <th>Email</th>
+                      <th>Code Academy Score</th>
+                      <th>Attendance Percentage</th>
+                      <th>Remove Student?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @classroom.enrollments.each do |enrollment| %>
+                      <tr>
+                        <td><%= enrollment.student.id %></td>
+                        <td><a href="/students/<%= enrollment.student.id %>"><%= enrollment.student.first_name %></a></td>
+                        <td><%= enrollment.student.profile_name %></td>
+                        <%if enrollment.is_verified == true%>
+                          <td><a href="mailto:<%= enrollment.student.user.email%>"> <%= enrollment.student.user.email%></a></td>
+                          <td><%= enrollment.student.ca_data.last.total_points %></td>
+                          <td><%= enrollment.percent_present %> %</td>
+                        <%else%>
+                          <td>Enrollment </td>
+                          <td>Currently</td>
+                          <td>Pending</td>
+                        <%end%>
+                        <% if current_user == @classroom.teacher.user || current_user == enrollment.student.user || current_user.try(:admin?) %>
+                          <td><%= link_to 'Remove', [@classroom, enrollment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <%end%>
+                      </tr>
+                    <%end%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+              <br>
+              <% @classroom.verified_enrollments.each do |enrollment| %>
+                <div class="col-lg-3">
+                  <div class="panel panel-default">
+                    <%= link_to enrollment.student do %>
                       <div class="panel-body panel-project">
                         <%= image_tag enrollment.student.user.image, :class => "img-circle img-responsive panel-img-user" %>
                         <h4><%= enrollment.student.first_name %> <%= enrollment.student.last_name %></h4>
@@ -225,49 +233,42 @@
                         <p> <%= enrollment.student.ca_data.last.total_points%> Points on CA </p>
                         <p> <%= enrollment.student.projects.count%> Projects : <%= enrollment.student.events.count%> Events</p>
                       </div>
-                      <%end%>
-                      <div class="panel-footer">
-                        <a href='https://github.com/<%=enrollment.student.github_username%>' class="btn btn-social-icon btn-github">
-                            <span class="fa fa-github"></span>
-                        </a>
-
-                        <a href='https://www.codecademy.com/<%=enrollment.student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
-                            <span class="fa fa-code"></span>
-                        </a>
-
-                        <a href='https://devpost.com/<%=enrollment.student.github_username%>' class="btn btn-social-icon btn-reddit">
-                          <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">        
-                        </a>
-                      </div>
+                    <%end%>
+                    <div class="panel-footer">
+                      <a href='https://github.com/<%=enrollment.student.github_username%>' class="btn btn-social-icon btn-github">
+                        <span class="fa fa-github"></span>
+                      </a>
+                      <a href='https://www.codecademy.com/<%=enrollment.student.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                        <span class="fa fa-code"></span>
+                      </a>
+                      <a href='https://devpost.com/<%=enrollment.student.github_username%>' class="btn btn-social-icon btn-reddit">
+                        <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">
+                      </a>
                     </div>
-                  </div> 
-            <% end %>
-          </div>
-
-          <div id="menu2" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
-          </div>
-
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+              <h3>Menu 2</h3>
+              <p>Some content in menu 2.</p>
+            </div>
           </div>
         </div>
         <div class="tab-pane fade" id="attendence-student-pills">
-        <br>
-          <div class = "col-md-3 text-center">
-           
-           <%= pie_chart @classroom.attendance_data.group(:present).count %>
-         </div>
-
-         <div class="col-md-9 table-responsive">
+          <br>
+          <p>
+            Download:
+          <%= link_to "CSV", export_attendance_classroom_path(format: "csv") %> |
+          <%= link_to "Excel", export_attendance_classroom_path(format: "xls") %>
+          </p>
+          <div class="col-md-12 table-responsive">
             <table class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
-
-                  
                 </tr>
               </thead>
-              <tbody>              
-                
+              <tbody>
                 <tr>
                   <td>
                     <%=link_to "Record", record_attendance_list_path(:classroom_id => @classroom.id), :class => "btn btn-primary"%>
@@ -278,42 +279,36 @@
                       <%= attendance_list.percent_present%> % <br>
                       <i class="fa fa-pencil-square-o"></i><%=link_to "Update", edit_attendance_list_path(attendance_list)%>
                       <i class="fa fa-trash-o"></i> <%= link_to 'Delete', attendance_list, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      | <%= link_to attendance_list.status, toggle_status_attendance_list_path(attendance_list),  method: :post %>
+                      <!--  | <%= link_to attendance_list.status, toggle_status_attendance_list_path(attendance_list),  method: :post %> -->
                     </td>
-                  <%end%> 
+                  <%end%>
                 </tr>
-
                 <% @classroom.verified_enrollments.each do |enrollment| %>
-                <tr>
-                  <td>
-                   <%= enrollment.student.first_name%> <br>
-                   <%= enrollment.percent_present%> %
+                  <tr>
+                    <td>
+                      <%= enrollment.student.first_name%> <br>
+                      <%= enrollment.percent_present%> %
                   </td>
-                  <% enrollment.attendance_data.reverse[0..4].each do |attendance_datum| %>
-                  <td> 
-                   <% if  attendance_datum.present == true %>
-                   <i class="fa fa-check fa-2x"></i>
-                   <%else%>
-                   <i class="fa fa-times fa-2x"></i>
-                   <%end%>
-                 </td>
-                 <%end%>
-                </tr>
-
+                    <% enrollment.attendance_data.reverse[0..4].each do |attendance_datum| %>
+                      <td>
+                        <% if  attendance_datum.present == true %>
+                          <i class="fa fa-check fa-2x"></i>
+                        <%else%>
+                          <i class="fa fa-times fa-2x"></i>
+                        <%end%>
+                      </td>
+                    <%end%>
+                  </tr>
                 <%end%>
-             </tbody>
-           </table>
+              </tbody>
+            </table>
           </div>
-
-
-       </div>
-
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<!-- /.panel-body -->
+  <!-- /.panel-body -->
 </div>
 <!-- /.panel -->
 <!-- /.panel -->
-</div>  
-
+</div>

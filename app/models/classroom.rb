@@ -2,6 +2,7 @@ class Classroom < ActiveRecord::Base
     belongs_to :teacher
     belongs_to :school
     
+    has_many :announcements
     has_many :enrollments, dependent: :destroy
     has_many :students, through: :enrollments
     has_many :notifications
@@ -26,9 +27,7 @@ class Classroom < ActiveRecord::Base
             end
             current_student
         end
-
         return response
-
     end
     
     def verified_enrollments
@@ -59,14 +58,24 @@ def calculate_ca_points
     class_total_ca_score = 0.0
     
     self.verified_enrollments.each do |enrollment|
-        class_total_ca_score = enrollment.student.current_ca_score
+        class_total_ca_score += enrollment.student.current_ca_score
     end
     self.update_attribute(:ca_points, class_total_ca_score)
     class_total_ca_score
 end
 
 def calculate_average_ca_points
-    return (self.ca_points / self.verified_enrollments.count) 
+    if self.verified_enrollments.count == 0
+        return 0
+    else
+        return (self.ca_points / self.verified_enrollments.count) 
+    end
+end
+
+def self.total_ca_points
+    total = 0
+    all.each{|c| total += c.calculate_ca_points}
+    total.to_i
 end
 
 
@@ -78,6 +87,21 @@ def mailboxer_email(object)
  
 end
 
+
+def to_csv(options = {})
+      CSV.generate(options) do |csv|
+      header = [""]  
+      header += self.attendance_lists.reverse.collect { |p| p.date } 
+      csv <<  header
+        self.verified_enrollments.each do |enrollment|
+          row = ["#{enrollment.student.first_name + enrollment.student.last_name}"]
+          puts "testing1"
+          row += enrollment.attendance_data.reverse.collect { |p| p.present } 
+          puts row
+          csv << row
+        end
+      end
+end
 
 
 #    def remove_student(student_id)

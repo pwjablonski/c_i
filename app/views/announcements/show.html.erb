@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @announcement.message %>
+</p>
+
+<p>
+  <strong>Classroom:</strong>
+  <%= @announcement.classroom_id %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @announcement.subject %>
+</p>
+
+<%= link_to 'Edit', edit_announcement_path(@announcement) %> |
+<%= link_to 'Back', announcements_path %>

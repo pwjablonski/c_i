@@ -22,7 +22,6 @@ class AttendanceList < ActiveRecord::Base
         
         return percent_present.round(2)
     end
-    
-    
-    
+
+        
 end
