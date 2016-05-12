@@ -11,6 +11,7 @@
 // about supported directives.
 //= require jquery
 //= require jquery_ujs
+
 //= require turbolinks
 //= require ace-rails-ap
 //= require bootstrap
@@ -21,12 +22,19 @@
 //= require messages
 //= require select2
 
+//= require moment
+//= require bootstrap-datetimepicker
+
 
 $( "#dropdown" ).select2({
     theme: "bootstrap"
 });
 
-
+ 
+$(function () {
+    $('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+    $('#datetimepicker2').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+});
 
 
 $(function() {

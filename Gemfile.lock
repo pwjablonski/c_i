@@ -45,6 +45,8 @@ GEM
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
+    bootstrap3-datetimepicker-rails (4.17.37)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (8.2.2)
     carrierwave (0.10.0)
@@ -142,6 +144,8 @@ GEM
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -271,6 +275,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.1.1)
   bootstrap-will_paginate
+  bootstrap3-datetimepicker-rails (~> 4.17.37)
   byebug
   chartkick (~> 1.4, >= 1.4.1)
   chosen_assets (~> 1.1, >= 1.1.0.2)
@@ -289,6 +294,7 @@ DEPENDENCIES
   mail (~> 2.6.3)
   mailboxer (~> 0.13.0)
   mechanize (~> 2.7, >= 2.7.3)
+  momentjs-rails (>= 2.9.0)
   nokogiri (~> 1.6, >= 1.6.7.1)
   omniauth-github (~> 1.1, >= 1.1.2)
   pg

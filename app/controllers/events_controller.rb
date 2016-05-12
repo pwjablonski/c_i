@@ -89,7 +89,7 @@ class EventsController < ApplicationController
       @notice = ""
       classrooms = Classroom.where(id: params['recipients'])
       classrooms.each do |classroom|
-        @notice = @notice + @event.add_students(classroom.students)
+        @notice = @notice + @event.add_students(classroom.students, "")
       end
 
      redirect_to @event

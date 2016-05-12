@@ -10,8 +10,8 @@
 
 <div class="container">
   <%= render 'form' %>
-
-  <%= link_to 'Back', @event %> | 
-  <%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Are you sure?' } %> 
-  
+  <div class = "col-md-12">       
+    <%= link_to 'Back', @event %> | 
+    <%= link_to 'Delete Event', @event, method: :delete, data: { confirm: 'Are you sure?' } %> 
+  </div>
 </div>

@@ -62,7 +62,10 @@ class Event < ActiveRecord::Base
                 count +=1
             end
         end
-        return (count / registrations.count) * 100
+        if registrations.count != 0
+            count = (count / registrations.count) * 100
+        end
+        return count
     end
     
 #    

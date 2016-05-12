@@ -11,12 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field form-goup">
-    <%= f.radio_button :registration_type, 'open', :checked => true  %> 
-    <%= label :registration_type, 'open' %>
-    <%= f.radio_button :registration_type, 'invite_only'   %>
-    <%= label :registration_type, 'Invite Only' %>
-  </div>
+  <div class="col-md-6">
   <div class="field form-goup">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, :class => "form-control" %>
@@ -27,20 +22,42 @@
     <%= f.text_field :location, autofocus: true, :class => "form-control" %>
   </div>
 
-  <div class="field form-goup">
+  <div class="form-goup">
     <%= f.label :start_time %><br />
-    <%= f.datetime_select :start_time, autofocus: true, :class => "form-control" %>
+    <div class='input-group date' id='datetimepicker1'>
+      <%= f.text_field :start_time, autofocus: true, :class => "form-control" %>
+      <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
   </div>
   <div class="field form-goup">
     <%= f.label :end_time %><br />
-    <%= f.datetime_select :end_time, autofocus: true, :class => "form-control" %>
+    <div class='input-group date' id='datetimepicker2'>
+    <%= f.text_field :end_time, autofocus: true, :class => "form-control" %>
+    <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
   </div>
 
  <div class="field form-goup">
     <%= f.label :description %><br>
     <%= f.text_area :description, :class => "form-control" %>
   </div>
+  <div class="field form-goup">
+    <%= f.radio_button :registration_type, 'open', :checked => true  %> 
+    <%= label :registration_type, 'open' %>
+    <%= f.radio_button :registration_type, 'invite_only'   %>
+    <%= label :registration_type, 'Invite Only' %>
+  </div>
 
+  <div class="actions">
+    <%= f.submit "Save Event", :class => "btn btn-primary" %>
+  </div>
+
+  </div>
+  <div class="col-md-6">
   <div class="field form-goup">
     <%= f.label :image_url %><br>
     <%= f.text_field :image_url, :class => "form-control" %>
@@ -61,7 +78,7 @@
     <%= f.text_field :num_tickets, :class => "form-control" %>
   </div> -->
 
-  <div class="actions">
-    <%= f.submit "Save Event", :class => "btn btn-primary" %>
   </div>
+
+  
 <% end %>

@@ -16,11 +16,14 @@
  *= require select2
  *= require select2-bootstrap
  
+ *= require bootstrap-datetimepicker
+ 
+ 
  */ 
 
 
-
 @import "bootstrap";
+
 
 /* Some Style from the Bootstrap Default Theme */
 body {
