@@ -15,15 +15,14 @@
 //= require turbolinks
 //= require ace-rails-ap
 //= require bootstrap
-//= require_tree .
 
-//= require jquery.turbolinks
-//= require chosen.jquery
+
 //= require messages
 //= require select2
 
 //= require moment
 //= require bootstrap-datetimepicker
+//= require_tree .
 
 
 $( "#dropdown" ).select2({
