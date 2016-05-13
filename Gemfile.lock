@@ -303,6 +303,7 @@ DEPENDENCIES
   pry (~> 0.10.3)
   rails (= 4.2.1)
   rails_12factor
+  rails_serve_static_assets
   ransack
   sdoc (~> 0.4.0)
   select2-rails (~> 4.0, >= 4.0.1)

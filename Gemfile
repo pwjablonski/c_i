@@ -96,6 +96,7 @@ gem 'echochamber', '~> 1.0', '>= 1.0.2'
 
 group :production do
   gem 'rails_12factor'
+  gem 'rails_serve_static_assets'
 end
 
 gem 'bootstrap-will_paginate'
