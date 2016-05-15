@@ -57,15 +57,18 @@ class Event < ActiveRecord::Base
 
     def attendance_percentage
         count = 0
+
         self.registrations.each do |registration|
             if registration.attendance_datum.present==true
-                count +=1
+                count += 1
             end
         end
+
         if registrations.count != 0
             count = (count / registrations.count) * 100
         end
-        return count
+        
+        return count  
     end
     
 #    

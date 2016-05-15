@@ -80,8 +80,14 @@
           <h4><span class="fa fa-map-marker"></span>    <%= @event.location %> </h4>
           <h4><span class="fa fa-calendar"></span>     <%= @event.start_time.strftime("%B, %d %Y") %> - <%= @event.end_time.strftime("%B, %d %Y") %> </h4>
           <h4><span class="fa fa-clock-o"></span>      <%= @event.start_time.strftime("%I:%M %p") %> </h4>
-          <h4><span class="fa fa-pencil"></span>      <%= @event.registration_type %> </h4>
+          
           <h2 > Event Map </h2>
+          <div id="map-container">
+            <div id="map-canvas">
+            <iframe src="https://www.google.com/maps/embed/v1/place?q=<%=@event.location%>&zoom=12&key=AIzaSyCtF2xfHxpXCiqXddCVrgvJ2TxnlMCJ3_o">
+            </iframe>
+            </div>
+          </div>
           
         </div>
       </div>

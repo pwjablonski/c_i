@@ -103,8 +103,9 @@
         <div id="home" class="tab-pane fade in active">
           <div class="col-lg-12"> 
           <h3> My Classrooms </h3>
+          </div>
+          
           <% @student.classrooms.each do |classroom| %>
-          <div class="row">
             <div class="col-lg-3">
                 <div class="panel panel-yellow">
                     <div class="panel-heading">
@@ -122,12 +123,10 @@
                          <%= link_to "View Classroom", classroom%>
                     </div>
                 </div>
-            </div> 
-
-            </div> 
+            </div>  
             <%end%>
+
           
-          </div>
         </div>
 
         <div id="menu1" class="tab-pane fade">
@@ -139,22 +138,22 @@
             </div>
 
             <% @student.projects.each do |project| %>
-            
-                <div class="col-lg-3"> 
-                   <div class="panel panel-default">
+            <div class="col-md-3"> 
+         
+               <div class="panel panel-default">
+                <%= link_to project do %>
+                <div class="panel-body panel-project">
+                  <%= image_tag project.image_url  %>
+                  <h3><%= project.name%></h3>
 
-                    <div class="panel-body panel-project">
-                      <h3><%= link_to project.name, project%></h3>
-                      <p><%= project.tag_line %> </p>
-                    </div>
-                      
-                      <div class="panel-footer">
-                        <% if current_user.try(:admin?) || current_user == @student.user%> 
-                        <%= link_to 'Remove', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-                        <%end%>
-                      </div>
-                  </div>
-                </div> 
+                </div>
+                <%end%>
+                <div class="panel-footer">
+                  <%= image_tag project.student.user.image, :class => "img-circle img-responsive panel-img-footer"%>
+                </div>
+              </div>
+              
+            </div> 
             <% end %>
           </div>
         </div>
