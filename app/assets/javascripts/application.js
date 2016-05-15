@@ -25,15 +25,15 @@
 //= require_tree .
 
 
-$( "#dropdown" ).select2({
-    theme: "bootstrap"
-});
+// $( "#dropdown" ).select2({
+//     theme: "bootstrap"
+// });
 
  
-$(function () {
-    $('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-    $('#datetimepicker2').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-});
+// $(function () {
+//     $('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+//     $('#datetimepicker2').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+// });
 
 
 $(function() {
