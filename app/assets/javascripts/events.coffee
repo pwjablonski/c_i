@@ -3,4 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-    $('#datetimepicker').datetimepicker();
+    $('#datetimepicker1').datetimepicker();
