@@ -6,6 +6,7 @@
   <%= javascript_include_tag 'application'%>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= favicon_link_tag 'ci-vector.ico' %>
+  <%= javascript_include_tag Ckeditor.cdn_url %>
   <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.metismenu/2.2.0/metisMenu.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
@@ -34,6 +35,15 @@ $( "#dropdown" ).select2({
     theme: "bootstrap"
 });
 
+$( "#student_school_id" ).select2({
+    theme: "bootstrap"
+});
+
+$(document).bind('page:change', function() {
+  $('.ckeditor').each(function() {
+    CKEDITOR.replace($(this).attr('id'));
+  });
+});
  
 $(function () {
     $('#datetimepicker1').datetimepicker({format: 'YYYY-MM-DD HH:mm'});

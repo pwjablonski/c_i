@@ -1,10 +1,13 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
-        <h1><%= link_to @lesson.unit.track.name, @lesson.track %></h1>
+      <div class="col-lg-10">
+        <h1><%= link_to @lesson.unit.track.name, @lesson.track %> > <%= link_to @lesson.unit.name, @lesson.track %> > <%= link_to @lesson.name, @lesson.track %></h1>
         
       </div> 
+      <div class="col-lg-2">
+        <h1> <%= link_to 'Edit Lesson', edit_lesson_path(@lesson), :class => "btn btn-primary" %> </h1>
+      </div>
     </div>
     <!-- /.col-lg-12 -->
   </div>

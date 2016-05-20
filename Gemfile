@@ -113,3 +113,11 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 
 gem 'sprockets_better_errors'
+
+gem 'ckeditor', '~> 4.1', '>= 4.1.6'
+gem 'carrierwave'
+gem 'mini_magick'
+
+gem 'acts_as_list', '~> 0.7.4'
+
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'

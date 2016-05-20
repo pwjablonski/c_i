@@ -17,9 +17,15 @@
   </div>
 
   <div class="field form-group">
-    <%= f.label "Codacademy Class ID" %><br>
+    <%= f.label "Codacademy Class ID" %> <a href="www.codacademy.com">   Codecademy.com</a><br>
     <%= f.text_field :ca_class_id, :class => "form-control" %>
   </div>
+
+  <div class="field">
+        <%= f.label :track %><br>
+        <td><%= f.collection_select :track_id, Track.all, :id, :name %></td>
+  </div>
+
   
   <div class="field">
     <% if current_user.try(:admin?)%>

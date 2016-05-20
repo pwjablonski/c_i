@@ -1,11 +1,13 @@
 <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
         <h1><%= @track.name %></h1>
-        <%= link_to 'Edit Track', edit_track_path(@track) %> | 
-        <%= link_to 'All Tracks', tracks_path %>
       </div> 
+      <div class="col-lg-2">
+        <h1> <%= link_to 'Edit Track', edit_track_path(@track), :class => "btn btn-primary" %> </h1>
+      </div>
+
     </div>
     <!-- /.col-lg-12 -->
   </div>
@@ -27,7 +29,13 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-
+                        <% if current_user.try(:admin?)%>
+                          <li>
+                            <%= link_to tracks_path do %>
+                              <i class="fa fa-sitemap fa-fw"></i> All Tracks
+                            <%end%>
+                          </li>
+                          <%end%>
                         <% @track.units.each do |unit| %>
                         <li>
                           <a href= "#"> <%= unit.name %> <span class="fa arrow"></span></a>
@@ -56,6 +64,45 @@
                       <%= msg %> 
                     </div>
                     <%end%>
+
+
+                    <h1> Track Overview </h1>
+                    <hr>
+                    <h3> Classrooms <h3>
+
+                    <h3> Units </h3>
+
+
+                        <% @track.units.each do |unit| %>
+                        <li>
+                          <a href= "#"> <%= unit.name %> <span class="fa arrow"></span></a>
+                          <ul class="nav nav-second-level">
+                            <% unit.lessons.each do |lesson| %>
+                           
+                              <ul id="lessons">
+                              
+                                
+                                <%= content_tag_for :li, lesson do %>
+                                  <%= link_to lesson.name, lesson%>  
+                                <%end%>
+                               
+                              
+                              </ul>
+                            
+                            <%end%>  
+                          </ul>
+                        </li>   
+                        <%end%>  
+
+
+
+                    <h3> Resources </h3>
+
+
+
+
+
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

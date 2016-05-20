@@ -11,62 +11,67 @@
     </div>
   <% end %>
 
-  <div class="field form-group col-md-6">
+<div class="col-md-6">
+  <div class="field form-group ">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name, autofocus: true , :class => "form-control" %>
   </div>
   
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label :last_name %><br>
     <%= f.text_field :last_name, autofocus: true, :class => "form-control" %>
   </div>
   
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label :profile_name %><br>
     <%= f.text_field :profile_name, autofocus: true, :class => "form-control" %>
   </div>
 
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label :about_me %><br>
     <%= f.text_area :about_me , :class => "form-control"%>
   </div>
 
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
+      <%= f.label :school %><br>
+      <%= f.collection_select :school_id, School.all, :id, :school_name, :class => "form-control" %>
+  </div>
+
+  <div class="field form-group ">
+     <%= f.hidden_field :user_id, value: current_user.id%>
+  </div>
+
+  <div class="field form-group ">
+    <%= f.submit "Save Profile", :class => "btn btn-primary" %>
+  </div>
+</div> 
+
+<div class="col-md-6">
+  <div class="field form-group ">
     <%= f.label :codecademy_username %> <a href="www.codacademy.com"> Sign Up/Visit Codacademy </a><br>
     <%= f.text_field :codecademy_username, :class => "form-control" %>
   </div>
 
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label :github_username %> <a href="www.github.com"> Sign Up/Visit Github </a><br>
     <%= f.text_field :github_username, :class => "form-control" %>
   </div>
 
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label :cloud9_username %> <a href="www.c9.io"> Sign Up/Visit Cloud 9 </a><br>
     <%= f.text_field :cloud9_username, :class => "form-control" %>
   </div>
 
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label :devpost_username %> <a href="www.devpost.com"> Sign Up/Visit Devpost </a><br>
     <%= f.text_field :devpost_username, :class => "form-control" %>
   </div>
 
-  <div class="field form-group col-md-6">
+  <div class="field form-group ">
     <%= f.label "Credly Member ID" %><br>
     <%= f.text_field :credly_member_id, :class => "form-control" %>
   </div>
-
-    <div class="field form-group col-md-6">
-      <%= f.label :school %><br>
-      <%= f.collection_select :school_id, School.all, :id, :school_name, :class => "form-control" %>
-    </div>
-
-     <div class="field form-group col-md-6">
-     <%= f.hidden_field :user_id, value: current_user.id%>
-    </div>
-
-    <div class="field form-group col-md-6">
-    <%= f.submit "Save Profile", :class => "btn btn-primary" %>
-    </div>
+</div>
+    
 
 <% end %>

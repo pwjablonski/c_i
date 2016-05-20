@@ -1,22 +1,24 @@
-<h1>Editing Track</h1>
+<div class="page-header ribbon-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10">
+        <h1>Edit <%= @track.name %></h1>
+      </div> 
+      <div class="col-lg-2">
+        <h1> <%= link_to 'Back', @track, :class => "btn btn-primary" %> </h1>
+      </div>
 
-<%= render 'form' %>
+    </div>
+    <!-- /.col-lg-12 -->
+  </div>
+</div> 
 
-<%= link_to 'Show', @track %> |
-<%= link_to 'Back', tracks_path %>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12">
 
-                        <li>
-                          <%= link_to new_unit_path do %>
-                            <i class="fa fa-plus fa-fw"></i> New Unit
-                          <%end%>
-                        </li>
-                        <li>
-                        <%= link_to new_lesson_path do %>
-                                <i class="fa fa-plus fa-fw"></i> New Lesson
-                        <%end%>
-                        </li>
-                        <li>
-                        <%= link_to new_quiz_path do %>
-                                <i class="fa fa-plus fa-fw"></i> New Quiz
-                        <%end%>
-                        </li>
+        <%= render 'form' %>
+
+        </div>
+    </div>
+</div>

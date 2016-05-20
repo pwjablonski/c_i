@@ -8,6 +8,7 @@ class Classroom < ActiveRecord::Base
     has_many :notifications
     has_many :attendance_lists
     has_many :attendance_data, through: :attendance_lists
+    belongs_to :track
     
     acts_as_messageable
     

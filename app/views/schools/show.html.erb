@@ -10,31 +10,58 @@
 
 <div class="container">
  
-     <div class="row">
+    <div class="row">
+     <div class="col-md-6 text-center">
       <p id="notice"><%= notice %></p>
-
+      <h1>School Info</h1>
       <p>
-        <strong>School address:</strong>
+        <strong>School Address:</strong>
         <%= @school.school_address %>
       </p>
       <p>
-      <strong>School Teachers:</strong>
-      <% @school.teachers.each do |teacher| %>
-        <%= link_to teacher.last_name, teacher%>
-      <% end %>
+        <strong>Principal:</strong>
+       
       </p>
+      <p>
+        <strong>Assistant Prinicpal:</strong>
+        <%= @school.school_address %>
+      </p>
+      <p>
+        <strong>Phone Number:</strong>
+        
+      </p>
+      <p>
+        <strong>School Website:</strong>
+        
+      </p>
+      
       
       <% if current_user.try(:admin?) || current_user.try(:teacher?)%>
         <%= link_to 'Edit School', edit_school_path(@school) %>
       <%end%>
+      </div>
 
+      <div class="col-md-6">
+        <div id="map-container">
+            <div id="map-canvas">
+            <iframe src="https://www.google.com/maps/embed/v1/place?q=<%=@school.school_address%>&zoom=12&key=AIzaSyCtF2xfHxpXCiqXddCVrgvJ2TxnlMCJ3_o">
+            </iframe>
+            </div>
+          </div>
+      </div>
+</div>
+      <div class="row">
       <h1>Classrooms</h1>
-
+      
               <% @school.classrooms.each do |classroom| %>
-                <div class="card classroom-card">
-                  <h3><%=classroom.name%></h3>
-                   <%= link_to image_tag('speech-bubble-3-128.png'), classroom%>
-          
+                <div class="col-md-3"> 
+         
+                  <div class="panel panel-default">
+                  <div class="panel-body panel-project">   
+                   <%= link_to image_tag('CodeInteractive-Logo-1000x1000px.jpg'), classroom%>
+                   <h3><%=classroom.name%></h3>
+                  </div>
+                   <div class="panel-footer">
                   <% if current_user.try(:student?)%>
                     <%= button_to 'Enroll', enrollments_path(classroom_id: classroom) %>
                   <%end%>
@@ -42,9 +69,44 @@
                   <% if current_user.try(:admin?)%> 
                   <p><%= link_to 'DELETE', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></p>
                   <%end%>
-                  
+                  </div>
+
+                  </div>
                 </div>
               <% end %>
-            </div>
-  </div>
+        </div>  
+<div class="row">
+       <h1>Teachers</h1>
+       
+          <% @school.teachers.each do |teacher| %>
+               
+                  <div class="col-lg-3"> 
+                     
+                     <div class="panel panel-default">
+                      <%= link_to teacher do %>
+                      <div class="panel-body panel-project">
+                        <%= image_tag teacher.user.image, :height => "50px", :class => "img-circle img-responsive panel-img-user" %>
+                        <h4><%= teacher.first_name %> <%= teacher.last_name %></h4>
+                      </div>
+                      <%end%>
+                      <div class="panel-footer">
+                        <a href='https://github.com/<%=teacher.github_username%>' class="btn btn-social-icon btn-github">
+                            <span class="fa fa-github"></span>
+                        </a>
+
+                        <a href='https://www.codecademy.com/<%=teacher.codecademy_username %>' class="btn btn-social-icon btn-instagram">
+                            <span class="fa fa-code"></span>
+                        </a>
+
+                        <a href='https://devpost.com/<%=teacher.github_username%>' class="btn btn-social-icon btn-reddit">
+                          <img src = "http://nealrs.github.io/devpost-follow-button/icon/devpost-32.png">        
+                        </a>
+                      </div>
+                    </div>
+                    
+                  </div> 
+             
+            <% end %>
+      </div>
+ 
 </div>
