@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   get 'projects/add', to: 'projects#add'
   get 'editor', to: 'static_pages#editor'
 
-  get 'loaderio-1b19d1cc5db77033a543463b11bc8324/', to: 'static_pages#loader'
+ 
 
   post 'projects/import', to: 'projects#import'
 
