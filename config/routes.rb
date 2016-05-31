@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :announcements
   resources :quizzes
-  resources :lessons
+  resources :lessons do
+    collection {post :sort}
+  end
   resources :units
   resources :tracks
   resources :badges
@@ -55,6 +57,10 @@ Rails.application.routes.draw do
 #  end
 
   get 'projects/add', to: 'projects#add'
+  get 'editor', to: 'static_pages#editor'
+
+  get 'loaderio-1b19d1cc5db77033a543463b11bc8324/', to: 'static_pages#loader'
+
   post 'projects/import', to: 'projects#import'
 
   post '/signatures/callbacks', to: 'signatures#callbacks'
@@ -62,6 +68,7 @@ Rails.application.routes.draw do
   post 'signatures/authorize_adobe', to: 'signatures#authorize_adobe'
   
   post '/users/invite_teacher', to: 'users#invite_teacher'
+
 
 
   resources :projects

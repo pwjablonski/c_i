@@ -11,24 +11,10 @@
 <div class="container">
   
   <div class="row">
-    <div class="col-md-2"> 
-        <h3> Fill in info or..</h3>
-    </div>
-    <div class="col-md-4"> 
-       <h3>
-        <%= link_to projects_add_path, :class => "btn btn-block btn-social btn-github" do %>
-         <span class="fa fa-github"></span>
-         Import from Github
-         <%end%>
-      </div>
-      </h3>
-  </div>
-
-    <div class="row">
+   <div class="col-md-12"> 
+        
+   
       <%= render 'form' %>
     </div>
-
-    <div class="col-md-12">
-      <%= link_to 'Explore More Projects', projects_path %>
-    </div>
+  </div>
 </div>

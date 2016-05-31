@@ -11,26 +11,12 @@
     </div>
   <% end %>
 
-<div class="col-md-6"> 
+<div class="col-md-6 col-md-offset-3"> 
   <div class="field form-contol">
     <%= f.label :name %><br>
     <%= f.text_field :name, autofocus: true, :class => "form-control"  %>
   </div>
 
-  <div class="field form-contol">
-    <%= f.label :tag_line %><br>
-    <%= f.text_field :tag_line, autofocus: true, :class => "form-control"  %>
-  </div>
-  <div class="field form-contol">
-    <%= f.label :description %><br>
-    <%= f.cktext_area :description, autofocus: true,   %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save Project", :class => "btn btn-primary"%>
-  </div>
-</div>
-<div class="col-md-6"> 
-  
   <div class="field form-contol">
     <%= f.label :devpost_url %><br>
     <%= f.text_field :devpost_url, autofocus: true, :class => "form-control"  %>
@@ -39,8 +25,22 @@
     <%= f.label :image_url %><br>
     <%= f.text_field :image_url, autofocus: true, :class => "form-control"  %>
   </div>
+  
+  <div class="field form-contol">
+    <%= f.label :tag_line %><br>
+    <%= f.text_field :tag_line, autofocus: true, :class => "form-control"  %>
+  </div>
+  <div class="field form-contol">
+    <%= f.label :description %><br>
+   
+  </div>
+  
   <div class="field form-contol">
     <%= f.hidden_field :student_id, value: current_user.student.id%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save Project", :class => "btn btn-primary"%>
   </div>
   
 </div>

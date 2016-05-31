@@ -55,6 +55,16 @@ class LessonsController < ApplicationController
     end
   end
 
+
+  def sort
+    puts params[:lesson]
+    params[:lesson].each_with_index do |id , index|
+        lesson = Lesson.find(id)
+        lesson.update_attribute(:position, index) if lesson
+    end
+    render nothing: true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson

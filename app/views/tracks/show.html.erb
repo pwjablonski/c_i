@@ -1,4 +1,4 @@
-<div class="page-header ribbon-top">
+ <div class="page-header ribbon-top">
   <div class="container">
     <div class="row">
       <div class="col-lg-10">
@@ -40,7 +40,7 @@
                         <li>
                           <a href= "#"> <%= unit.name %> <span class="fa arrow"></span></a>
                           <ul class="nav nav-second-level">
-                            <% unit.lessons.each do |lesson| %>
+                            <% unit.lessons.order("position").each do |lesson| %>
                             <li>
                               <%= link_to lesson do %>
                                 <%= lesson.name%>
@@ -77,9 +77,10 @@
                         <li>
                           <a href= "#"> <%= unit.name %> <span class="fa arrow"></span></a>
                           <ul class="nav nav-second-level">
+                            <ul id="lessons" data-update-url="<%= sort_lessons_url%>">
                             <% unit.lessons.each do |lesson| %>
                            
-                              <ul id="lessons">
+                              
                               
                                 
                                 <%= content_tag_for :li, lesson do %>
@@ -87,9 +88,10 @@
                                 <%end%>
                                
                               
-                              </ul>
-                            
+                              
+                        
                             <%end%>  
+                            </ul>
                           </ul>
                         </li>   
                         <%end%>  
