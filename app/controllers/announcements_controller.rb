@@ -25,7 +25,7 @@ class AnnouncementsController < ApplicationController
   # POST /announcements.json
   def create
     @announcement = Announcement.new(announcement_params)
-    @announcement.classroom.users.notify("Your Classroom Had a ","Check Your Class Page for details")
+    @announcement.classroom.verified_enrollments.each { |enrollment| enrollment.student.user.notify("Your Classroom Has A New Announcement","Check Your Class Page for details")}
 
     respond_to do |format|
       if @announcement.save

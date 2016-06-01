@@ -14,6 +14,11 @@ class ClassroomsController < ApplicationController
 
   end
 
+  def importcadata
+    Classroom.import(params[:file])
+    redirect_to classrooms_path, notice: "CaData Imported."
+  end
+
   # GET /classrooms/1
   # GET /classrooms/1.json
   def show

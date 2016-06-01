@@ -66,18 +66,35 @@
                     <%end%>
 
 
-                    <h1> Track Overview </h1>
+                    <h1> Track Overview 
+
+
+                          <%= link_to new_unit_path, :class => "btn btn-primary" do %>
+                            <i class="fa fa-plus fa-fw"></i> New Unit
+                          <%end%>
+                        
+                        <%= link_to new_lesson_path, :class => "btn btn-primary" do %>
+                                <i class="fa fa-plus fa-fw"></i> New Lesson
+                        <%end%>
+                        
+                        <%= link_to new_quiz_path, :class => "btn btn-primary" do %>
+                                <i class="fa fa-plus fa-fw"></i> New Quiz
+                        <%end%>
+                    </h1>
+
+
+
                     <hr>
                     <h3> Classrooms <h3>
 
                     <h3> Units </h3>
-
-
+                    <div id="lessons">
+                    <ul >
                         <% @track.units.each do |unit| %>
-                        <li>
+                          <li>
                           <a href= "#"> <%= unit.name %> <span class="fa arrow"></span></a>
-                          <ul class="nav nav-second-level">
-                            <ul id="lessons" data-update-url="<%= sort_lessons_url%>">
+                          
+                            <ul  data-update-url="<%= sort_lessons_url%>">
                             <% unit.lessons.each do |lesson| %>
                            
                               
@@ -92,11 +109,11 @@
                         
                             <%end%>  
                             </ul>
-                          </ul>
-                        </li>   
+                          </li>
+                           
                         <%end%>  
-
-
+                      </ul>
+                    </div>
 
                     <h3> Resources </h3>
 

@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   get 'admin/show'
   get 'projects/add', to: 'projects#add'
 
+
+  resources :classrooms do
+    collection { post :importcadata }
+  end
+
   resources :events do
       resources :registrations, only: [:create, :destroy, :add_students_by_classroom, :add_students_by_school] do
           

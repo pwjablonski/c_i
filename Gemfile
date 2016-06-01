@@ -120,3 +120,5 @@ gem 'mini_magick'
 
 gem 'acts_as_list', '~> 0.7.4'
 
+gem 'roo'
+
